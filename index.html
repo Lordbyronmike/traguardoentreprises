@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Traguardo — Un cap, des solutions</title>
+  <meta name="description" content="Traguardo : accompagnement motivationnel et opérationnel. Un cap clair, des solutions concrètes." />
+
+  <meta property="og:title" content="Traguardo — Un cap, des solutions" />
+  <meta property="og:description" content="Un site moderne et épuré : un cap clair, des solutions concrètes." />
+  <meta property="og:type" content="website" />
+
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="brand" href="#/" data-link aria-label="Traguardo — Accueil">
+        <img class="brand__logo" src="./logo.jpg" alt="Traguardo" />
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="#/" data-link>Accueil</a>
+
+        <div class="navDropdown">
+          <button id="solutionsBtn" class="navDropdown__btn" type="button" aria-haspopup="true" aria-expanded="false">
+            Nos solutions <span class="chev">▾</span>
+          </button>
+          <div id="solutionsMenu" class="navDropdown__menu" role="menu">
+            <a role="menuitem" href="#/solutions" data-link>Vue d’ensemble</a>
+            <a role="menuitem" href="#/solutions-motivationnel" data-link>Soutien motivationnel</a>
+            <a role="menuitem" href="#/solutions-operationnel" data-link>Soutien opérationnel</a>
+          </div>
+        </div>
+
+        <a href="#/actualites" data-link>Actualités</a>
+        <a href="#/snake" data-link>Jeu Snake</a>
+        <a href="#/avis" data-link>Avis</a>
+        <a href="#/contact" data-link>Nous contacter</a>
+      </nav>
+
+      <!-- CTA header: redirige vers Contact -->
+      <a class="btn btn--ghost" href="#/contact" data-link id="headerCta">
+        Je prends rendez-vous
+      </a>
+
+      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false" id="burgerBtn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="mobileNav" id="mobileNav" hidden>
+      <div class="container mobileNav__inner">
+        <a href="#/" data-link>Accueil</a>
+
+        <details class="mobileSolutions" aria-label="Menu solutions">
+          <summary>Nos solutions</summary>
+          <div class="mobileSolutions__links">
+            <a href="#/solutions" data-link>Vue d’ensemble</a>
+            <a href="#/solutions-motivationnel" data-link>Soutien motivationnel</a>
+            <a href="#/solutions-operationnel" data-link>Soutien opérationnel</a>
+          </div>
+        </details>
+
+        <a href="#/actualites" data-link>Actualités</a>
+        <a href="#/snake" data-link>Jeu Snake</a>
+        <a href="#/avis" data-link>Avis</a>
+        <a href="#/contact" data-link>Nous contacter</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="app" class="main" role="main"></main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year"></span> Traguardo. Tous droits réservés.</p>
+      <p class="muted">Site épuré. Résultats concrets. Zéro blabla.</p>
+    </div>
+  </footer>
+
+  <!-- Bouton flottant: redirige vers Contact -->
+  <a class="fab" href="#/contact" data-link aria-label="Nous contacter">RDV</a>
+
+  <script src="./app.js" defer></script>
+</body>
+</html>
