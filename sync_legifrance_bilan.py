@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
 Synchronise les donnees reglementaires "Bilan de competences" depuis Legifrance
-vers assets/data/bilan-cpf-reglementation.json.
+vers data/bilan-cpf-reglementation.json.
 
 Usage:
-  python3 scripts/sync_legifrance_bilan.py
-  python3 scripts/sync_legifrance_bilan.py --output /tmp/bilan.json
+  python3 sync_legifrance_bilan.py
+  python3 sync_legifrance_bilan.py --output /tmp/bilan.json
 """
 
 from __future__ import annotations
@@ -23,7 +23,7 @@ import urllib.request
 from typing import Any
 
 
-DEFAULT_OUTPUT = "assets/data/bilan-cpf-reglementation.json"
+DEFAULT_OUTPUT = "data/bilan-cpf-reglementation.json"
 DEFAULT_ARRETE_URL = "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000050935023"
 DEFAULT_CODE_URL = "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038878296"
 USER_AGENT = "TraguardoLegifranceSync/1.0"
