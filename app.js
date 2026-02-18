@@ -1196,8 +1196,11 @@ form?.addEventListener("submit", async (e) => {
 
     setFormState("loading", "Envoi en cours...");
 
-    // Si pas d'endpoint Worker, on ne peut pas envoyer depuis file://
-    if (!CONTACT_ENDPOINT) {
+    const isFileContext = window.location.protocol === "file:";
+    const isRelativeEndpoint = CONTACT_ENDPOINT.startsWith("/");
+
+    // Sans endpoint explicite (ou en file:// avec endpoint relatif), on affiche le fallback mail.
+    if (!CONTACT_ENDPOINT || (isFileContext && isRelativeEndpoint)) {
       setFormState(
         "info",
         `ℹ️ Pour envoyer des emails, il faut un Worker Cloudflare (le navigateur ne peut pas garder une clé secrète).
