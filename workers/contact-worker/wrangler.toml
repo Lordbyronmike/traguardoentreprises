@@ -5,8 +5,10 @@ compatibility_date = "2026-02-18"
 [vars]
 # Domains autorises en CORS (separes par virgule). Exemple:
 # ALLOWED_ORIGINS = "https://traguardo.fr,https://www.traguardo.fr"
-ALLOWED_ORIGINS = ""
+ALLOWED_ORIGINS = "https://traguardo.fr,https://www.traguardo.fr"
 CONTACT_SUBJECT_PREFIX = "Traguardo"
 
-# Si ton site est sur Cloudflare, configure une route telle que:
-# routes = [{ pattern = "traguardo.fr/api/contact*", zone_name = "traguardo.fr" }]
+routes = [
+  { pattern = "traguardo.fr/api/contact*", zone_name = "traguardo.fr" },
+  { pattern = "www.traguardo.fr/api/contact*", zone_name = "traguardo.fr" }
+]
