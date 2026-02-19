@@ -6,7 +6,7 @@
 const SMARTAGENDA_URL =
   "https://www.smartagenda.fr/pro/traguardo/rendez-vous/?affrdv&tkaction=2046--97769-057d68da795c0";
 
-// Endpoint optionnel (Cloudflare Worker) pour l'envoi d'email
+// Endpoint optionnel (API serveur) pour l'envoi d'email
 // Tu peux le définir dans config.js : window.CONTACT_ENDPOINT = "https://.../api/contact";
 const CONTACT_ENDPOINT = window.CONTACT_ENDPOINT || "";
 
@@ -1203,7 +1203,7 @@ form?.addEventListener("submit", async (e) => {
     if (!CONTACT_ENDPOINT || (isFileContext && isRelativeEndpoint)) {
       setFormState(
         "info",
-        `ℹ️ Pour envoyer des emails, il faut un Worker Cloudflare (le navigateur ne peut pas garder une clé secrète).
+        `ℹ️ L'envoi de formulaire nécessite une API serveur (les clés secrètes ne peuvent pas être exposées côté navigateur).
          En attendant, écris-nous directement : <a class="email-fallback" href="mailto:contact@traguardo.fr">contact@traguardo.fr</a>`
       );
       return;
