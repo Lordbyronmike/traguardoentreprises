@@ -1114,7 +1114,7 @@ function renderContact() {
 
             <div id="formMessage" class="form-message mt16" style="display:none"></div>
 
-            <p class="kicker mt8">Email : contact@traguardo.fr</p>
+            <p class="kicker mt8">Email : contact@truzzle.fr</p>
           </form>
         </div>
 
@@ -1204,7 +1204,7 @@ form?.addEventListener("submit", async (e) => {
       setFormState(
         "info",
         `ℹ️ L'envoi de formulaire nécessite une API serveur (les clés secrètes ne peuvent pas être exposées côté navigateur).
-         En attendant, écris-nous directement : <a class="email-fallback" href="mailto:contact@traguardo.fr">contact@traguardo.fr</a>`
+         En attendant, écris-nous directement : <a class="email-fallback" href="mailto:contact@truzzle.fr">contact@truzzle.fr</a>`
       );
       return;
     }
@@ -1226,7 +1226,7 @@ form?.addEventListener("submit", async (e) => {
     } catch (err) {
       setFormState(
         "error",
-        `❌ Erreur lors de l'envoi. Contactez-nous : <a class="email-fallback" href="mailto:contact@traguardo.fr">contact@traguardo.fr</a>`
+        `❌ Erreur lors de l'envoi. Contactez-nous : <a class="email-fallback" href="mailto:contact@truzzle.fr">contact@truzzle.fr</a>`
       );
     }
   });
