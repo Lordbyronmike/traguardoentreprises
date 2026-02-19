@@ -1217,16 +1217,37 @@ form?.addEventListener("submit", async (e) => {
       });
 
       if (!res.ok) {
-        const t = await res.text();
-        throw new Error(t || `HTTP ${res.status}`);
+        let apiError = "";
+        const ct = (res.headers.get("content-type") || "").toLowerCase();
+        if (ct.includes("application/json")) {
+          try {
+            const data = await res.json();
+            apiError = typeof data?.error === "string" ? data.error : "";
+          } catch {}
+        } else {
+          try {
+            apiError = (await res.text()).trim();
+          } catch {}
+        }
+
+        const statusError = `HTTP ${res.status}`;
+        throw new Error(apiError || statusError);
       }
 
       setFormState("success", "✅ Message envoyé ! Nous vous répondrons sous 24h.");
       form.reset();
     } catch (err) {
+      const raw = String(err?.message || "").trim();
+      const detail = raw ? ` (${escapeHtml(raw).slice(0, 140)})` : "";
+      let hint = "";
+      if (raw === "Server not configured") {
+        hint = " Vérifie la configuration serveur (RESEND_API_KEY, CONTACT_FROM_EMAIL, CONTACT_TO_EMAIL).";
+      } else if (raw === "Email send failed") {
+        hint = " Vérifie que l'adresse d'envoi est bien validée dans Resend.";
+      }
       setFormState(
         "error",
-        `❌ Erreur lors de l'envoi. Contactez-nous : <a class="email-fallback" href="mailto:contact@traguardo.fr">contact@traguardo.fr</a>`
+        `❌ Erreur lors de l'envoi${detail}.${hint} Contactez-nous : <a class="email-fallback" href="mailto:contact@traguardo.fr">contact@traguardo.fr</a>`
       );
     }
   });
