@@ -228,13 +228,7 @@ function setupScrollReveal() {
   if (_revealCleanup) _revealCleanup();
   if (!targets.length) return;
   targets.forEach((el) => el.classList.remove("is-visible"));
-
-  const supportsObserver = "IntersectionObserver" in window;
-  if (!supportsObserver) {
-    targets.forEach((el) => el.classList.add("is-visible"));
-    _revealCleanup = null;
-    return;
-  }
+  targets.forEach((el) => el.style.setProperty("--reveal-delay", "0ms"));
 
   const prefersReducedMotion =
     window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -244,50 +238,41 @@ function setupScrollReveal() {
     return;
   }
 
-  const revealQueue = [];
-  let revealTimer = null;
+  let nextIndex = 0;
+  const REVEAL_STEP_PX = 110;
+  let accumulatedScroll = 0;
+  let lastY = window.scrollY;
 
-  const flushRevealQueue = () => {
-    if (revealTimer !== null) return;
-    const revealNext = () => {
-      const next = revealQueue.shift();
-      if (!next) {
-        revealTimer = null;
-        return;
-      }
-      next.classList.add("is-visible");
-      revealTimer = window.setTimeout(revealNext, 110);
-    };
-    revealNext();
+  const revealNext = () => {
+    if (nextIndex >= targets.length) return false;
+    targets[nextIndex].classList.add("is-visible");
+    nextIndex += 1;
+    return true;
   };
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        if (entry.target.dataset.revealQueued === "1") return;
-        entry.target.dataset.revealQueued = "1";
-        revealQueue.push(entry.target);
-        observer.unobserve(entry.target);
-      });
-      flushRevealQueue();
-    },
-    { threshold: 0.16, rootMargin: "0px 0px -10% 0px" }
-  );
+  // Manuel: on affiche le premier bloc, puis les suivants uniquement au scroll.
+  revealNext();
 
-  targets.forEach((el) => {
-    el.style.setProperty("--reveal-delay", "0ms");
-    delete el.dataset.revealQueued;
-    observer.observe(el);
-  });
+  const onScroll = () => {
+    const y = window.scrollY;
+    const delta = y - lastY;
+    lastY = y;
+    if (delta <= 0) return;
+    accumulatedScroll += delta;
+
+    while (accumulatedScroll >= REVEAL_STEP_PX) {
+      const revealed = revealNext();
+      accumulatedScroll -= REVEAL_STEP_PX;
+      if (!revealed) {
+        accumulatedScroll = 0;
+        break;
+      }
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
 
   _revealCleanup = () => {
-    observer.disconnect();
-    revealQueue.length = 0;
-    if (revealTimer !== null) {
-      clearTimeout(revealTimer);
-      revealTimer = null;
-    }
+    window.removeEventListener("scroll", onScroll);
   };
 }
 
