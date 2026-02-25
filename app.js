@@ -225,38 +225,36 @@ function setupWordAnimation() {
 let _revealCleanup = null;
 function setupScrollReveal() {
   const targets = Array.from(document.querySelectorAll("[data-reveal]"));
+  if (_revealCleanup) _revealCleanup();
   if (!targets.length) return;
   targets.forEach((el) => el.classList.remove("is-visible"));
-  if (_revealCleanup) _revealCleanup();
+
+  const supportsObserver = "IntersectionObserver" in window;
+  if (!supportsObserver) {
+    targets.forEach((el) => el.classList.add("is-visible"));
+    _revealCleanup = null;
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.16, rootMargin: "0px 0px -10% 0px" }
+  );
 
   targets.forEach((el, index) => {
-    el.style.setProperty("--reveal-delay", "0ms");
+    const delay = Math.min(index * 70, 280);
+    el.style.setProperty("--reveal-delay", `${delay}ms`);
+    observer.observe(el);
   });
 
-  let nextIndex = 0;
-  let lastY = window.scrollY;
-  let scrolledSinceLastReveal = 0;
-  const REVEAL_STEP_PX = 120;
-
-  const onScroll = () => {
-    const y = window.scrollY;
-    const delta = y - lastY;
-    lastY = y;
-    if (delta <= 0) return;
-
-    scrolledSinceLastReveal += delta;
-    if (scrolledSinceLastReveal < REVEAL_STEP_PX) return;
-    scrolledSinceLastReveal = 0;
-
-    if (nextIndex >= targets.length) return;
-    targets[nextIndex].classList.add("is-visible");
-    nextIndex += 1;
-  };
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-
   _revealCleanup = () => {
-    window.removeEventListener("scroll", onScroll);
+    observer.disconnect();
   };
 }
 
