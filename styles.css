@@ -534,6 +534,107 @@ a{ color:inherit; text-decoration:none; }
   }
 }
 
+/* ===== Hero Accueil ===== */
+.homeHero{
+  isolation: isolate;
+  background:
+    linear-gradient(105deg, rgba(7,18,38,.56) 0%, rgba(7,18,38,.34) 50%, rgba(7,18,38,.10) 100%),
+    linear-gradient(0deg, rgba(250,248,237,.16) 0%, rgba(250,248,237,.16) 100%),
+    url("./brand/page-accueil.png") center center / cover no-repeat;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+}
+
+.homeHero::before{
+  background:
+    linear-gradient(90deg, rgba(7,18,38,.64) 0%, rgba(7,18,38,.34) 48%, rgba(7,18,38,.10) 100%),
+    radial-gradient(120% 90% at 100% 0%, rgba(41,144,166,.16) 0%, rgba(41,144,166,0) 58%);
+}
+
+.homeHero .hero__inner{
+  z-index: 1;
+}
+
+.homeHero__content{
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, rgba(7,18,38,.36) 0%, rgba(7,18,38,.14) 74%, rgba(7,18,38,0) 100%);
+}
+
+.homeHero .h1{
+  color: #ffffff;
+  text-shadow: 0 10px 24px rgba(0,0,0,.45);
+}
+
+.homeHero .muted{
+  color: rgba(255,255,255,.9);
+}
+
+.homeHero .stack .p{
+  color: rgba(245,249,255,.94);
+  text-shadow: 0 6px 16px rgba(0,0,0,.30);
+}
+
+.homeHero #accompagnementMots{
+  background: rgba(255,255,255,.92);
+}
+
+/* ===== Hero Contact ===== */
+.contactHero{
+  isolation: isolate;
+  background:
+    linear-gradient(105deg, rgba(7,18,38,.60) 0%, rgba(7,18,38,.38) 50%, rgba(7,18,38,.12) 100%),
+    linear-gradient(0deg, rgba(250,248,237,.12) 0%, rgba(250,248,237,.12) 100%),
+    url("./brand/contact-accessibilite-confiance.png") center center / cover no-repeat;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+}
+
+.contactHero::before{
+  background:
+    linear-gradient(90deg, rgba(7,18,38,.66) 0%, rgba(7,18,38,.38) 48%, rgba(7,18,38,.10) 100%),
+    radial-gradient(120% 90% at 100% 0%, rgba(41,144,166,.14) 0%, rgba(41,144,166,0) 58%),
+    linear-gradient(180deg, rgba(3,10,24,.06) 0%, rgba(3,10,24,.28) 100%);
+}
+
+.contactHero__inner{
+  position: relative;
+  z-index: 1;
+  min-height: 400px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.contactHero__content{
+  max-width: 760px;
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, rgba(7,18,38,.34) 0%, rgba(7,18,38,.12) 72%, rgba(7,18,38,0) 100%);
+}
+
+.contactHero .kicker{
+  color: #9dd8e5;
+}
+
+.contactHero .h1{
+  color: #ffffff;
+  text-shadow: 0 10px 24px rgba(0,0,0,.5);
+}
+
+.contactHero .p{
+  color: rgba(245,249,255,.94);
+  text-shadow: 0 6px 16px rgba(0,0,0,.32);
+}
+
+.contactHero__ghost{
+  border-color: rgba(255,255,255,.7);
+  color: #ffffff;
+  background: rgba(255,255,255,.06);
+}
+
+.contactHero__ghost:hover{
+  border-color: #ffffff;
+  background: rgba(255,255,255,.12);
+}
+
 /* ===== Hero Vision & Leadership ===== */
 .visionHero{
   isolation: isolate;
@@ -926,6 +1027,9 @@ textarea.input{ resize:vertical; min-height:100px; }
   }
   .section{ padding: 40px 0; }
   .hero{ padding: 40px 0 20px; }
+  .homeHero__content{ padding: 12px 12px; }
+  .contactHero__inner{ min-height: 330px; }
+  .contactHero__content{ padding: 14px 14px; }
   .visionHero__inner{ min-height: 360px; }
   .visionHero__content{ padding: 14px 14px; }
   .planActionHero__inner{ min-height: 340px; }

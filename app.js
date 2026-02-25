@@ -440,9 +440,9 @@ function renderHome() {
   const latest = POSTS.slice().sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 3);
 
   $app.innerHTML = `
-    <section class="hero">
+    <section class="hero homeHero homeHero--accueil">
       <div class="container hero__inner">
-        <div class="stack">
+        <div class="stack homeHero__content">
           <div class="kicker">Dirigeants et créateurs d'entreprises</div>
           <h1 class="h1">Faire avancer votre entreprise. <span class="muted">Sans vous épuiser.</span></h1>
           <p class="p maxW">
@@ -1061,86 +1061,105 @@ function loadElfsightScript() {
 }
 
 function renderContact() {
-  $app.innerHTML = pageShell(
-    "Nous contacter",
-    "Un message, une question, ou directement un rendez-vous via l'agenda.",
-    `
-      <div class="grid grid--2 mt24">
-        <div class="card">
-          <h3 class="h3">📧 Nous écrire</h3>
-          <p class="p">Remplissez le formulaire ci-dessous, nous vous répondrons rapidement.</p>
-
-
-          <div class="quickChoices mt16" aria-label="Aide à la rédaction">
-            <div class="kicker">Je vous contacte pour…</div>
-            <div class="quickChoices__row">
-              <button type="button" class="chip" data-template="strategie">Structurer ma stratégie</button>
-              <button type="button" class="chip" data-template="lancement">Lancer mon entreprise</button>
-              <button type="button" class="chip" data-template="priorites">Clarifier mes priorités</button>
-            </div>
-          </div>
-
-
-          <form class="stack mt16" id="contactForm" novalidate>
-            <div class="field-group">
-              <label for="name" class="field-label">Votre nom *</label>
-              <input class="input" id="name" name="name" placeholder="Ex: Marie Dupont" required>
-            </div>
-
-            <div class="field-group">
-              <label for="email" class="field-label">Votre email *</label>
-              <input class="input" id="email" name="email" type="email" placeholder="exemple@email.com" required>
-            </div>
-
-            <div class="field-group">
-              <label for="message" class="field-label">Votre message *</label>
-              <textarea class="input" id="message" name="message" rows="6" placeholder="Décrivez votre demande..." required></textarea>
-            </div>
-
-            <div class="honeypot" aria-hidden="true">
-              <input type="text" name="website" tabindex="-1" autocomplete="off" placeholder="Ne pas remplir ce champ">
-            </div>
-
-            <button class="btn btn--solid mt16" type="submit" id="submitBtn">
-              <span id="submitText">Envoyer le message</span>
-              <span id="submitSpinner" class="spinner" style="display:none; margin-left:8px"></span>
-            </button>
-
-            <div id="formMessage" class="form-message mt16" style="display:none"></div>
-
-            <p class="kicker mt8">Email : contact@traguardo.fr</p>
-          </form>
-        </div>
-
-        <div class="card">
-          <h3 class="h3">📅 Prendre rendez-vous</h3>
-          <p class="p">Choisissez un créneau directement dans l'agenda.</p>
-
-          <div class="agendaEmbed mt16">
-            <iframe
-              src="${SMARTAGENDA_URL}"
-              title="SmartAgenda Traguardo"
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
-
-          <div class="mt16">
-            <a class="btn btn--ghost" href="${SMARTAGENDA_URL}" target="_blank" rel="noopener noreferrer">
-              Ouvrir l'agenda dans un nouvel onglet
-            </a>
+  $app.innerHTML = `
+    <section class="hero contactHero contactHero--confiance">
+      <div class="container contactHero__inner">
+        <div class="contactHero__content stack">
+          <div class="kicker">Contact & Confiance</div>
+          <h1 class="h1">Nous contacter</h1>
+          <p class="p maxW">Un message, une question, ou directement un rendez-vous via l'agenda.</p>
+          <div class="programHero__cta">
+            <button class="btn btn--solid" type="button" id="contactHeroScrollBtn">Écrire un message</button>
+            <a class="btn btn--ghost contactHero__ghost" href="${SMARTAGENDA_URL}" target="_blank" rel="noopener noreferrer">Ouvrir l'agenda</a>
           </div>
         </div>
       </div>
-    `
-  );
+    </section>
+
+    <section class="section" id="contact-form">
+      <div class="container">
+        <div class="grid grid--2 mt24">
+          <div class="card">
+            <h3 class="h3">📧 Nous écrire</h3>
+            <p class="p">Remplissez le formulaire ci-dessous, nous vous répondrons rapidement.</p>
+
+            <div class="quickChoices mt16" aria-label="Aide à la rédaction">
+              <div class="kicker">Je vous contacte pour…</div>
+              <div class="quickChoices__row">
+                <button type="button" class="chip" data-template="strategie">Structurer ma stratégie</button>
+                <button type="button" class="chip" data-template="lancement">Lancer mon entreprise</button>
+                <button type="button" class="chip" data-template="priorites">Clarifier mes priorités</button>
+              </div>
+            </div>
+
+            <form class="stack mt16" id="contactForm" novalidate>
+              <div class="field-group">
+                <label for="name" class="field-label">Votre nom *</label>
+                <input class="input" id="name" name="name" placeholder="Ex: Marie Dupont" required>
+              </div>
+
+              <div class="field-group">
+                <label for="email" class="field-label">Votre email *</label>
+                <input class="input" id="email" name="email" type="email" placeholder="exemple@email.com" required>
+              </div>
+
+              <div class="field-group">
+                <label for="message" class="field-label">Votre message *</label>
+                <textarea class="input" id="message" name="message" rows="6" placeholder="Décrivez votre demande..." required></textarea>
+              </div>
+
+              <div class="honeypot" aria-hidden="true">
+                <input type="text" name="website" tabindex="-1" autocomplete="off" placeholder="Ne pas remplir ce champ">
+              </div>
+
+              <button class="btn btn--solid mt16" type="submit" id="submitBtn">
+                <span id="submitText">Envoyer le message</span>
+                <span id="submitSpinner" class="spinner" style="display:none; margin-left:8px"></span>
+              </button>
+
+              <div id="formMessage" class="form-message mt16" style="display:none"></div>
+
+              <p class="kicker mt8">Email : contact@traguardo.fr</p>
+            </form>
+          </div>
+
+          <div class="card">
+            <h3 class="h3">📅 Prendre rendez-vous</h3>
+            <p class="p">Choisissez un créneau directement dans l'agenda.</p>
+
+            <div class="agendaEmbed mt16">
+              <iframe
+                src="${SMARTAGENDA_URL}"
+                title="SmartAgenda Traguardo"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+
+            <div class="mt16">
+              <a class="btn btn--ghost" href="${SMARTAGENDA_URL}" target="_blank" rel="noopener noreferrer">
+                Ouvrir l'agenda dans un nouvel onglet
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
 
   const form = document.getElementById("contactForm");
+  const contactHeroScrollBtn = document.getElementById("contactHeroScrollBtn");
   const submitBtn = document.getElementById("submitBtn");
   const submitText = document.getElementById("submitText");
   const submitSpinner = document.getElementById("submitSpinner");
 
 const formMessage = document.getElementById("formMessage");
+
+contactHeroScrollBtn?.addEventListener("click", () => {
+  form?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const nameEl = document.getElementById("name");
+  nameEl?.focus();
+});
 
 // Mini-diagnostic : pré-remplit le message pour aider (sans friction)
 const messageEl = document.getElementById("message");
