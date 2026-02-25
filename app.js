@@ -1293,7 +1293,6 @@ function pageShell(title, subtitle, contentHtml) {
   return `
     <section class="section">
       <div class="container">
-        <div class="badge">Traguardo</div>
         <h1 class="h1" style="font-size:clamp(30px,4vw,44px)">${escapeHtml(title)}</h1>
         <p class="p maxW">${escapeHtml(subtitle)}</p>
         <div class="mt32">${contentHtml}</div>
