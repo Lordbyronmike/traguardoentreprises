@@ -536,6 +536,7 @@ a{ color:inherit; text-decoration:none; }
 
 /* ===== Hero Vision & Leadership ===== */
 .visionHero{
+  isolation: isolate;
   background:
     linear-gradient(105deg, rgba(7,18,38,.58) 6%, rgba(7,18,38,.36) 48%, rgba(7,18,38,.16) 100%),
     linear-gradient(0deg, rgba(250,248,237,.42) 0%, rgba(250,248,237,.42) 100%),
@@ -544,9 +545,27 @@ a{ color:inherit; text-decoration:none; }
 }
 
 .visionHero::before{
+  z-index: 0;
   background:
     radial-gradient(120% 90% at 100% 0%, rgba(41,144,166,.12) 0%, rgba(41,144,166,0) 58%),
     linear-gradient(180deg, rgba(3,10,24,.06) 0%, rgba(3,10,24,.28) 100%);
+}
+
+.visionHero::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(250,248,237,.98) 0%, rgba(250,248,237,.74) 34%, rgba(250,248,237,0) 68%);
+  transform: translateX(-115%);
+  animation: visionHeroSweep 1100ms cubic-bezier(.22,1,.36,1) 120ms forwards;
+}
+
+.visionHero__content{
+  opacity: 0;
+  transform: translateX(-18px);
+  animation: visionHeroContentIn 760ms cubic-bezier(.22,1,.36,1) 180ms forwards;
 }
 
 .visionHero__inner{
@@ -560,6 +579,20 @@ a{ color:inherit; text-decoration:none; }
 .visionHero__content{
   max-width: 760px;
   padding: 22px 0;
+}
+
+@keyframes visionHeroSweep{
+  to{
+    transform: translateX(108%);
+    opacity: 0;
+  }
+}
+
+@keyframes visionHeroContentIn{
+  to{
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .visionHero .kicker{
