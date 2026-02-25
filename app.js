@@ -455,7 +455,11 @@ function renderHome() {
             <a class="btn btn--ghost" href="#/contact" data-link>Contactez-nous</a>
           </div>
         </div>
+      </div>
+    </section>
 
+    <section class="section">
+      <div class="container">
         <div class="card" id="accompagnementMots">
           <h3 class="h3">Nos 4 engagements</h3>
           <div class="pills">
@@ -465,12 +469,8 @@ function renderHome() {
             <div class="pill">Suivi régulier</div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="h2">Un accompagnement en 3 blocs</h2>
+        <h2 class="h2 mt32">Un accompagnement en 3 blocs</h2>
         <div class="grid grid--3 mt24">
           <div class="card">
             <h3 class="h3">À propos</h3>
