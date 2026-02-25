@@ -1015,7 +1015,7 @@ function renderAvis() {
         <div class="card">
           <div class="google-badge">
             <span>Google</span>
-            <span style="color:#FFB400">★★★★★</span>
+            <span style="color:#f4d309">★★★★★</span>
             <span>5.0</span>
           </div>
 
