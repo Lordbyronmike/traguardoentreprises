@@ -236,25 +236,58 @@ function setupScrollReveal() {
     return;
   }
 
+  const prefersReducedMotion =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion) {
+    targets.forEach((el) => el.classList.add("is-visible"));
+    _revealCleanup = null;
+    return;
+  }
+
+  const revealQueue = [];
+  let revealTimer = null;
+
+  const flushRevealQueue = () => {
+    if (revealTimer !== null) return;
+    const revealNext = () => {
+      const next = revealQueue.shift();
+      if (!next) {
+        revealTimer = null;
+        return;
+      }
+      next.classList.add("is-visible");
+      revealTimer = window.setTimeout(revealNext, 110);
+    };
+    revealNext();
+  };
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        entry.target.classList.add("is-visible");
+        if (entry.target.dataset.revealQueued === "1") return;
+        entry.target.dataset.revealQueued = "1";
+        revealQueue.push(entry.target);
         observer.unobserve(entry.target);
       });
+      flushRevealQueue();
     },
     { threshold: 0.16, rootMargin: "0px 0px -10% 0px" }
   );
 
-  targets.forEach((el, index) => {
-    const delay = Math.min(index * 70, 280);
-    el.style.setProperty("--reveal-delay", `${delay}ms`);
+  targets.forEach((el) => {
+    el.style.setProperty("--reveal-delay", "0ms");
+    delete el.dataset.revealQueued;
     observer.observe(el);
   });
 
   _revealCleanup = () => {
     observer.disconnect();
+    revealQueue.length = 0;
+    if (revealTimer !== null) {
+      clearTimeout(revealTimer);
+      revealTimer = null;
+    }
   };
 }
 
