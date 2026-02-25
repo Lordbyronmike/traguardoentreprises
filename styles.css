@@ -26,7 +26,13 @@ body{
   margin:0;
   font-family: var(--font-body);
   font-weight: 500;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1200px 480px at 82% -10%, rgba(41,144,166,.20) 0%, rgba(41,144,166,0) 65%),
+    radial-gradient(950px 420px at -8% 38%, rgba(244,211,9,.18) 0%, rgba(244,211,9,0) 68%),
+    radial-gradient(900px 420px at 110% 78%, rgba(41,144,166,.11) 0%, rgba(41,144,166,0) 72%),
+    linear-gradient(180deg, #ffffff 0%, #faf8ed 55%, #f7f5e8 100%);
+  background-repeat:no-repeat;
   color: var(--text);
 }
 
@@ -393,7 +399,7 @@ a{ color:inherit; text-decoration:none; }
   content:"";
   position:absolute;
   inset:0;
-  background: linear-gradient(180deg, #ffffff 0%, #faf8ed 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,.75) 0%, rgba(250,248,237,.35) 100%);
 }
 
 .blob{
