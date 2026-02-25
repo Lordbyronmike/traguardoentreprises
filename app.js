@@ -232,15 +232,39 @@ function setupScrollReveal() {
 
   let nextIndex = 0;
   const REVEAL_STEP_PX = 110;
+  const REVEAL_LATENCY_MS = 180;
   let accumulatedScroll = 0;
   let lastY = window.scrollY;
   let manualRevealEnabled = false;
+  let pendingRevealCount = 0;
+  let revealTimer = null;
 
   const revealNext = () => {
     if (nextIndex >= targets.length) return false;
     targets[nextIndex].classList.add("is-visible");
     nextIndex += 1;
     return true;
+  };
+
+  const flushPendingReveals = () => {
+    if (revealTimer !== null || pendingRevealCount <= 0) return;
+
+    const revealOne = () => {
+      if (pendingRevealCount <= 0) {
+        revealTimer = null;
+        return;
+      }
+      const revealed = revealNext();
+      pendingRevealCount -= 1;
+      if (!revealed || pendingRevealCount <= 0) {
+        revealTimer = null;
+        pendingRevealCount = 0;
+        return;
+      }
+      revealTimer = window.setTimeout(revealOne, REVEAL_LATENCY_MS);
+    };
+
+    revealOne();
   };
 
   const enableManualReveal = () => {
@@ -262,13 +286,11 @@ function setupScrollReveal() {
     accumulatedScroll += delta;
 
     while (accumulatedScroll >= REVEAL_STEP_PX) {
-      const revealed = revealNext();
       accumulatedScroll -= REVEAL_STEP_PX;
-      if (!revealed) {
-        accumulatedScroll = 0;
-        break;
-      }
+      if (nextIndex + pendingRevealCount >= targets.length) break;
+      pendingRevealCount += 1;
     }
+    flushPendingReveals();
   };
 
   window.addEventListener("wheel", enableManualReveal, { passive: true });
@@ -281,6 +303,11 @@ function setupScrollReveal() {
     window.removeEventListener("touchstart", enableManualReveal);
     window.removeEventListener("keydown", onKeyDown);
     window.removeEventListener("scroll", onScroll);
+    if (revealTimer !== null) {
+      clearTimeout(revealTimer);
+      revealTimer = null;
+    }
+    pendingRevealCount = 0;
   };
 }
 
