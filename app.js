@@ -320,7 +320,7 @@ function updateHeaderCtaVisibility() {
   const cta = document.getElementById("headerCta");
   if (!cta) return;
   const onContact = route() === "/contact";
-  cta.hidden = onContact;
+  cta.style.display = onContact ? "none" : "";
 }
 
 let _fabScrollBound = false;
