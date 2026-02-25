@@ -446,8 +446,6 @@ function renderHome() {
 
   $app.innerHTML = `
     <section class="hero">
-      <div class="blob blob--a"></div>
-      <div class="blob blob--b"></div>
       <div class="container hero__inner">
         <div class="stack">
           <div class="kicker">Accompagnement des salariés</div>
