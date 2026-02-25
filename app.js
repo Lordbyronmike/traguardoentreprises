@@ -642,7 +642,7 @@ function renderReperage() {
 
 function renderAccompagnementSalaries() {
   $app.innerHTML = `
-    <section class="hero programHero">
+    <section class="hero programHero programHero--roadmap">
       <div class="blob blob--a"></div>
       <div class="blob blob--b"></div>
       <div class="container hero__inner">
