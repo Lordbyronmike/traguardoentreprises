@@ -566,6 +566,7 @@ a{ color:inherit; text-decoration:none; }
 .missionHero__inner,
 .equipeHero__inner,
 .actualitesHero__inner,
+.diagnosticHero__inner,
 .contactHero__inner,
 .visionHero__inner,
 .planActionHero__inner,
@@ -728,6 +729,66 @@ a{ color:inherit; text-decoration:none; }
 .actualitesHero .p{
   color: rgba(245,249,255,.94);
   text-shadow: 0 6px 16px rgba(0,0,0,.32);
+}
+
+/* ===== Hero Diagnostic ===== */
+.diagnosticHero{
+  isolation: isolate;
+  background:
+    linear-gradient(105deg, rgba(7,18,38,.62) 0%, rgba(7,18,38,.40) 50%, rgba(7,18,38,.14) 100%),
+    linear-gradient(0deg, rgba(250,248,237,.12) 0%, rgba(250,248,237,.12) 100%),
+    url("./brand/diagnostiquee_dentreprise.png") center center / cover no-repeat;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+}
+
+.diagnosticHero::before{
+  background:
+    linear-gradient(90deg, rgba(7,18,38,.66) 0%, rgba(7,18,38,.38) 48%, rgba(7,18,38,.10) 100%),
+    radial-gradient(120% 90% at 100% 0%, rgba(41,144,166,.14) 0%, rgba(41,144,166,0) 58%),
+    linear-gradient(180deg, rgba(3,10,24,.06) 0%, rgba(3,10,24,.28) 100%);
+}
+
+.diagnosticHero__inner{
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.diagnosticHero__content{
+  max-width: 760px;
+  padding: 20px 22px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, rgba(7,18,38,.34) 0%, rgba(7,18,38,.12) 72%, rgba(7,18,38,0) 100%);
+}
+
+.diagnosticHero .kicker{
+  color: #9dd8e5;
+}
+
+.diagnosticHero .h1{
+  color: #ffffff;
+  text-shadow: 0 10px 24px rgba(0,0,0,.5);
+}
+
+.diagnosticHero .muted{
+  color: rgba(255,255,255,.9);
+}
+
+.diagnosticHero .p{
+  color: rgba(245,249,255,.94);
+  text-shadow: 0 6px 16px rgba(0,0,0,.32);
+}
+
+.diagnosticHero__ghost{
+  border-color: rgba(255,255,255,.7);
+  color: #ffffff;
+  background: rgba(255,255,255,.06);
+}
+
+.diagnosticHero__ghost:hover{
+  border-color: #ffffff;
+  background: rgba(255,255,255,.12);
 }
 
 /* ===== Hero Contact ===== */
@@ -1185,6 +1246,7 @@ textarea.input{ resize:vertical; min-height:100px; }
   .missionHero__inner,
   .equipeHero__inner,
   .actualitesHero__inner,
+  .diagnosticHero__inner,
   .contactHero__inner,
   .visionHero__inner,
   .planActionHero__inner,
@@ -1192,6 +1254,7 @@ textarea.input{ resize:vertical; min-height:100px; }
     min-height: var(--hero-media-height-mobile);
   }
   .actualitesHero__content{ padding: 14px 14px; }
+  .diagnosticHero__content{ padding: 14px 14px; }
   .contactHero__content{ padding: 14px 14px; }
   .visionHero__content{ padding: 14px 14px; }
   .planActionHero__content{ padding: 14px 14px; }

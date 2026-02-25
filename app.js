@@ -859,49 +859,65 @@ function renderAccompagnementSalaries() {
 }
 
 function renderBilanCompetences() {
-  $app.innerHTML = pageShell(
-    "Diagnostic d'entreprise",
-    "Faire le point sur votre modèle, vos priorités et vos leviers de croissance.",
-    `
-      <div class="stack">
-        <div class="card" data-reveal>
-          <h3 class="h3">1. Positionnement et offre</h3>
-          <p class="p">
-            Nous clarifions votre proposition de valeur, votre cible prioritaire et la promesse qui vous différencie.
-          </p>
-        </div>
-
-        <div class="card" data-reveal>
-          <h3 class="h3">2. Modèle économique</h3>
-          <p class="p">
-            Nous analysons vos revenus, vos marges, votre structure de coûts et les points qui freinent la rentabilité.
-          </p>
-        </div>
-
-        <div class="card" data-reveal>
-          <h3 class="h3">3. Pilotage et organisation</h3>
-          <p class="p">
-            Nous identifions les décisions clés, les zones de dispersion et les routines de direction à renforcer.
-          </p>
-        </div>
-
-        <div class="card" data-reveal>
-          <h3 class="h3">4. Exécution commerciale</h3>
-          <p class="p">
-            Nous passons en revue le tunnel d'acquisition, la transformation et la fidélisation pour accélérer la traction.
-          </p>
-        </div>
-
-        <div class="card" data-reveal>
-          <h3 class="h3">5. Plan de priorités à 90 jours</h3>
-          <p class="p">
-            Vous repartez avec un plan d'action business concret, des objectifs mesurables et un rythme d'exécution réaliste.
-          </p>
+  $app.innerHTML = `
+    <section class="hero diagnosticHero diagnosticHero--entreprise">
+      <div class="container diagnosticHero__inner">
+        <div class="diagnosticHero__content stack">
+          <div class="kicker">Diagnostic d'entreprise</div>
+          <h1 class="h1">Clarifier votre modèle et vos <span class="muted">priorités business.</span></h1>
+          <p class="p maxW">Faire le point sur votre modèle, vos priorités et vos leviers de croissance.</p>
+          <div class="programHero__cta">
+            <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
+            <a class="btn btn--ghost diagnosticHero__ghost" href="#/solutions" data-link>Voir les solutions</a>
+          </div>
         </div>
       </div>
-      <div class="mt32">${ctaContact()}</div>
-    `
-  );
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">Diagnostic en 5 axes</h2>
+        <p class="p maxW">Une lecture structurée pour identifier les points de blocage et les priorités d'action.</p>
+        <div class="stack mt24">
+          <div class="card" data-reveal>
+            <h3 class="h3">1. Positionnement et offre</h3>
+            <p class="p">
+              Nous clarifions votre proposition de valeur, votre cible prioritaire et la promesse qui vous différencie.
+            </p>
+          </div>
+
+          <div class="card" data-reveal>
+            <h3 class="h3">2. Modèle économique</h3>
+            <p class="p">
+              Nous analysons vos revenus, vos marges, votre structure de coûts et les points qui freinent la rentabilité.
+            </p>
+          </div>
+
+          <div class="card" data-reveal>
+            <h3 class="h3">3. Pilotage et organisation</h3>
+            <p class="p">
+              Nous identifions les décisions clés, les zones de dispersion et les routines de direction à renforcer.
+            </p>
+          </div>
+
+          <div class="card" data-reveal>
+            <h3 class="h3">4. Exécution commerciale</h3>
+            <p class="p">
+              Nous passons en revue le tunnel d'acquisition, la transformation et la fidélisation pour accélérer la traction.
+            </p>
+          </div>
+
+          <div class="card" data-reveal>
+            <h3 class="h3">5. Plan de priorités à 90 jours</h3>
+            <p class="p">
+              Vous repartez avec un plan d'action business concret, des objectifs mesurables et un rythme d'exécution réaliste.
+            </p>
+          </div>
+        </div>
+        <div class="mt32">${ctaContact()}</div>
+      </div>
+    </section>
+  `;
 }
 
 async function hydrateBilanLegalData() {
