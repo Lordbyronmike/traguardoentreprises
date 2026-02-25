@@ -230,35 +230,38 @@ function setupScrollReveal() {
   targets.forEach((el) => el.classList.remove("is-visible"));
   targets.forEach((el) => el.style.setProperty("--reveal-delay", "0ms"));
 
-  let nextIndex = 0;
-  const REVEAL_STEP_PX = 110;
   const REVEAL_LATENCY_MS = 180;
-  let accumulatedScroll = 0;
-  let lastY = window.scrollY;
-  let manualRevealEnabled = false;
-  let pendingRevealCount = 0;
+  const prefersReducedMotion =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    targets.forEach((el) => el.classList.add("is-visible"));
+    _revealCleanup = null;
+    return;
+  }
+
+  let nextIndex = 0;
+  const pendingSet = new Set();
   let revealTimer = null;
 
   const revealNext = () => {
-    if (nextIndex >= targets.length) return false;
-    targets[nextIndex].classList.add("is-visible");
-    nextIndex += 1;
-    return true;
+    while (nextIndex < targets.length) {
+      const el = targets[nextIndex];
+      nextIndex += 1;
+      if (!pendingSet.has(el)) continue;
+      pendingSet.delete(el);
+      el.classList.add("is-visible");
+      return true;
+    }
+    return false;
   };
 
   const flushPendingReveals = () => {
-    if (revealTimer !== null || pendingRevealCount <= 0) return;
+    if (revealTimer !== null || pendingSet.size <= 0) return;
 
     const revealOne = () => {
-      if (pendingRevealCount <= 0) {
-        revealTimer = null;
-        return;
-      }
       const revealed = revealNext();
-      pendingRevealCount -= 1;
-      if (!revealed || pendingRevealCount <= 0) {
+      if (!revealed || pendingSet.size <= 0) {
         revealTimer = null;
-        pendingRevealCount = 0;
         return;
       }
       revealTimer = window.setTimeout(revealOne, REVEAL_LATENCY_MS);
@@ -267,47 +270,48 @@ function setupScrollReveal() {
     revealOne();
   };
 
-  const enableManualReveal = () => {
-    manualRevealEnabled = true;
-  };
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        if (pendingSet.has(entry.target) || entry.target.classList.contains("is-visible")) return;
+        pendingSet.add(entry.target);
+        observer.unobserve(entry.target);
+      });
+      if (pendingSet.size > 0) {
+        flushPendingReveals();
+      }
+    },
+    { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
+  );
 
-  const onKeyDown = (e) => {
-    if (["ArrowDown", "PageDown", " ", "Spacebar", "End"].includes(e.key)) {
-      manualRevealEnabled = true;
+  targets.forEach((el) => {
+    observer.observe(el);
+  });
+
+  const revealVisibleNow = () => {
+    let hasQueued = false;
+    targets.forEach((el) => {
+      if (el.classList.contains("is-visible")) return;
+      const rect = el.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
+      if (!inView) return;
+      pendingSet.add(el);
+      hasQueued = true;
+    });
+    if (hasQueued) {
+      flushPendingReveals();
     }
   };
-
-  const onScroll = () => {
-    if (!manualRevealEnabled) return;
-    const y = window.scrollY;
-    const delta = y - lastY;
-    lastY = y;
-    if (delta <= 0) return;
-    accumulatedScroll += delta;
-
-    while (accumulatedScroll >= REVEAL_STEP_PX) {
-      accumulatedScroll -= REVEAL_STEP_PX;
-      if (nextIndex + pendingRevealCount >= targets.length) break;
-      pendingRevealCount += 1;
-    }
-    flushPendingReveals();
-  };
-
-  window.addEventListener("wheel", enableManualReveal, { passive: true });
-  window.addEventListener("touchstart", enableManualReveal, { passive: true });
-  window.addEventListener("keydown", onKeyDown);
-  window.addEventListener("scroll", onScroll, { passive: true });
+  revealVisibleNow();
 
   _revealCleanup = () => {
-    window.removeEventListener("wheel", enableManualReveal);
-    window.removeEventListener("touchstart", enableManualReveal);
-    window.removeEventListener("keydown", onKeyDown);
-    window.removeEventListener("scroll", onScroll);
+    observer.disconnect();
     if (revealTimer !== null) {
       clearTimeout(revealTimer);
       revealTimer = null;
     }
-    pendingRevealCount = 0;
+    pendingSet.clear();
   };
 }
 
