@@ -230,7 +230,9 @@ function setupScrollReveal() {
   targets.forEach((el) => el.classList.remove("is-visible"));
   targets.forEach((el) => el.style.setProperty("--reveal-delay", "0ms"));
 
-  const REVEAL_LATENCY_MS = 180;
+  const path = route();
+  const isDiagnosticPage = path === "/diagnostic-entreprise" || path === "/bilan-competences";
+  const REVEAL_LATENCY_MS = isDiagnosticPage ? 320 : 180;
   const prefersReducedMotion =
     window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
