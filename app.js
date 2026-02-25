@@ -230,14 +230,6 @@ function setupScrollReveal() {
   targets.forEach((el) => el.classList.remove("is-visible"));
   targets.forEach((el) => el.style.setProperty("--reveal-delay", "0ms"));
 
-  const prefersReducedMotion =
-    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReducedMotion) {
-    targets.forEach((el) => el.classList.add("is-visible"));
-    _revealCleanup = null;
-    return;
-  }
-
   let nextIndex = 0;
   const REVEAL_STEP_PX = 110;
   let accumulatedScroll = 0;
@@ -845,7 +837,7 @@ function renderBilanCompetences() {
     "Faire le point sur votre modèle, vos priorités et vos leviers de croissance.",
     `
       <div class="stack">
-        <div class="card data-reveal--peek" data-reveal>
+        <div class="card" data-reveal>
           <h3 class="h3">1. Positionnement et offre</h3>
           <p class="p">
             Nous clarifions votre proposition de valeur, votre cible prioritaire et la promesse qui vous différencie.
