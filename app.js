@@ -452,7 +452,7 @@ function renderHome() {
           </p>
           <div class="programHero__cta">
             <a class="btn btn--solid" href="#/solutions" data-link>Découvrir les solutions dirigeants</a>
-            <a class="btn btn--ghost" href="#/contact" data-link>Contactez-nous</a>
+            <a class="btn btn--ghost homeHero__ghost" href="#/contact" data-link>Contactez-nous</a>
           </div>
         </div>
       </div>

@@ -584,6 +584,19 @@ a{ color:inherit; text-decoration:none; }
   background: rgba(255,255,255,.92);
 }
 
+.homeHero__ghost{
+  color: #ffffff;
+  border-color: rgba(255,255,255,.86);
+  background: rgba(255,255,255,.10);
+  backdrop-filter: blur(2px);
+}
+
+.homeHero__ghost:hover{
+  color: #ffffff;
+  border-color: #ffffff;
+  background: rgba(255,255,255,.18);
+}
+
 /* ===== Hero Contact ===== */
 .contactHero{
   isolation: isolate;
