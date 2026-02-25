@@ -985,15 +985,25 @@ function renderBienEtreTravail() {
 
 function renderActualites() {
   const sorted = POSTS.slice().sort((a, b) => (a.date < b.date ? 1 : -1));
-  $app.innerHTML = pageShell(
-    "Actualités",
-    "Articles, méthodes, réflexions utiles (pas du bruit).",
-    `
-      <div class="grid mt24">
-        ${sorted.map((p) => postCard(p)).join("")}
+  $app.innerHTML = `
+    <section class="hero actualitesHero">
+      <div class="container actualitesHero__inner">
+        <div class="actualitesHero__content stack">
+          <div class="kicker">Veille & méthodes</div>
+          <h1 class="h1">Actualités</h1>
+          <p class="p maxW">Articles, méthodes, réflexions utiles (pas du bruit).</p>
+        </div>
       </div>
-    `
-  );
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid mt24">
+          ${sorted.map((p) => postCard(p)).join("")}
+        </div>
+      </div>
+    </section>
+  `;
 }
 
 function renderArticle(slug) {
