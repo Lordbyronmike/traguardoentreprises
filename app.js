@@ -185,11 +185,6 @@ document.addEventListener("click", (e) => {
 // Effet "goutte d'eau" au clic
 // =========================
 (function setupClickDrops() {
-  const reduceMotion =
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (reduceMotion) return;
-
   document.addEventListener("pointerdown", (e) => {
     const tag = (e.target?.tagName || "").toLowerCase();
     if (["input", "textarea", "select"].includes(tag)) return;
