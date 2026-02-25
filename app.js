@@ -273,6 +273,7 @@ function initPage() {
     setupWordAnimation();
     setupScrollReveal();
   }, 50);
+  updateHeaderCtaVisibility();
   updateActiveNav();
   updateFabVisibilityByScroll();
 }
@@ -313,6 +314,13 @@ function updateActiveNav() {
     const isActive = (target === path) || (path === "/" && (target === "/" || target === ""));
     a.classList.toggle("active", isActive);
   });
+}
+
+function updateHeaderCtaVisibility() {
+  const cta = document.getElementById("headerCta");
+  if (!cta) return;
+  const onContact = route() === "/contact";
+  cta.hidden = onContact;
 }
 
 let _fabScrollBound = false;
