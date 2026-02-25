@@ -14,33 +14,33 @@ const CONTACT_ENDPOINT = window.CONTACT_ENDPOINT || "";
 const POSTS = [
   {
     slug: "reprendre-le-controle-sans-sepuiser",
-    title: "Reprendre le contrôle sans s'épuiser",
+    title: "Retrouver du cap quand tout accélère",
     date: "2026-01-10",
-    excerpt: "Charge mentale, priorités et énergie : une méthode simple pour respirer.",
+    excerpt: "Dirigeants et créateurs : priorités business, charge mentale et décisions clés.",
     content: [
-      "Quand tout semble urgent, le stress prend toute la place.",
-      "On repart de vos objectifs personnels, on clarifie les priorités, puis on met en place un plan réaliste.",
-      "Le but : moins de pression, plus de sérénité au travail."
+      "Quand tout semble urgent, la vision se brouille et les décisions se retardent.",
+      "Nous repartons de vos enjeux business, de vos priorités stratégiques et de vos contraintes terrain.",
+      "Objectif : reprendre la main avec un plan d'action clair et une exécution soutenable."
     ]
   },
   {
     slug: "motivation-durable",
-    title: "Motivation durable : le mythe et la méthode",
+    title: "Décider plus vite sans subir l'urgence",
     date: "2026-01-05",
-    excerpt: "La motivation n'est pas une ressource magique. C'est un système.",
+    excerpt: "Une méthode simple pour arbitrer, trancher et garder le rythme entrepreneurial.",
     content: [
-      "On ne « trouve » pas la motivation : on la construit.",
-      "Rituels, environnement, boucles de feedback : trois piliers qui tiennent sur la durée."
+      "Le vrai sujet n'est pas la motivation, c'est la qualité du pilotage.",
+      "Cadre de décision, routines de direction et indicateurs utiles: trois leviers pour avancer."
     ]
   },
   {
     slug: "reconversion-sans-se-perdre",
-    title: "Reconversion : avancer sans se perdre",
+    title: "Créer son entreprise sans s'éparpiller",
     date: "2025-12-15",
-    excerpt: "Changer de voie demande une méthode claire et des étapes réalistes.",
+    excerpt: "Passer de l'idée au lancement avec des étapes nettes et un rythme réaliste.",
     content: [
-      "Une reconversion réussie commence par clarifier ses envies, ses contraintes et ses compétences transférables.",
-      "Ensuite, on avance par petites étapes concrètes pour garder le cap."
+      "Un lancement solide commence par un positionnement clair, une offre lisible et un plan de traction.",
+      "Ensuite, on avance par sprints concrets pour garder le cap et sécuriser la croissance."
     ]
   }
 ];
@@ -392,28 +392,28 @@ function render() {
     setTitle("Nos solutions");
     return renderSolutions();
   }
-  if (path === "/orientation-professionnelle") {
-    setTitle("Orientation professionnelle");
+  if (path === "/vision-strategique" || path === "/orientation-professionnelle") {
+    setTitle("Vision stratégique");
     return renderReperage();
   }
-  if (path === "/accompagnement-salaries" || path === "/dynamiques-emploi") {
-    setTitle("Accompagnement des salariés");
+  if (path === "/accompagnement-dirigeants" || path === "/accompagnement-salaries" || path === "/dynamiques-emploi") {
+    setTitle("Accompagnement des dirigeants");
     return renderAccompagnementSalaries();
   }
-  if (path === "/bilan-competences") {
-    setTitle("Bilan de compétences");
+  if (path === "/diagnostic-entreprise" || path === "/bilan-competences") {
+    setTitle("Diagnostic d'entreprise");
     return renderBilanCompetences();
   }
-  if (path === "/plan-action-carriere") {
-    setTitle("Plan d'action carrière");
+  if (path === "/plan-action-business" || path === "/plan-action-carriere") {
+    setTitle("Plan d'action business");
     return renderOutilSuivi();
   }
-  if (path === "/reconversion-formation") {
-    setTitle("Reconversion et formation");
+  if (path === "/creation-lancement" || path === "/reconversion-formation") {
+    setTitle("Création et lancement");
     return renderEcoleFormation();
   }
-  if (path === "/bien-etre-travail") {
-    setTitle("Bien-être au travail");
+  if (path === "/leadership-equilibre" || path === "/bien-etre-travail") {
+    setTitle("Leadership et équilibre dirigeant");
     return renderBienEtreTravail();
   }
   if (path === "/actualites") {
@@ -448,14 +448,15 @@ function renderHome() {
     <section class="hero">
       <div class="container hero__inner">
         <div class="stack">
-          <div class="kicker">Accompagnement des salariés</div>
-          <h1 class="h1">Avancer dans votre vie pro. <span class="muted">Sans vous épuiser.</span></h1>
+          <div class="kicker">Dirigeants et créateurs d'entreprises</div>
+          <h1 class="h1">Faire avancer votre entreprise. <span class="muted">Sans vous épuiser.</span></h1>
           <p class="p maxW">
-            Traguardo accompagne les salariés dans leurs étapes clés:
-            évolution de poste, reconversion, bilan de compétences et équilibre professionnel.
+            Traguardo accompagne les dirigeants et créateurs d'entreprises
+            dans leurs étapes clés : vision stratégique, plan d'action business,
+            lancement, pilotage et équilibre de direction.
           </p>
           <div class="programHero__cta">
-            <a class="btn btn--solid" href="#/solutions" data-link>Découvrir les solutions salariés</a>
+            <a class="btn btn--solid" href="#/solutions" data-link>Découvrir les solutions dirigeants</a>
             <a class="btn btn--ghost" href="#/contact" data-link>Contactez-nous</a>
           </div>
         </div>
@@ -478,12 +479,12 @@ function renderHome() {
         <div class="grid grid--3 mt24">
           <div class="card">
             <h3 class="h3">À propos</h3>
-            <p class="p">Notre mission, notre équipe et notre méthode dédiée aux salariés.</p>
+            <p class="p">Notre mission, notre équipe et notre méthode dédiée aux dirigeants et créateurs.</p>
             <div class="mt16"><a class="btn btn--ghost" href="#/notre-mission" data-link>Voir la mission</a></div>
           </div>
           <div class="card">
             <h3 class="h3">Nos solutions</h3>
-            <p class="p">6 solutions concrètes pour évoluer, changer de voie et retrouver de l'équilibre.</p>
+            <p class="p">6 solutions concrètes pour structurer, lancer et développer votre entreprise.</p>
             <div class="mt16"><a class="btn btn--ghost" href="#/solutions" data-link>Voir les solutions</a></div>
           </div>
           <div class="card">
@@ -496,9 +497,9 @@ function renderHome() {
         <div class="hr"></div>
 
         <div class="grid grid--3 mt24">
-          <div class="card"><h3 class="h3">Clarifier</h3><p class="p">Faire le point sur votre situation et vos options.</p></div>
-          <div class="card"><h3 class="h3">Évoluer</h3><p class="p">Construire un plan réaliste pour la suite de votre carrière.</p></div>
-          <div class="card"><h3 class="h3">S'équilibrer</h3><p class="p">Retrouver une dynamique durable entre travail et bien-être.</p></div>
+          <div class="card"><h3 class="h3">Clarifier</h3><p class="p">Faire le point sur votre vision, votre offre et vos priorités business.</p></div>
+          <div class="card"><h3 class="h3">Exécuter</h3><p class="p">Transformer vos objectifs en plan d'action concret et mesurable.</p></div>
+          <div class="card"><h3 class="h3">Tenir</h3><p class="p">Conserver une dynamique entrepreneuriale durable sans surcharge.</p></div>
         </div>
 
         <div class="hr"></div>
@@ -518,38 +519,38 @@ function renderHome() {
 function renderSolutions() {
   $app.innerHTML = pageShell(
     "Nos solutions",
-    "Une offre 100% dédiée aux salariés, avec 6 solutions complémentaires.",
+    "Une offre 100% dédiée aux dirigeants et créateurs d'entreprises, avec 6 solutions complémentaires.",
     `
       <div class="grid grid--2 mt24">
         ${solutionCard(
-          "Orientation professionnelle",
-          "Faire le point sur votre situation, vos envies et vos priorités.",
-          "#/orientation-professionnelle"
+          "Vision stratégique",
+          "Clarifier votre cap, votre positionnement et vos priorités de direction.",
+          "#/vision-strategique"
         )}
         ${solutionCard(
-          "Accompagnement des salariés",
-          "Avancer pas à pas avec un cadre clair, personnalisé et réaliste.",
-          "#/accompagnement-salaries"
+          "Accompagnement des dirigeants",
+          "Avancer pas à pas avec un cadre clair, personnalisé et orienté résultats business.",
+          "#/accompagnement-dirigeants"
         )}
         ${solutionCard(
-          "Bilan de compétences",
-          "Clarifier un projet réaliste et aligné avec les compétences transférables.",
-          "#/bilan-competences"
+          "Diagnostic d'entreprise",
+          "Analyser vos forces, vos points de friction et vos priorités d'amélioration.",
+          "#/diagnostic-entreprise"
         )}
         ${solutionCard(
-          "Plan d'action carrière",
-          "Structurer vos prochaines étapes avec des objectifs simples et mesurables.",
-          "#/plan-action-carriere"
+          "Plan d'action business",
+          "Structurer vos prochaines étapes avec des objectifs concrets et mesurables.",
+          "#/plan-action-business"
         )}
         ${solutionCard(
-          "Reconversion et formation",
-          "Préparer un changement professionnel en sécurisant chaque étape.",
-          "#/reconversion-formation"
+          "Création et lancement",
+          "Passer de l'idée au lancement avec une exécution structurée.",
+          "#/creation-lancement"
         )}
         ${solutionCard(
-          "Bien-être au travail",
-          "Prévenir l'épuisement et retrouver une dynamique professionnelle saine.",
-          "#/bien-etre-travail"
+          "Leadership et équilibre dirigeant",
+          "Prévenir l'épuisement du dirigeant et renforcer la qualité de pilotage.",
+          "#/leadership-equilibre"
         )}
       </div>
 
@@ -563,14 +564,14 @@ function renderSolutions() {
 function renderMission() {
   $app.innerHTML = pageShell(
     "Notre mission",
-    "Aider les salariés à évoluer, se reconvertir et retrouver un équilibre professionnel durable.",
+    "Aider les dirigeants et créateurs d'entreprises à structurer leur cap, exécuter et durer.",
     `
       <div class="grid grid--2">
         <div class="card">
           <h3 class="h3">Notre vision</h3>
           <p class="p">
-            Chaque salarié peut retrouver de la clarté et du pouvoir d'action
-            quand il bénéficie d'un accompagnement concret et humain.
+            Chaque dirigeant ou créateur peut retrouver de la clarté et du pouvoir d'action
+            avec un accompagnement concret, exigeant et humain.
           </p>
         </div>
         <div class="card">
@@ -591,12 +592,12 @@ function renderMission() {
 function renderEquipe() {
   $app.innerHTML = pageShell(
     "Notre équipe",
-    "Une équipe pluridisciplinaire dédiée à l'accompagnement des salariés.",
+    "Une équipe pluridisciplinaire dédiée à l'accompagnement des dirigeants et créateurs.",
     `
       <div class="grid grid--3">
-        <div class="card"><h3 class="h3">Coach carrière</h3><p class="p">Clarification des objectifs et plan d'évolution professionnelle.</p></div>
-        <div class="card"><h3 class="h3">Consultant bilan</h3><p class="p">Analyse des compétences et construction d'un projet réaliste.</p></div>
-        <div class="card"><h3 class="h3">Référent bien-être</h3><p class="p">Prévention de l'épuisement et équilibre de vie au travail.</p></div>
+        <div class="card"><h3 class="h3">Coach dirigeant</h3><p class="p">Clarification du cap et priorisation stratégique.</p></div>
+        <div class="card"><h3 class="h3">Consultant business</h3><p class="p">Analyse du modèle, de l'offre et des leviers de croissance.</p></div>
+        <div class="card"><h3 class="h3">Mentor création</h3><p class="p">Structuration du lancement et montée en cadence entrepreneuriale.</p></div>
       </div>
       <div class="mt32">${ctaContact()}</div>
     `
@@ -605,17 +606,17 @@ function renderEquipe() {
 
 function renderReperage() {
   $app.innerHTML = pageShell(
-    "Orientation professionnelle",
-    "Faire un état des lieux clair de votre situation pour choisir la bonne direction.",
+    "Vision stratégique",
+    "Faire un état des lieux clair de votre entreprise pour choisir la bonne direction.",
     `
       <div class="grid grid--2">
         <div class="card">
           <h3 class="h3">Ce que nous faisons</h3>
-          <p class="p">Analyse de votre parcours, de vos contraintes et de vos objectifs pour poser un cap réaliste.</p>
+          <p class="p">Analyse de votre contexte, de vos contraintes et de vos objectifs pour poser un cap réaliste.</p>
         </div>
         <div class="card">
           <h3 class="h3">Bénéfices</h3>
-          <p class="p">Plus de clarté, moins d'hésitations et des décisions plus sereines pour la suite.</p>
+          <p class="p">Plus de clarté, moins d'hésitations et des décisions de pilotage plus sereines.</p>
         </div>
       </div>
       <div class="mt32">${ctaContact()}</div>
@@ -630,10 +631,10 @@ function renderAccompagnementSalaries() {
       <div class="blob blob--b"></div>
       <div class="container hero__inner">
         <div class="stack">
-          <h1 class="h1">Accompagnement des salariés</h1>
+          <h1 class="h1">Accompagnement des dirigeants</h1>
           <p class="p maxW">
-            Un accompagnement clair et structuré pour retrouver un cap professionnel,
-            relancer la motivation et avancer avec méthode.
+            Un accompagnement clair et structuré pour piloter avec plus de lucidité,
+            décider plus vite et exécuter avec méthode.
           </p>
           <div class="programHero__cta">
             <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
@@ -649,7 +650,7 @@ function renderAccompagnementSalaries() {
             </div>
             <div class="programMetric">
               <div class="programMetric__value">Sur mesure</div>
-              <p class="p">Parcours adapté à votre situation de salarié.</p>
+              <p class="p">Parcours adapté à votre contexte de dirigeant ou créateur.</p>
             </div>
             <div class="programMetric">
               <div class="programMetric__value">Concret</div>
@@ -664,25 +665,25 @@ function renderAccompagnementSalaries() {
       <div class="container">
         <h2 class="h2">À qui s'adresse ce parcours ?</h2>
         <p class="p maxW">
-          Personnes en transition professionnelle, en recherche d'emploi ou en reprise d'activité,
-          qui veulent une méthode claire pour avancer de manière durable.
+          Dirigeants, créateurs d'entreprises et indépendants
+          qui veulent structurer leurs décisions et avancer de manière durable.
         </p>
 
         <div class="grid grid--2 mt24">
           <div class="card">
             <h3 class="h3">Objectifs du programme</h3>
             <p class="p">
-              • Clarifier votre projet et vos priorités<br/>
-              • Renforcer votre confiance professionnelle<br/>
+              • Clarifier votre vision et vos priorités business<br/>
+              • Renforcer votre leadership et votre posture de direction<br/>
               • Structurer vos actions semaine après semaine
             </p>
           </div>
           <div class="card">
             <h3 class="h3">Résultats attendus</h3>
             <p class="p">
-              • Un plan d'évolution réaliste<br/>
-              • Un meilleur niveau d'autonomie<br/>
-              • Une dynamique de travail plus régulière
+              • Un plan d'action business réaliste<br/>
+              • Un pilotage plus fluide et plus autonome<br/>
+              • Une dynamique d'exécution plus régulière
             </p>
           </div>
         </div>
@@ -699,7 +700,7 @@ function renderAccompagnementSalaries() {
             <div class="programStep__index">01</div>
             <h3 class="h3 mt16">Diagnostic</h3>
             <p class="p">
-              Analyse de votre situation, de vos freins et de vos ressources pour définir un point de départ fiable.
+              Analyse de votre situation business, de vos freins et de vos ressources pour définir un point de départ fiable.
             </p>
           </article>
           <article class="card card--hover">
@@ -713,7 +714,7 @@ function renderAccompagnementSalaries() {
             <div class="programStep__index">03</div>
             <h3 class="h3 mt16">Passage à l'action</h3>
             <p class="p">
-              Mise en oeuvre accompagnée, ajustements réguliers, et montée en autonomie.
+              Mise en oeuvre accompagnée, ajustements réguliers et montée en autonomie de pilotage.
             </p>
           </article>
         </div>
@@ -728,7 +729,7 @@ function renderAccompagnementSalaries() {
             <p class="p">
               • Séances individuelles en visio ou présentiel<br/>
               • Rythme adaptable selon les besoins<br/>
-              • Support entre séances pour maintenir la dynamique
+              • Support entre séances pour maintenir la dynamique de direction
             </p>
           </div>
           <div class="card">
@@ -758,103 +759,48 @@ function renderAccompagnementSalaries() {
 
 function renderBilanCompetences() {
   $app.innerHTML = pageShell(
-    "Bilan de compétences",
-    "Guide pratique 2026 - financement CPF et points de vigilance.",
+    "Diagnostic d'entreprise",
+    "Faire le point sur votre modèle, vos priorités et vos leviers de croissance.",
     `
       <div class="stack">
-        <div class="card">
-          <h3 class="h3">Introduction</h3>
-          <p class="p">
-            Le bilan de compétences est un outil professionnel reconnu qui permet de faire le point sur vos compétences,
-            vos motivations et de construire un projet d'évolution ou de reconversion de façon claire et structurée.
-          </p>
-          <p class="kicker mt16" id="bilanLegalMeta">Dernière vérification Légifrance : --</p>
-          <p class="p mt16" id="bilanLegalAlert" style="display:none;color:#92400e;">
-            Une mise à jour réglementaire a été détectée. Vérifiez le contenu avant publication.
-          </p>
-          <p class="kicker mt8">
-            <a id="bilanLegalSource" href="#" target="_blank" rel="noopener noreferrer" hidden>Source principale Légifrance</a>
-          </p>
-        </div>
-
         <div class="card data-reveal--peek" data-reveal>
-          <h3 class="h3">1. Le CPF : un financement toujours disponible en 2026</h3>
+          <h3 class="h3">1. Positionnement et offre</h3>
           <p class="p">
-            Le bilan de compétences reste éligible au financement via le CPF en 2026.
-            Vous pouvez mobiliser vos droits CPF pour financer tout ou partie du parcours.
+            Nous clarifions votre proposition de valeur, votre cible prioritaire et la promesse qui vous différencie.
           </p>
         </div>
 
         <div class="card" data-reveal>
-          <h3 class="h3">2. Participation forfaitaire obligatoire</h3>
+          <h3 class="h3">2. Modèle économique</h3>
           <p class="p">
-            Depuis 2026, l'utilisation du CPF implique une participation forfaitaire :
-            <strong id="bilanParticipationAmount">103,20 €</strong> par dossier mobilisé.
-            Cette somme s'affiche lors de la validation sur Mon Compte Formation.
+            Nous analysons vos revenus, vos marges, votre structure de coûts et les points qui freinent la rentabilité.
           </p>
         </div>
 
         <div class="card" data-reveal>
-          <h3 class="h3">3. Plafond de financement CPF</h3>
+          <h3 class="h3">3. Pilotage et organisation</h3>
           <p class="p">
-            En 2026, le CPF est plafonné par action. Pour un bilan de compétences,
-            les projets réglementaires indiquent un plafond autour de <strong id="bilanCpfCapAmount">1 600 €</strong> maximum pris en charge.
-            Si le coût total dépasse ce plafond, le complément peut être financé via l'autofinancement,
-            l'employeur, un OPCO ou France Travail.
+            Nous identifions les décisions clés, les zones de dispersion et les routines de direction à renforcer.
           </p>
         </div>
 
         <div class="card" data-reveal>
-          <h3 class="h3">4. Durée minimale et conditions</h3>
+          <h3 class="h3">4. Exécution commerciale</h3>
           <p class="p">
-            • Le bilan doit comporter au moins 13 heures d'accompagnement effectif avec un prestataire certifié.<br/>
-            • Un nouveau financement CPF pour un second bilan n'est possible qu'après 5 ans.
+            Nous passons en revue le tunnel d'acquisition, la transformation et la fidélisation pour accélérer la traction.
           </p>
         </div>
 
         <div class="card" data-reveal>
-          <h3 class="h3">5. Comment s'organiser ?</h3>
+          <h3 class="h3">5. Plan de priorités à 90 jours</h3>
           <p class="p">
-            1. Vérifier vos droits sur moncompteformation.gouv.fr.<br/>
-            2. Choisir un prestataire certifié Qualiopi.<br/>
-            3. Monter le dossier CPF avec le bon intitulé d'action.<br/>
-            4. Valider la demande et régler la participation forfaitaire.<br/>
-            5. Prévoir des financements complémentaires si nécessaire.
-          </p>
-        </div>
-
-        <div class="card" data-reveal>
-          <h3 class="h3">6. Ce que cela signifie pour vous</h3>
-          <p class="p">
-            ✔ Le bilan peut toujours être financé par le CPF.<br/>
-            ✔ Une participation forfaitaire est à prévoir.<br/>
-            ✔ Un plafond de prise en charge s'applique.<br/>
-            ✔ Le reste peut être financé par d'autres dispositifs.
-          </p>
-        </div>
-
-        <div class="card" data-reveal>
-          <h3 class="h3">7. Points de vigilance</h3>
-          <p class="p">
-            • Vérifier le coût total du bilan pour limiter le reste à charge.<br/>
-            • Anticiper le budget et les financements complémentaires.<br/>
-            • Demander un devis clair et détaillé au prestataire.
-          </p>
-        </div>
-
-        <div class="card" data-reveal>
-          <h3 class="h3">Conclusion</h3>
-          <p class="p">
-            Le bilan de compétences reste un outil puissant pour clarifier vos ambitions professionnelles.
-            Grâce au CPF, il reste accessible, avec des règles tarifaires à intégrer dans votre stratégie.
+            Vous repartez avec un plan d'action business concret, des objectifs mesurables et un rythme d'exécution réaliste.
           </p>
         </div>
       </div>
       <div class="mt32">${ctaContact()}</div>
     `
   );
-
-  hydrateBilanLegalData();
 }
 
 async function hydrateBilanLegalData() {
@@ -903,21 +849,21 @@ async function hydrateBilanLegalData() {
 
 function renderOutilSuivi() {
   $app.innerHTML = pageShell(
-    "Plan d'action carrière",
-    "Structurer votre progression professionnelle avec des étapes claires et atteignables.",
+    "Plan d'action business",
+    "Structurer votre progression avec des priorités claires et des indicateurs concrets.",
     `
       <div class="grid grid--2">
         <div class="card">
           <h3 class="h3">Contenu du plan</h3>
           <p class="p">
-            • Étapes concrètes par priorité<br/>
-            • Objectifs hebdomadaires simples<br/>
-            • Points d'ajustement réguliers
+            • Priorités business par impact<br/>
+            • Objectifs hebdomadaires mesurables<br/>
+            • Points d'arbitrage et d'ajustement réguliers
           </p>
         </div>
         <div class="card">
           <h3 class="h3">Bénéfices</h3>
-          <p class="p">Plus de régularité, moins de dispersion et une progression visible dans le temps.</p>
+          <p class="p">Plus de régularité, moins de dispersion et une progression visible du business.</p>
         </div>
       </div>
       <div class="mt32">${ctaContact()}</div>
@@ -927,17 +873,17 @@ function renderOutilSuivi() {
 
 function renderEcoleFormation() {
   $app.innerHTML = pageShell(
-    "Reconversion et formation",
-    "Préparer un changement de métier ou une montée en compétences avec un cadre progressif.",
+    "Création et lancement",
+    "Passer de l'idée au lancement avec un cadre structuré et des étapes réalistes.",
     `
       <div class="grid grid--2">
         <div class="card">
           <h3 class="h3">Ce que nous construisons</h3>
-          <p class="p">Un parcours de reconversion réaliste: compétences à acquérir, étapes et calendrier.</p>
+          <p class="p">Un parcours de lancement réaliste: offre, positionnement, acquisition et calendrier d'exécution.</p>
         </div>
         <div class="card">
           <h3 class="h3">Résultats attendus</h3>
-          <p class="p">Une transition sécurisée, avec des choix de formation adaptés à votre profil.</p>
+          <p class="p">Un démarrage sécurisé, des décisions plus claires et une montée en puissance progressive.</p>
         </div>
       </div>
       <div class="mt32">${ctaContact()}</div>
@@ -947,17 +893,17 @@ function renderEcoleFormation() {
 
 function renderBienEtreTravail() {
   $app.innerHTML = pageShell(
-    "Bien-être au travail",
-    "Prévenir l'épuisement professionnel et retrouver un équilibre durable.",
+    "Leadership et équilibre dirigeant",
+    "Prévenir l'épuisement du dirigeant et maintenir une performance durable.",
     `
       <div class="grid grid--2">
         <div class="card">
           <h3 class="h3">Ce que nous travaillons</h3>
-          <p class="p">Stress, charge mentale, relation au travail et organisation du quotidien professionnel.</p>
+          <p class="p">Charge mentale dirigeant, rythme de décision, limites, délégation et organisation du pilotage.</p>
         </div>
         <div class="card">
           <h3 class="h3">Résultat</h3>
-          <p class="p">Plus de recul, des limites plus claires et une dynamique de travail plus saine.</p>
+          <p class="p">Plus de recul, des arbitrages plus nets et une dynamique de direction plus saine.</p>
         </div>
       </div>
       <div class="mt32">${ctaContact()}</div>
@@ -1092,9 +1038,9 @@ function renderContact() {
           <div class="quickChoices mt16" aria-label="Aide à la rédaction">
             <div class="kicker">Je vous contacte pour…</div>
             <div class="quickChoices__row">
-              <button type="button" class="chip" data-template="motivation">Gagner en motivation</button>
-              <button type="button" class="chip" data-template="reconversion">Préparer ma reconversion</button>
-              <button type="button" class="chip" data-template="clarte">Clarifier mon projet pro</button>
+              <button type="button" class="chip" data-template="strategie">Structurer ma stratégie</button>
+              <button type="button" class="chip" data-template="lancement">Lancer mon entreprise</button>
+              <button type="button" class="chip" data-template="priorites">Clarifier mes priorités</button>
             </div>
           </div>
 
@@ -1163,12 +1109,12 @@ const formMessage = document.getElementById("formMessage");
 // Mini-diagnostic : pré-remplit le message pour aider (sans friction)
 const messageEl = document.getElementById("message");
 const templates = {
-  motivation:
-    "Bonjour,\n\nJe souhaite gagner en motivation et retrouver une dynamique durable.\n\nContexte : …\nObjectif : …\nCe qui me bloque aujourd’hui : …\n\nMerci,",
-  reconversion:
-    "Bonjour,\n\nJe souhaite préparer une reconversion professionnelle.\n\nContexte : …\nObjectif : …\nContraintes : …\n\nMerci,",
-  clarte:
-    "Bonjour,\n\nJe souhaite clarifier mon projet professionnel et mes prochaines étapes.\n\nContexte : …\nObjectif : …\nContraintes : …\n\nMerci,"
+  strategie:
+    "Bonjour,\n\nJe souhaite structurer ma stratégie d'entreprise.\n\nContexte : …\nObjectif : …\nPriorités : …\n\nMerci,",
+  lancement:
+    "Bonjour,\n\nJe souhaite lancer mon entreprise avec un plan clair.\n\nContexte : …\nObjectif : …\nContraintes : …\n\nMerci,",
+  priorites:
+    "Bonjour,\n\nJe souhaite clarifier mes priorités de dirigeant et mon plan d'action.\n\nContexte : …\nObjectif : …\nCe qui me bloque aujourd’hui : …\n\nMerci,"
 };
 
 document.querySelectorAll(".quickChoices .chip").forEach((btn) => {
