@@ -862,27 +862,49 @@ async function hydrateBilanLegalData() {
 }
 
 function renderOutilSuivi() {
-  $app.innerHTML = pageShell(
-    "Plan d'action business",
-    "Structurer votre progression avec des priorités claires et des indicateurs concrets.",
-    `
-      <div class="grid grid--2">
-        <div class="card">
-          <h3 class="h3">Contenu du plan</h3>
-          <p class="p">
-            • Priorités business par impact<br/>
-            • Objectifs hebdomadaires mesurables<br/>
-            • Points d'arbitrage et d'ajustement réguliers
+  $app.innerHTML = `
+    <section class="hero planActionHero planActionHero--processus">
+      <div class="container planActionHero__inner">
+        <div class="planActionHero__content stack">
+          <div class="kicker">Exécution & Pilotage</div>
+          <h1 class="h1">Transformer vos priorités en <span class="muted">résultats mesurables.</span></h1>
+          <p class="p maxW">
+            Structurer votre progression avec des priorités claires, des objectifs concrets
+            et un rythme d'exécution adapté à votre réalité de dirigeant.
           </p>
-        </div>
-        <div class="card">
-          <h3 class="h3">Bénéfices</h3>
-          <p class="p">Plus de régularité, moins de dispersion et une progression visible du business.</p>
+          <div class="programHero__cta">
+            <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
+            <a class="btn btn--ghost planActionHero__ghost" href="#/solutions" data-link>Voir les solutions</a>
+          </div>
         </div>
       </div>
-      <div class="mt32">${ctaContact()}</div>
-    `
-  );
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">Plan d'action business</h2>
+        <p class="p maxW">
+          Structurer votre progression avec des priorités claires et des indicateurs concrets.
+        </p>
+
+        <div class="grid grid--2 mt24">
+          <div class="card">
+            <h3 class="h3">Contenu du plan</h3>
+            <p class="p">
+              • Priorités business par impact<br/>
+              • Objectifs hebdomadaires mesurables<br/>
+              • Points d'arbitrage et d'ajustement réguliers
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="h3">Bénéfices</h3>
+            <p class="p">Plus de régularité, moins de dispersion et une progression visible du business.</p>
+          </div>
+        </div>
+        <div class="mt32">${ctaContact()}</div>
+      </div>
+    </section>
+  `;
 }
 
 function renderEcoleFormation() {
