@@ -52,11 +52,27 @@ a{ color:inherit; text-decoration:none; }
 }
 
 .brand{
-  font-family: var(--font-heading);
-  font-weight:800;
-  font-size: 24px;
+  display:inline-flex;
+  align-items:center;
   line-height: 1;
-  letter-spacing:-.02em;
+}
+
+.brand__logo{
+  display:block;
+  width:auto;
+  height:42px;
+}
+
+.sr-only{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
 }
 
 .nav{
@@ -456,6 +472,18 @@ a{ color:inherit; text-decoration:none; }
   font-size:14px;
 }
 
+.footer__brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.footer__logo{
+  width:auto;
+  height:48px;
+  object-fit:contain;
+}
+
 /* ===== Focus clavier ===== */
 :focus { outline:none; }
 :focus-visible{
@@ -623,9 +651,12 @@ textarea.input{ resize:vertical; min-height:100px; }
 }
 
 @media (max-width: 768px){
+  .brand__logo{ height:36px; }
   .section{ padding: 40px 0; }
   .hero{ padding: 40px 0 20px; }
   .grid--2, .grid--3{ grid-template-columns: 1fr; }
+  .footer__brand{ gap:10px; }
+  .footer__logo{ height:40px; }
 }
 
 
