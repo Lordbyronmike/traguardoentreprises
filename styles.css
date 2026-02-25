@@ -1013,6 +1013,12 @@ textarea.input{ resize:vertical; min-height:100px; }
   z-index: 1;
 }
 
+@media(min-width: 860px){
+  .programHero--roadmap .hero__inner{
+    grid-template-columns: 1fr;
+  }
+}
+
 .programHero--roadmap .blob{
   display: none;
 }

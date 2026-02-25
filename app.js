@@ -656,30 +656,28 @@ function renderAccompagnementSalaries() {
             <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
           </div>
         </div>
-
-        <div class="card">
-          <h3 class="h3">En bref</h3>
-          <div class="grid mt16">
-            <div class="programMetric">
-              <div class="programMetric__value">3 phases</div>
-              <p class="p">Écoute, plan d'action, passage à l'action.</p>
-            </div>
-            <div class="programMetric">
-              <div class="programMetric__value">Sur mesure</div>
-              <p class="p">Parcours adapté à votre contexte de dirigeant ou créateur.</p>
-            </div>
-            <div class="programMetric">
-              <div class="programMetric__value">Concret</div>
-              <p class="p">Des actions utiles dès les premières séances.</p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <h2 class="h2">À qui s'adresse ce parcours ?</h2>
+        <h2 class="h2">En bref</h2>
+        <div class="grid grid--3 mt24">
+          <div class="programMetric">
+            <div class="programMetric__value">3 phases</div>
+            <p class="p">Écoute, plan d'action, passage à l'action.</p>
+          </div>
+          <div class="programMetric">
+            <div class="programMetric__value">Sur mesure</div>
+            <p class="p">Parcours adapté à votre contexte de dirigeant ou créateur.</p>
+          </div>
+          <div class="programMetric">
+            <div class="programMetric__value">Concret</div>
+            <p class="p">Des actions utiles dès les premières séances.</p>
+          </div>
+        </div>
+
+        <h2 class="h2 mt32">À qui s'adresse ce parcours ?</h2>
         <p class="p maxW">
           Dirigeants, créateurs d'entreprises et indépendants
           qui veulent structurer leurs décisions et avancer de manière durable.
