@@ -242,6 +242,7 @@ function setupScrollReveal() {
   const REVEAL_STEP_PX = 110;
   let accumulatedScroll = 0;
   let lastY = window.scrollY;
+  let manualRevealEnabled = false;
 
   const revealNext = () => {
     if (nextIndex >= targets.length) return false;
@@ -250,10 +251,18 @@ function setupScrollReveal() {
     return true;
   };
 
-  // Manuel: on affiche le premier bloc, puis les suivants uniquement au scroll.
-  revealNext();
+  const enableManualReveal = () => {
+    manualRevealEnabled = true;
+  };
+
+  const onKeyDown = (e) => {
+    if (["ArrowDown", "PageDown", " ", "Spacebar", "End"].includes(e.key)) {
+      manualRevealEnabled = true;
+    }
+  };
 
   const onScroll = () => {
+    if (!manualRevealEnabled) return;
     const y = window.scrollY;
     const delta = y - lastY;
     lastY = y;
@@ -269,9 +278,16 @@ function setupScrollReveal() {
       }
     }
   };
+
+  window.addEventListener("wheel", enableManualReveal, { passive: true });
+  window.addEventListener("touchstart", enableManualReveal, { passive: true });
+  window.addEventListener("keydown", onKeyDown);
   window.addEventListener("scroll", onScroll, { passive: true });
 
   _revealCleanup = () => {
+    window.removeEventListener("wheel", enableManualReveal);
+    window.removeEventListener("touchstart", enableManualReveal);
+    window.removeEventListener("keydown", onKeyDown);
     window.removeEventListener("scroll", onScroll);
   };
 }
