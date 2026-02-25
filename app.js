@@ -557,46 +557,74 @@ function renderSolutions() {
 }
 
 function renderMission() {
-  $app.innerHTML = pageShell(
-    "Notre mission",
-    "Aider les dirigeants et créateurs d'entreprises à structurer leur cap, exécuter et durer.",
-    `
-      <div class="grid grid--2">
-        <div class="card">
-          <h3 class="h3">Notre vision</h3>
-          <p class="p">
-            Chaque dirigeant ou créateur peut retrouver de la clarté et du pouvoir d'action
-            avec un accompagnement concret, exigeant et humain.
-          </p>
-        </div>
-        <div class="card">
-          <h3 class="h3">Notre méthode</h3>
-          <p class="p">
-            • Écoute de votre situation<br/>
-            • Clarification des priorités<br/>
-            • Plan d'action adapté<br/>
-            • Suivi et ajustements réguliers
-          </p>
+  $app.innerHTML = `
+    <section class="hero missionHero missionHero--mission">
+      <div class="container missionHero__inner">
+        <div class="missionHero__content stack">
+          <div class="kicker">À propos</div>
+          <h1 class="h1">Notre mission</h1>
+          <p class="p maxW">Aider les dirigeants et créateurs d'entreprises à structurer leur cap, exécuter et durer.</p>
+          <div class="programHero__cta">
+            <a class="btn btn--solid" href="#/contact" data-link>Nous contacter</a>
+            <a class="btn btn--ghost missionHero__ghost" href="#/solutions" data-link>Voir les solutions</a>
+          </div>
         </div>
       </div>
-      <div class="mt32">${ctaContact()}</div>
-    `
-  );
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid grid--2">
+          <div class="card">
+            <h3 class="h3">Notre vision</h3>
+            <p class="p">
+              Chaque dirigeant ou créateur peut retrouver de la clarté et du pouvoir d'action
+              avec un accompagnement concret, exigeant et humain.
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="h3">Notre méthode</h3>
+            <p class="p">
+              • Écoute de votre situation<br/>
+              • Clarification des priorités<br/>
+              • Plan d'action adapté<br/>
+              • Suivi et ajustements réguliers
+            </p>
+          </div>
+        </div>
+        <div class="mt32">${ctaContact()}</div>
+      </div>
+    </section>
+  `;
 }
 
 function renderEquipe() {
-  $app.innerHTML = pageShell(
-    "Notre équipe",
-    "Une équipe pluridisciplinaire dédiée à l'accompagnement des dirigeants et créateurs.",
-    `
-      <div class="grid grid--3">
-        <div class="card"><h3 class="h3">Coach dirigeant</h3><p class="p">Clarification du cap et priorisation stratégique.</p></div>
-        <div class="card"><h3 class="h3">Consultant business</h3><p class="p">Analyse du modèle, de l'offre et des leviers de croissance.</p></div>
-        <div class="card"><h3 class="h3">Mentor création</h3><p class="p">Structuration du lancement et montée en cadence entrepreneuriale.</p></div>
+  $app.innerHTML = `
+    <section class="hero equipeHero equipeHero--team">
+      <div class="container equipeHero__inner">
+        <div class="equipeHero__content stack">
+          <div class="kicker">Notre équipe</div>
+          <h1 class="h1">Une équipe pluridisciplinaire</h1>
+          <p class="p maxW">Dédiée à l'accompagnement des dirigeants et créateurs d'entreprises, avec une approche concrète et orientée résultats.</p>
+          <div class="programHero__cta">
+            <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
+            <a class="btn btn--ghost equipeHero__ghost" href="#/solutions" data-link>Voir les solutions</a>
+          </div>
+        </div>
       </div>
-      <div class="mt32">${ctaContact()}</div>
-    `
-  );
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid grid--3">
+          <div class="card"><h3 class="h3">Coach dirigeant</h3><p class="p">Clarification du cap et priorisation stratégique.</p></div>
+          <div class="card"><h3 class="h3">Consultant business</h3><p class="p">Analyse du modèle, de l'offre et des leviers de croissance.</p></div>
+          <div class="card"><h3 class="h3">Mentor création</h3><p class="p">Structuration du lancement et montée en cadence entrepreneuriale.</p></div>
+        </div>
+        <div class="mt32">${ctaContact()}</div>
+      </div>
+    </section>
+  `;
 }
 
 function renderReperage() {
