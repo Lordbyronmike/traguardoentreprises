@@ -600,23 +600,44 @@ function renderEquipe() {
 }
 
 function renderReperage() {
-  $app.innerHTML = pageShell(
-    "Vision stratégique",
-    "Faire un état des lieux clair de votre entreprise pour choisir la bonne direction.",
-    `
-      <div class="grid grid--2">
-        <div class="card">
-          <h3 class="h3">Ce que nous faisons</h3>
-          <p class="p">Analyse de votre contexte, de vos contraintes et de vos objectifs pour poser un cap réaliste.</p>
-        </div>
-        <div class="card">
-          <h3 class="h3">Bénéfices</h3>
-          <p class="p">Plus de clarté, moins d'hésitations et des décisions de pilotage plus sereines.</p>
+  $app.innerHTML = `
+    <section class="hero visionHero">
+      <div class="container visionHero__inner">
+        <div class="visionHero__content stack">
+          <div class="kicker">Vision & Leadership</div>
+          <h1 class="h1">Prendre de la hauteur. <span class="muted">Décider avec clarté.</span></h1>
+          <p class="p maxW">
+            Pour dirigeants et créateurs d'entreprises : clarifier le cap, arbitrer plus vite
+            et piloter une croissance soutenable.
+          </p>
+          <div class="programHero__cta">
+            <a class="btn btn--solid" href="#/contact" data-link>Prendre un rendez-vous</a>
+            <a class="btn btn--ghost visionHero__ghost" href="#/solutions" data-link>Voir les solutions</a>
+          </div>
         </div>
       </div>
-      <div class="mt32">${ctaContact()}</div>
-    `
-  );
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">Vision stratégique</h2>
+        <p class="p maxW">
+          Faire un état des lieux clair de votre entreprise pour choisir la bonne direction.
+        </p>
+        <div class="grid grid--2 mt24">
+          <div class="card">
+            <h3 class="h3">Ce que nous faisons</h3>
+            <p class="p">Analyse de votre contexte, de vos contraintes et de vos objectifs pour poser un cap réaliste.</p>
+          </div>
+          <div class="card">
+            <h3 class="h3">Bénéfices</h3>
+            <p class="p">Plus de clarté, moins d'hésitations et des décisions de pilotage plus sereines.</p>
+          </div>
+        </div>
+        <div class="mt32">${ctaContact()}</div>
+      </div>
+    </section>
+  `;
 }
 
 function renderAccompagnementSalaries() {
