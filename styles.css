@@ -199,19 +199,6 @@ a{ color:inherit; text-decoration:none; }
   transform: translateY(1px);
 }
 
-@media (prefers-reduced-motion: reduce){
-  .brand__letter{
-    animation: none;
-    opacity:1;
-    transform:none;
-  }
-  .brand__tagline{
-    animation:none;
-    opacity:1;
-    transform:none;
-  }
-}
-
 .nav{
   display:none;
   gap:4px;
