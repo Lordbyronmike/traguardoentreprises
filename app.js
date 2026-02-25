@@ -617,7 +617,6 @@ function renderAccompagnementSalaries() {
       <div class="blob blob--b"></div>
       <div class="container hero__inner">
         <div class="stack">
-          <div class="badge">Programme salariés</div>
           <h1 class="h1">Accompagnement des salariés</h1>
           <p class="p maxW">
             Un accompagnement clair et structuré pour retrouver un cap professionnel,
