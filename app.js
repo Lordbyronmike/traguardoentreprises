@@ -273,12 +273,27 @@ window.addEventListener("load", initPage);
 
 function initPage() {
   render();
+  removeLegacySectionLabel();
   setTimeout(() => {
     setupWordAnimation();
     setupScrollReveal();
   }, 50);
   updateActiveNav();
   updateFabVisibilityByScroll();
+}
+
+function removeLegacySectionLabel() {
+  const containers = document.querySelectorAll(".section .container");
+  containers.forEach((container) => {
+    const first = container.firstElementChild;
+    if (!first) return;
+    if (
+      (first.classList.contains("badge") || first.classList.contains("kicker")) &&
+      first.textContent.trim().toLowerCase() === "traguardo"
+    ) {
+      first.remove();
+    }
+  });
 }
 
 function route() {
