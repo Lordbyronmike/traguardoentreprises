@@ -76,18 +76,47 @@ a{ color:inherit; text-decoration:none; }
 }
 
 .brand__name{
+  display:inline-flex;
   font-size: 40px;
   font-weight: 800;
   letter-spacing: -.025em;
   line-height: 1;
-  -webkit-text-stroke: 0.8px var(--text);
-  paint-order: stroke fill;
-  text-shadow: none;
   transition: transform .22s ease, text-shadow .22s ease;
 }
 
+.brand__letter{
+  display:inline-block;
+  -webkit-text-stroke: 0.8px var(--text);
+  paint-order: stroke fill;
+  text-shadow: none;
+  opacity: 0;
+  transform: translateY(8px) scale(.98);
+  animation: brandLetterIn .5s cubic-bezier(.2,.7,.2,1) forwards;
+}
+
+.brand__letter:nth-child(1){ animation-delay: 40ms; }
+.brand__letter:nth-child(2){ animation-delay: 85ms; }
+.brand__letter:nth-child(3){ animation-delay: 130ms; }
+.brand__letter:nth-child(4){ animation-delay: 175ms; }
+.brand__letter:nth-child(5){ animation-delay: 220ms; }
+.brand__letter:nth-child(6){ animation-delay: 265ms; }
+.brand__letter:nth-child(7){ animation-delay: 310ms; }
+.brand__letter:nth-child(8){ animation-delay: 355ms; }
+.brand__letter:nth-child(9){ animation-delay: 400ms; }
+
+@keyframes brandLetterIn{
+  from{
+    opacity:0;
+    transform: translateY(8px) scale(.98);
+  }
+  to{
+    opacity:1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @supports not (-webkit-text-stroke: 1px #000) {
-  .brand__name{
+  .brand__letter{
     text-shadow:
       -0.45px -0.45px 0 var(--text),
       0.45px -0.45px 0 var(--text),
@@ -114,6 +143,8 @@ a{ color:inherit; text-decoration:none; }
   }
   .brand:hover .brand__name{
     transform: translateY(-1px) scale(1.015);
+  }
+  .brand:hover .brand__letter{
     text-shadow: 0 8px 18px rgba(0,0,0,.16);
   }
   .brand:hover .brand__tagline{
@@ -127,11 +158,21 @@ a{ color:inherit; text-decoration:none; }
 }
 .brand:focus-visible .brand__name{
   transform: translateY(-1px) scale(1.015);
+}
+.brand:focus-visible .brand__letter{
   text-shadow: 0 8px 18px rgba(0,0,0,.16);
 }
 .brand:focus-visible .brand__tagline{
   letter-spacing: .16em;
   transform: translateY(1px);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .brand__letter{
+    animation:none;
+    opacity:1;
+    transform:none;
+  }
 }
 
 .nav{
