@@ -1008,12 +1008,12 @@ a{ color:inherit; text-decoration:none; }
 /* ===== Reveal on scroll ===== */
 [data-reveal]{
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(var(--reveal-distance, 12px));
   filter: blur(.4px);
   transition:
-    opacity 1.05s cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0ms),
-    transform 1.05s cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0ms),
-    filter .9s ease-out var(--reveal-delay, 0ms);
+    opacity var(--reveal-duration, 1.05s) cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0ms),
+    transform var(--reveal-duration, 1.05s) cubic-bezier(.22, 1, .36, 1) var(--reveal-delay, 0ms),
+    filter var(--reveal-filter-duration, .9s) ease-out var(--reveal-delay, 0ms);
   will-change: opacity, transform, filter;
 }
 

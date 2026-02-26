@@ -228,12 +228,20 @@ function setupScrollReveal() {
   if (_revealCleanup) _revealCleanup();
   if (!targets.length) return;
   targets.forEach((el) => el.classList.remove("is-visible"));
-  targets.forEach((el) => el.style.setProperty("--reveal-delay", "0ms"));
 
   const path = route();
   const isDiagnosticPage = path === "/diagnostic-entreprise" || path === "/bilan-competences";
-  const REVEAL_LATENCY_MS = isDiagnosticPage ? 900 : 180;
-  const REVEAL_INITIAL_DELAY_MS = isDiagnosticPage ? 350 : 0;
+  const REVEAL_LATENCY_MS = isDiagnosticPage ? 1600 : 180;
+  const REVEAL_INITIAL_DELAY_MS = isDiagnosticPage ? 900 : 0;
+  const revealDuration = isDiagnosticPage ? "2.2s" : "1.05s";
+  const revealFilterDuration = isDiagnosticPage ? "2s" : ".9s";
+  const revealDistance = isDiagnosticPage ? "20px" : "12px";
+  targets.forEach((el) => {
+    el.style.setProperty("--reveal-delay", "0ms");
+    el.style.setProperty("--reveal-duration", revealDuration);
+    el.style.setProperty("--reveal-filter-duration", revealFilterDuration);
+    el.style.setProperty("--reveal-distance", revealDistance);
+  });
   const prefersReducedMotion =
     window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
