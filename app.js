@@ -232,7 +232,8 @@ function setupScrollReveal() {
 
   const path = route();
   const isDiagnosticPage = path === "/diagnostic-entreprise" || path === "/bilan-competences";
-  const REVEAL_LATENCY_MS = isDiagnosticPage ? 320 : 180;
+  const REVEAL_LATENCY_MS = isDiagnosticPage ? 900 : 180;
+  const REVEAL_INITIAL_DELAY_MS = isDiagnosticPage ? 350 : 0;
   const prefersReducedMotion =
     window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (prefersReducedMotion || !("IntersectionObserver" in window)) {
@@ -269,6 +270,13 @@ function setupScrollReveal() {
       revealTimer = window.setTimeout(revealOne, REVEAL_LATENCY_MS);
     };
 
+    if (REVEAL_INITIAL_DELAY_MS > 0) {
+      revealTimer = window.setTimeout(() => {
+        revealTimer = null;
+        revealOne();
+      }, REVEAL_INITIAL_DELAY_MS);
+      return;
+    }
     revealOne();
   };
 
