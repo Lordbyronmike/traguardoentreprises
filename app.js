@@ -231,11 +231,11 @@ function setupScrollReveal() {
 
   const path = route();
   const isDiagnosticPage = path === "/diagnostic-entreprise" || path === "/bilan-competences";
-  const REVEAL_LATENCY_MS = isDiagnosticPage ? 900 : 180;
-  const REVEAL_INITIAL_DELAY_MS = isDiagnosticPage ? 220 : 0;
-  const revealDuration = isDiagnosticPage ? "1.55s" : "1.05s";
-  const revealFilterDuration = isDiagnosticPage ? "1.35s" : ".9s";
-  const revealDistance = isDiagnosticPage ? "16px" : "12px";
+  const REVEAL_LATENCY_MS = isDiagnosticPage ? 220 : 180;
+  const REVEAL_INITIAL_DELAY_MS = isDiagnosticPage ? 120 : 0;
+  const revealDuration = isDiagnosticPage ? "1.2s" : "1.05s";
+  const revealFilterDuration = isDiagnosticPage ? "1.05s" : ".9s";
+  const revealDistance = isDiagnosticPage ? "14px" : "12px";
   targets.forEach((el) => {
     el.style.setProperty("--reveal-delay", "0ms");
     el.style.setProperty("--reveal-duration", revealDuration);
