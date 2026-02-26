@@ -156,6 +156,33 @@ a{ color:inherit; text-decoration:none; }
   transition: letter-spacing .22s ease, transform .22s ease;
 }
 
+.brand__entity{
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(5px);
+  animation: brandEntityIn .4s cubic-bezier(.2,.7,.2,1) forwards;
+  animation-delay: 980ms;
+  transition: letter-spacing .22s ease, transform .22s ease;
+}
+
+@keyframes brandEntityIn{
+  from{
+    opacity:0;
+    transform: translateY(5px);
+  }
+  to{
+    opacity:1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes brandTaglineIn{
   from{
     opacity:0;
@@ -183,6 +210,10 @@ a{ color:inherit; text-decoration:none; }
     letter-spacing: .16em;
     transform: translateY(1px);
   }
+  .brand:hover .brand__entity{
+    letter-spacing: .20em;
+    transform: translateY(1px);
+  }
 }
 
 .brand:focus-visible{
@@ -198,6 +229,10 @@ a{ color:inherit; text-decoration:none; }
 }
 .brand:focus-visible .brand__tagline{
   letter-spacing: .16em;
+  transform: translateY(1px);
+}
+.brand:focus-visible .brand__entity{
+  letter-spacing: .20em;
   transform: translateY(1px);
 }
 
@@ -1254,6 +1289,10 @@ textarea.input{ resize:vertical; min-height:100px; }
     gap:2px;
   }
   .brand__name{ font-size:30px; }
+  .brand__entity{
+    font-size:9px;
+    letter-spacing: .14em;
+  }
   .brand__tagline{
     font-size:10px;
     letter-spacing: .10em;
