@@ -231,7 +231,7 @@ function setupScrollReveal() {
 
   const path = route();
   const isDiagnosticPage = path === "/diagnostic-entreprise" || path === "/bilan-competences";
-  const REVEAL_LATENCY_MS = isDiagnosticPage ? 800 : 180;
+  const REVEAL_LATENCY_MS = isDiagnosticPage ? 900 : 180;
   const REVEAL_INITIAL_DELAY_MS = isDiagnosticPage ? 220 : 0;
   const revealDuration = isDiagnosticPage ? "1.55s" : "1.05s";
   const revealFilterDuration = isDiagnosticPage ? "1.35s" : ".9s";
@@ -250,55 +250,25 @@ function setupScrollReveal() {
     return;
   }
 
-  let nextIndex = 0;
-  const pendingSet = new Set();
-  let revealTimer = null;
+  let revealIndex = 0;
+  const revealedSet = new Set();
 
-  const revealNext = () => {
-    while (nextIndex < targets.length) {
-      const el = targets[nextIndex];
-      nextIndex += 1;
-      if (!pendingSet.has(el)) continue;
-      pendingSet.delete(el);
-      el.classList.add("is-visible");
-      return true;
-    }
-    return false;
-  };
-
-  const flushPendingReveals = () => {
-    if (revealTimer !== null || pendingSet.size <= 0) return;
-
-    const revealOne = () => {
-      const revealed = revealNext();
-      if (!revealed || pendingSet.size <= 0) {
-        revealTimer = null;
-        return;
-      }
-      revealTimer = window.setTimeout(revealOne, REVEAL_LATENCY_MS);
-    };
-
-    if (REVEAL_INITIAL_DELAY_MS > 0) {
-      revealTimer = window.setTimeout(() => {
-        revealTimer = null;
-        revealOne();
-      }, REVEAL_INITIAL_DELAY_MS);
-      return;
-    }
-    revealOne();
+  const revealElement = (el) => {
+    if (revealedSet.has(el) || el.classList.contains("is-visible")) return;
+    const delay = REVEAL_INITIAL_DELAY_MS + revealIndex * REVEAL_LATENCY_MS;
+    el.style.setProperty("--reveal-delay", `${delay}ms`);
+    el.classList.add("is-visible");
+    revealedSet.add(el);
+    revealIndex += 1;
   };
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        if (pendingSet.has(entry.target) || entry.target.classList.contains("is-visible")) return;
-        pendingSet.add(entry.target);
+        revealElement(entry.target);
         observer.unobserve(entry.target);
       });
-      if (pendingSet.size > 0) {
-        flushPendingReveals();
-      }
     },
     { threshold: 0.18, rootMargin: "0px 0px -8% 0px" }
   );
@@ -308,28 +278,19 @@ function setupScrollReveal() {
   });
 
   const revealVisibleNow = () => {
-    let hasQueued = false;
     targets.forEach((el) => {
       if (el.classList.contains("is-visible")) return;
       const rect = el.getBoundingClientRect();
       const inView = rect.top < window.innerHeight * 0.92 && rect.bottom > 0;
       if (!inView) return;
-      pendingSet.add(el);
-      hasQueued = true;
+      revealElement(el);
     });
-    if (hasQueued) {
-      flushPendingReveals();
-    }
   };
   revealVisibleNow();
 
   _revealCleanup = () => {
     observer.disconnect();
-    if (revealTimer !== null) {
-      clearTimeout(revealTimer);
-      revealTimer = null;
-    }
-    pendingSet.clear();
+    revealedSet.clear();
   };
 }
 
