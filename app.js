@@ -49,6 +49,26 @@ const $app = document.getElementById("app");
 const $year = document.getElementById("year");
 if ($year) $year.textContent = new Date().getFullYear();
 
+const HERO_IMAGE_URLS = [
+  "./brand/page-accueil.png",
+  "./brand/notre_mission.png",
+  "./brand/notre_equipe.png",
+  "./brand/hero-vision-leadership.png",
+  "./brand/roadmap.png",
+  "./brand/diagnostiquee_dentreprise.png",
+  "./brand/processus-methode-clarte.png",
+  "./brand/actualités.png",
+  "./brand/contact-accessibilite-confiance.png"
+];
+
+function warmHeroImages() {
+  HERO_IMAGE_URLS.forEach((src) => {
+    const img = new Image();
+    img.decoding = "async";
+    img.src = src;
+  });
+}
+
 // =========================
 // Header interactions
 // =========================
@@ -304,6 +324,7 @@ function setupScrollReveal() {
 // =========================
 window.addEventListener("hashchange", initPage);
 window.addEventListener("load", initPage);
+window.addEventListener("load", warmHeroImages, { once: true });
 
 function initPage() {
   render();
