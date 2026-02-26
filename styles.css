@@ -81,11 +81,24 @@ a{ color:inherit; text-decoration:none; }
 
 .brand__name{
   display:inline-flex;
+  align-items:flex-start;
   font-size: 40px;
   font-weight: 800;
   letter-spacing: -.025em;
   line-height: 1;
   transition: transform .22s ease, text-shadow .22s ease;
+}
+
+.brand__prefix,
+.brand__suffix{
+  display:inline-flex;
+}
+
+.brand__tail{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:2px;
 }
 
 .brand__letter{
@@ -99,16 +112,6 @@ a{ color:inherit; text-decoration:none; }
   animation: brandLetterIn .62s cubic-bezier(.2,.7,.2,1) forwards;
   animation-delay: calc(80ms + var(--brand-letter-index) * 75ms);
 }
-
-.brand__letter:nth-child(1){ --brand-letter-index: 0; }
-.brand__letter:nth-child(2){ --brand-letter-index: 1; }
-.brand__letter:nth-child(3){ --brand-letter-index: 2; }
-.brand__letter:nth-child(4){ --brand-letter-index: 3; }
-.brand__letter:nth-child(5){ --brand-letter-index: 4; }
-.brand__letter:nth-child(6){ --brand-letter-index: 5; }
-.brand__letter:nth-child(7){ --brand-letter-index: 6; }
-.brand__letter:nth-child(8){ --brand-letter-index: 7; }
-.brand__letter:nth-child(9){ --brand-letter-index: 8; }
 
 @keyframes brandLetterIn{
   from{
@@ -159,32 +162,32 @@ a{ color:inherit; text-decoration:none; }
 }
 
 .brand__entity{
-  --brand-entity-scale: .62;
   font-family: var(--font-body);
   display: inline-block;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 800;
-  letter-spacing: .16em;
+  letter-spacing: .14em;
   text-transform: uppercase;
   line-height: 1;
   white-space: nowrap;
+  text-align: center;
+  width: 100%;
   color: var(--accent);
   opacity: 0;
-  transform-origin: right center;
-  transform: translateY(1px) scaleX(var(--brand-entity-scale));
+  transform: translateY(4px);
   animation: brandEntityIn .4s cubic-bezier(.2,.7,.2,1) forwards;
   animation-delay: 980ms;
-  transition: letter-spacing .22s ease, transform .22s ease;
+  transition: letter-spacing .22s ease, transform .22s ease, opacity .22s ease;
 }
 
 @keyframes brandEntityIn{
   from{
     opacity:0;
-    transform: translateY(3px) scaleX(var(--brand-entity-scale));
+    transform: translateY(4px);
   }
   to{
     opacity:1;
-    transform: translateY(-1px) scaleX(var(--brand-entity-scale));
+    transform: translateY(0);
   }
 }
 
@@ -216,8 +219,8 @@ a{ color:inherit; text-decoration:none; }
     transform: translateY(1px);
   }
   .brand:hover .brand__entity{
-    letter-spacing: .18em;
-    transform: translateY(-1px) scaleX(var(--brand-entity-scale));
+    letter-spacing: .16em;
+    transform: translateY(-1px);
   }
 }
 
@@ -237,8 +240,8 @@ a{ color:inherit; text-decoration:none; }
   transform: translateY(1px);
 }
 .brand:focus-visible .brand__entity{
-  letter-spacing: .18em;
-  transform: translateY(-1px) scaleX(var(--brand-entity-scale));
+  letter-spacing: .16em;
+  transform: translateY(-1px);
 }
 
 .nav{
@@ -1298,11 +1301,13 @@ textarea.input{ resize:vertical; min-height:100px; }
     gap:2px;
   }
   .brand__name{ font-size:30px; }
+  .brand__tail{
+    gap:1px;
+  }
   .brand__entity{
-    --brand-entity-scale: .58;
-    font-size:11px;
-    letter-spacing: .12em;
-    transform: translateY(1px) scaleX(var(--brand-entity-scale));
+    font-size:10px;
+    letter-spacing: .10em;
+    transform: translateY(2px);
   }
   .brand__tagline{
     font-size:10px;
