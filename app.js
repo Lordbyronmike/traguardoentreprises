@@ -231,10 +231,10 @@ function setupScrollReveal() {
 
   const path = route();
   const isDiagnosticPage = path === "/diagnostic-entreprise" || path === "/bilan-competences";
-  const REVEAL_LATENCY_MS = isDiagnosticPage ? 220 : 180;
-  const REVEAL_INITIAL_DELAY_MS = isDiagnosticPage ? 120 : 0;
-  const revealDuration = isDiagnosticPage ? "1.2s" : "1.05s";
-  const revealFilterDuration = isDiagnosticPage ? "1.05s" : ".9s";
+  const REVEAL_LATENCY_MS = isDiagnosticPage ? 420 : 180;
+  const REVEAL_INITIAL_DELAY_MS = isDiagnosticPage ? 140 : 0;
+  const revealDuration = isDiagnosticPage ? "1.25s" : "1.05s";
+  const revealFilterDuration = isDiagnosticPage ? "1.1s" : ".9s";
   const revealDistance = isDiagnosticPage ? "14px" : "12px";
   targets.forEach((el) => {
     el.style.setProperty("--reveal-delay", "0ms");
@@ -242,9 +242,7 @@ function setupScrollReveal() {
     el.style.setProperty("--reveal-filter-duration", revealFilterDuration);
     el.style.setProperty("--reveal-distance", revealDistance);
   });
-  const prefersReducedMotion =
-    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+  if (!("IntersectionObserver" in window)) {
     targets.forEach((el) => el.classList.add("is-visible"));
     _revealCleanup = null;
     return;
@@ -252,12 +250,17 @@ function setupScrollReveal() {
 
   let revealIndex = 0;
   const revealedSet = new Set();
+  const revealTimeouts = new Set();
 
   const revealElement = (el) => {
     if (revealedSet.has(el) || el.classList.contains("is-visible")) return;
     const delay = REVEAL_INITIAL_DELAY_MS + revealIndex * REVEAL_LATENCY_MS;
     el.style.setProperty("--reveal-delay", `${delay}ms`);
-    el.classList.add("is-visible");
+    const timeoutId = window.setTimeout(() => {
+      revealTimeouts.delete(timeoutId);
+      el.classList.add("is-visible");
+    }, 24);
+    revealTimeouts.add(timeoutId);
     revealedSet.add(el);
     revealIndex += 1;
   };
@@ -290,6 +293,8 @@ function setupScrollReveal() {
 
   _revealCleanup = () => {
     observer.disconnect();
+    revealTimeouts.forEach((id) => clearTimeout(id));
+    revealTimeouts.clear();
     revealedSet.clear();
   };
 }
