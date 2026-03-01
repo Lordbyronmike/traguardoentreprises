@@ -30,8 +30,7 @@ async function parseBody(req) {
   return null;
 }
 
-function buildMessagePayload({ name, email, message, sourceIp, userAgent }) {
-  const nowIso = new Date().toISOString();
+function buildMessagePayload({ name, email, message }) {
   const subject = `[${SUBJECT_PREFIX}] Nouveau message - ${name}`;
 
   const text = [
@@ -42,11 +41,6 @@ function buildMessagePayload({ name, email, message, sourceIp, userAgent }) {
     "",
     "Message:",
     message,
-    "",
-    "---",
-    `Date UTC: ${nowIso}`,
-    `IP: ${sourceIp || "n/a"}`,
-    `User-Agent: ${userAgent || "n/a"}`,
   ].join("\n");
 
   const html = `
@@ -55,10 +49,6 @@ function buildMessagePayload({ name, email, message, sourceIp, userAgent }) {
     <p><strong>Email:</strong> ${escapeHtml(email)}</p>
     <p><strong>Message:</strong></p>
     <p>${escapeHtml(message).replaceAll("\n", "<br/>")}</p>
-    <hr/>
-    <p><strong>Date UTC:</strong> ${escapeHtml(nowIso)}</p>
-    <p><strong>IP:</strong> ${escapeHtml(sourceIp || "n/a")}</p>
-    <p><strong>User-Agent:</strong> ${escapeHtml(userAgent || "n/a")}</p>
   `.trim();
 
   return { subject, text, html };
@@ -103,9 +93,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: validationError });
     }
 
-    const sourceIp = req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "";
-    const userAgent = req.headers["user-agent"] || "";
-    const mail = buildMessagePayload({ name, email, message, sourceIp, userAgent });
+    const mail = buildMessagePayload({ name, email, message });
 
     const resendResponse = await fetch(RESEND_API_URL, {
       method: "POST",
