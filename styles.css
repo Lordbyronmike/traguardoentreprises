@@ -153,6 +153,7 @@ a{ color:inherit; text-decoration:none; }
   text-transform: lowercase;
   line-height: 1.1;
   white-space: nowrap;
+  margin-top: -4px;
   color: var(--text);
   opacity: 0;
   transform: translateY(6px);
@@ -218,7 +219,7 @@ a{ color:inherit; text-decoration:none; }
   }
   .brand:hover .brand__tagline{
     letter-spacing: .16em;
-    transform: translateY(1px);
+    transform: translateY(-1px);
   }
   .brand:hover .brand__entity{
     letter-spacing: .20em;
@@ -239,7 +240,7 @@ a{ color:inherit; text-decoration:none; }
 }
 .brand:focus-visible .brand__tagline{
   letter-spacing: .16em;
-  transform: translateY(1px);
+  transform: translateY(-1px);
 }
 .brand:focus-visible .brand__entity{
   letter-spacing: .20em;
