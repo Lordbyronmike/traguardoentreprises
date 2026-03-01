@@ -1768,6 +1768,19 @@ textarea.input{ resize:vertical; min-height:100px; }
   .visionHero__content{ padding: 14px 14px; }
   .planActionHero__content{ padding: 14px 14px; }
   .programHero--roadmap .stack{ padding: 12px 12px; }
+  .programHero__cta{
+    display:grid;
+    grid-template-columns: 1fr;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .programHero__cta > .btn{
+    width: 100%;
+    min-height: 48px;
+    white-space: normal;
+    position: relative;
+    z-index: 1;
+  }
   .grid--2, .grid--3{ grid-template-columns: 1fr; }
   .footer__brand{ gap:0; }
 }
@@ -1943,7 +1956,13 @@ textarea.input{ resize:vertical; min-height:100px; }
 .programHero__cta{
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 10px;
+}
+
+.programHero__cta > .btn{
+  flex: 0 0 auto;
+  touch-action: manipulation;
 }
 .programMetric{
   border: 1px solid var(--border);
