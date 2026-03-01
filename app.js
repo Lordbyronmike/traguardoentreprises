@@ -329,6 +329,7 @@ window.addEventListener("load", initPage);
 window.addEventListener("load", warmHeroImages, { once: true });
 
 function initPage() {
+  updateShellVisibility();
   render();
   removeLegacySectionLabel();
   setTimeout(() => {
@@ -355,7 +356,7 @@ function removeLegacySectionLabel() {
 }
 
 function route() {
-  const hash = location.hash || "#/";
+  const hash = location.hash || "#/intro";
   return hash.replace("#", "").split("?")[0];
 }
 
@@ -381,8 +382,8 @@ function updateActiveNav() {
 function updateHeaderCtaVisibility() {
   const cta = document.getElementById("headerCta");
   if (!cta) return;
-  const onContact = route() === "/contact";
-  cta.style.display = onContact ? "none" : "";
+  const path = route();
+  cta.style.display = path === "/contact" || path === "/intro" ? "none" : "";
 }
 
 let _fabScrollBound = false;
@@ -422,6 +423,16 @@ function setFabVisible(visible) {
   fab.classList.toggle("is-visible", Boolean(visible));
 }
 
+function updateShellVisibility() {
+  const isIntro = route() === "/intro";
+  document.body.classList.toggle("is-intro-route", isIntro);
+
+  if (isIntro && mobileNav && !mobileNav.hidden) {
+    burgerBtn?.setAttribute("aria-expanded", "false");
+    mobileNav.hidden = true;
+  }
+}
+
 function trackEvent(category, action, label) {
   try {
     if (typeof window.gtag === "function") {
@@ -441,6 +452,10 @@ function render() {
   const loadingElement = document.getElementById("elfsightLoading");
   if (loadingElement) loadingElement.style.display = "none";
 
+  if (path === "/intro") {
+    setTitle("Présentation");
+    return renderIntro();
+  }
   if (path === "/") {
     setTitle("");
     return renderHome();
@@ -506,6 +521,71 @@ function render() {
 // =========================
 // Views
 // =========================
+function renderIntro() {
+  $app.innerHTML = `
+    <section class="introGate">
+      <div class="introGate__ambient introGate__ambient--left"></div>
+      <div class="introGate__ambient introGate__ambient--right"></div>
+      <div class="container introGate__layout">
+        <div class="introGate__hero">
+          <div class="introGate__eyebrow">Traguardo entreprises</div>
+          <h1 class="introGate__title">Un cap clair pour <span>diriger, lancer et décider</span> avec plus de maîtrise.</h1>
+          <p class="introGate__lead">
+            Une entrée nette avant le site, pour poser la promesse: clarifier la vision,
+            structurer l'exécution et soutenir la direction sans dispersion.
+          </p>
+
+          <div class="introGate__actions">
+            <a class="btn btn--solid" href="#/" data-link>Entrer sur le site</a>
+            <a class="btn btn--ghost introGate__ghost" href="#/solutions" data-link>Voir les solutions</a>
+          </div>
+
+          <div class="introGate__metrics">
+            <div class="introGate__metric">
+              <span class="introGate__metricValue">6</span>
+              <span class="introGate__metricLabel">solutions ciblées</span>
+            </div>
+            <div class="introGate__metric">
+              <span class="introGate__metricValue">1</span>
+              <span class="introGate__metricLabel">cap de décision</span>
+            </div>
+            <div class="introGate__metric">
+              <span class="introGate__metricValue">0</span>
+              <span class="introGate__metricLabel">blabla inutile</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="introGate__panel">
+          <div class="introGate__panelHeader">
+            <span class="introGate__dot"></span>
+            <span class="introGate__dot"></span>
+            <span class="introGate__dot"></span>
+          </div>
+          <div class="introGate__panelBody">
+            <div class="introGate__line introGate__line--accent"></div>
+            <div class="introGate__line introGate__line--short"></div>
+            <div class="introGate__cards">
+              <div class="introGate__card">
+                <div class="introGate__cardLabel">Vision</div>
+                <div class="introGate__cardText">Clarifier les priorités et fixer un cap réaliste.</div>
+              </div>
+              <div class="introGate__card">
+                <div class="introGate__cardLabel">Action</div>
+                <div class="introGate__cardText">Transformer les décisions en exécution concrète.</div>
+              </div>
+              <div class="introGate__card">
+                <div class="introGate__cardLabel">Équilibre</div>
+                <div class="introGate__cardText">Soutenir la direction sans épuiser le dirigeant.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 function renderHome() {
   const latest = POSTS.slice().sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 3);
 
