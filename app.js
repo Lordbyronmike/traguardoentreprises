@@ -55,6 +55,7 @@ const HERO_IMAGE_URLS = [
   "./brand/notre_equipe.png",
   "./brand/hero-vision-leadership.png",
   "./brand/roadmap.png",
+  "./brand/Création et lancement.png",
   "./brand/diagnostiquee_dentreprise.png",
   "./brand/processus-methode-clarte.png",
   "./brand/actualités.png",
@@ -1021,23 +1022,37 @@ function renderOutilSuivi() {
 }
 
 function renderEcoleFormation() {
-  $app.innerHTML = pageShell(
-    "Création et lancement",
-    "Passer de l'idée au lancement avec un cadre structuré et des étapes réalistes.",
-    `
-      <div class="grid grid--2">
-        <div class="card">
-          <h3 class="h3">Ce que nous construisons</h3>
-          <p class="p">Un parcours de lancement réaliste: offre, positionnement, acquisition et calendrier d'exécution.</p>
-        </div>
-        <div class="card">
-          <h3 class="h3">Résultats attendus</h3>
-          <p class="p">Un démarrage sécurisé, des décisions plus claires et une montée en puissance progressive.</p>
+  $app.innerHTML = `
+    <section class="hero creationHero">
+      <div class="container creationHero__inner">
+        <div class="creationHero__content stack">
+          <div class="kicker">Création & lancement</div>
+          <h1 class="h1">Passer de l'idée au lancement avec un <span class="muted">cadre structuré.</span></h1>
+          <p class="p maxW">Valider l'offre, clarifier le positionnement et lancer avec des étapes réalistes.</p>
+          <div class="programHero__cta">
+            <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
+            <a class="btn btn--ghost creationHero__ghost" href="#/solutions" data-link>Voir les solutions</a>
+          </div>
         </div>
       </div>
-      <div class="mt32">${ctaContact()}</div>
-    `
-  );
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid grid--2">
+          <div class="card">
+            <h3 class="h3">Ce que nous construisons</h3>
+            <p class="p">Un parcours de lancement réaliste: offre, positionnement, acquisition et calendrier d'exécution.</p>
+          </div>
+          <div class="card">
+            <h3 class="h3">Résultats attendus</h3>
+            <p class="p">Un démarrage sécurisé, des décisions plus claires et une montée en puissance progressive.</p>
+          </div>
+        </div>
+        <div class="mt32">${ctaContact()}</div>
+      </div>
+    </section>
+  `;
 }
 
 function renderBienEtreTravail() {
