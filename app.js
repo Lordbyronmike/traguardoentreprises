@@ -58,6 +58,7 @@ const HERO_IMAGE_URLS = [
   "./brand/diagnostiquee_dentreprise.png",
   "./brand/processus-methode-clarte.png",
   "./brand/actualités.png",
+  "./brand/Leadership et équilibre dirigeant.png",
   "./brand/contact-accessibilite-confiance.png"
 ];
 
@@ -1040,23 +1041,37 @@ function renderEcoleFormation() {
 }
 
 function renderBienEtreTravail() {
-  $app.innerHTML = pageShell(
-    "Leadership et équilibre dirigeant",
-    "Prévenir l'épuisement du dirigeant et maintenir une performance durable.",
-    `
-      <div class="grid grid--2">
-        <div class="card">
-          <h3 class="h3">Ce que nous travaillons</h3>
-          <p class="p">Charge mentale dirigeant, rythme de décision, limites, délégation et organisation du pilotage.</p>
-        </div>
-        <div class="card">
-          <h3 class="h3">Résultat</h3>
-          <p class="p">Plus de recul, des arbitrages plus nets et une dynamique de direction plus saine.</p>
+  $app.innerHTML = `
+    <section class="hero leadershipHero leadershipHero--equilibre">
+      <div class="container leadershipHero__inner">
+        <div class="leadershipHero__content stack">
+          <div class="kicker">Leadership & équilibre</div>
+          <h1 class="h1">Diriger avec plus de recul, sans <span class="muted">vous épuiser.</span></h1>
+          <p class="p maxW">Prévenir l'épuisement du dirigeant et maintenir une performance durable.</p>
+          <div class="programHero__cta">
+            <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
+            <a class="btn btn--ghost leadershipHero__ghost" href="#/solutions" data-link>Voir les solutions</a>
+          </div>
         </div>
       </div>
-      <div class="mt32">${ctaContact()}</div>
-    `
-  );
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="grid grid--2">
+          <div class="card">
+            <h3 class="h3">Ce que nous travaillons</h3>
+            <p class="p">Charge mentale dirigeant, rythme de décision, limites, délégation et organisation du pilotage.</p>
+          </div>
+          <div class="card">
+            <h3 class="h3">Résultat</h3>
+            <p class="p">Plus de recul, des arbitrages plus nets et une dynamique de direction plus saine.</p>
+          </div>
+        </div>
+        <div class="mt32">${ctaContact()}</div>
+      </div>
+    </section>
+  `;
 }
 
 function renderActualites() {
