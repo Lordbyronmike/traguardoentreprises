@@ -1329,7 +1329,9 @@ const templates = {
 function updateMessageValidation() {
   if (!messageEl) return true;
 
-  const isTooShort = messageEl.value.trim().length > 0 && messageEl.value.trim().length < 3;
+  const trimmedLength = messageEl.value.trim().length;
+  const isTooShort = trimmedLength > 0 && trimmedLength < 3;
+  const isValid = trimmedLength >= 3;
   const hint = "Le message doit contenir au moins 3 caractères.";
 
   messageEl.setCustomValidity(isTooShort ? hint : "");
@@ -1339,7 +1341,12 @@ function updateMessageValidation() {
     messageHintEl.textContent = hint;
   }
 
-  return !isTooShort;
+  if (submitBtn && submitBtn.dataset.loading !== "true") {
+    submitBtn.disabled = !isValid;
+    submitBtn.setAttribute("aria-disabled", String(!isValid));
+  }
+
+  return isValid;
 }
 
 messageEl?.addEventListener("input", () => {
@@ -1448,7 +1455,13 @@ form?.addEventListener("submit", async (e) => {
   function setFormState(state, message = "") {
     if (!submitBtn || !submitText || !submitSpinner || !formMessage) return;
 
-    submitBtn.disabled = state === "loading";
+    submitBtn.dataset.loading = state === "loading" ? "true" : "false";
+    if (state === "loading") {
+      submitBtn.disabled = true;
+      submitBtn.setAttribute("aria-disabled", "true");
+    } else {
+      updateMessageValidation();
+    }
     submitText.textContent = state === "loading" ? "Envoi en cours..." : "Envoyer le message";
     submitSpinner.style.display = state === "loading" ? "inline-block" : "none";
 
@@ -1466,9 +1479,12 @@ form?.addEventListener("submit", async (e) => {
     setFormState("loading", "Traitement...");
     setTimeout(() => {
       form.reset();
+      updateMessageValidation();
       setFormState("success", "✅ Message envoyé ! (protection anti-spam)");
     }, 900);
   }
+
+  updateMessageValidation();
 }
 
 function renderNotFound() {
