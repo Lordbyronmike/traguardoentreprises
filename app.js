@@ -1258,6 +1258,7 @@ function renderContact() {
               <div class="field-group">
                 <label for="message" class="field-label">Votre message *</label>
                 <textarea class="input" id="message" name="message" rows="6" placeholder="Décrivez votre demande..." minlength="3" required></textarea>
+                <div id="messageHint" class="field-hint" hidden>Le message doit contenir au moins 3 caractères.</div>
               </div>
 
               <div class="honeypot" aria-hidden="true">
@@ -1315,6 +1316,7 @@ contactHeroScrollBtn?.addEventListener("click", () => {
 
 // Mini-diagnostic : pré-remplit le message pour aider (sans friction)
 const messageEl = document.getElementById("message");
+const messageHintEl = document.getElementById("messageHint");
 const templates = {
   strategie:
     "Bonjour,\n\nJe souhaite structurer ma stratégie d'entreprise.\n\nContexte : …\nObjectif : …\nPriorités : …\n\nMerci,",
@@ -1323,6 +1325,26 @@ const templates = {
   priorites:
     "Bonjour,\n\nJe souhaite clarifier mes priorités de dirigeant et mon plan d'action.\n\nContexte : …\nObjectif : …\nCe qui me bloque aujourd’hui : …\n\nMerci,"
 };
+
+function updateMessageValidation() {
+  if (!messageEl) return true;
+
+  const isTooShort = messageEl.value.trim().length > 0 && messageEl.value.trim().length < 3;
+  const hint = "Le message doit contenir au moins 3 caractères.";
+
+  messageEl.setCustomValidity(isTooShort ? hint : "");
+
+  if (messageHintEl) {
+    messageHintEl.hidden = !isTooShort;
+    messageHintEl.textContent = hint;
+  }
+
+  return !isTooShort;
+}
+
+messageEl?.addEventListener("input", () => {
+  updateMessageValidation();
+});
 
 document.querySelectorAll(".quickChoices .chip").forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -1335,6 +1357,7 @@ document.querySelectorAll(".quickChoices .chip").forEach((btn) => {
     document.querySelectorAll(".quickChoices .chip").forEach((b) => b.classList.remove("chip--active"));
     btn.classList.add("chip--active");
 
+    updateMessageValidation();
     messageEl.focus();
     messageEl.scrollIntoView({ behavior: "smooth", block: "center" });
 
@@ -1347,6 +1370,8 @@ form?.addEventListener("submit", async (e) => {
 
     const honeypot = form.website?.value;
     if (honeypot) return simulateSuccess();
+
+    updateMessageValidation();
 
     if (!form.checkValidity()) {
       form.reportValidity();
@@ -1401,6 +1426,7 @@ form?.addEventListener("submit", async (e) => {
 
       setFormState("success", "✅ Message envoyé ! Nous vous répondrons sous 24h.");
       form.reset();
+      updateMessageValidation();
     } catch (err) {
       const raw = String(err?.message || "").trim();
       const detail = raw ? ` (${escapeHtml(raw).slice(0, 140)})` : "";
