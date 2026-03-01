@@ -1257,7 +1257,7 @@ function renderContact() {
 
               <div class="field-group">
                 <label for="message" class="field-label">Votre message *</label>
-                <textarea class="input" id="message" name="message" rows="6" placeholder="Décrivez votre demande..." required></textarea>
+                <textarea class="input" id="message" name="message" rows="6" placeholder="Décrivez votre demande..." minlength="3" required></textarea>
               </div>
 
               <div class="honeypot" aria-hidden="true">
@@ -1409,6 +1409,8 @@ form?.addEventListener("submit", async (e) => {
         hint = " Vérifie la configuration serveur (RESEND_API_KEY, CONTACT_FROM_EMAIL, CONTACT_TO_EMAIL).";
       } else if (raw === "Email send failed") {
         hint = " Vérifie que l'adresse d'envoi est bien validée dans Resend.";
+      } else if (raw === "Invalid message length") {
+        hint = " Le message doit contenir au moins 3 caractères.";
       }
       setFormState(
         "error",

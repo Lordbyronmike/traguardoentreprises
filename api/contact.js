@@ -68,7 +68,7 @@ function validateInput({ name, email, message }) {
   if (!name || !email || !message) return "Missing fields";
   if (name.length > 120) return "Name too long";
   if (!isValidEmail(email) || email.length > 254) return "Invalid email";
-  if (message.length < 10 || message.length > 5000) return "Invalid message length";
+  if (message.length < 3 || message.length > 5000) return "Invalid message length";
   return "";
 }
 
