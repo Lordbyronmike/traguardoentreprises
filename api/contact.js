@@ -34,7 +34,7 @@ function buildMessagePayload({ name, email, message }) {
   const subject = `[${SUBJECT_PREFIX}] Nouveau message - ${name}`;
 
   const text = [
-    "Nouveau message de contact (site Traguardo)",
+    "Nouveau message de contact",
     "",
     `Nom: ${name}`,
     `Email: ${email}`,
@@ -44,7 +44,7 @@ function buildMessagePayload({ name, email, message }) {
   ].join("\n");
 
   const html = `
-    <h2>Nouveau message de contact (site Traguardo)</h2>
+    <h2>Nouveau message de contact</h2>
     <p><strong>Nom:</strong> ${escapeHtml(name)}</p>
     <p><strong>Email:</strong> ${escapeHtml(email)}</p>
     <p><strong>Message:</strong></p>
