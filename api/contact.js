@@ -1,5 +1,5 @@
 const RESEND_API_URL = "https://api.resend.com/emails";
-const SUBJECT_PREFIX = "Traguardo";
+const SUBJECT_PREFIX = "Traguardo Entreprises";
 
 function asString(value) {
   return typeof value === "string" ? value.trim() : "";
