@@ -1385,13 +1385,18 @@ function renderContact() {
   const submitBtn = document.getElementById("submitBtn");
   const submitText = document.getElementById("submitText");
   const submitSpinner = document.getElementById("submitSpinner");
+  const isTouchViewport =
+    window.matchMedia("(pointer: coarse)").matches ||
+    window.matchMedia("(hover: none)").matches;
 
 const formMessage = document.getElementById("formMessage");
 
 contactHeroScrollBtn?.addEventListener("click", () => {
   form?.scrollIntoView({ behavior: "smooth", block: "start" });
-  const nameEl = document.getElementById("name");
-  nameEl?.focus();
+  if (!isTouchViewport) {
+    const nameEl = document.getElementById("name");
+    nameEl?.focus();
+  }
 });
 
 // Mini-diagnostic : pré-remplit le message pour aider (sans friction)
@@ -1445,8 +1450,10 @@ document.querySelectorAll(".quickChoices .chip").forEach((btn) => {
     btn.classList.add("chip--active");
 
     updateMessageValidation();
-    messageEl.focus();
-    messageEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (!isTouchViewport) {
+      messageEl.focus();
+      messageEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
 
     trackEvent("contact", "click", `prefill_${kind}`);
   });
