@@ -1097,10 +1097,7 @@ function renderReperage() {
       <div class="container visionHero__inner">
         <div class="visionHero__content stack">
           <div class="kicker">Vision & Leadership</div>
-          <h1 class="h1 visionHero__headline">
-            <span class="visionHero__headlineMain">Prendre de la hauteur.</span>
-            <span class="visionHero__headlineAccent">Décider avec clarté.</span>
-          </h1>
+          <h1 class="h1">Prendre de la hauteur. <span class="muted">Décider avec clarté.</span></h1>
           <p class="p maxW">
             Pour dirigeants et créateurs d'entreprises : clarifier le cap, arbitrer plus vite
             et piloter une croissance soutenable.
