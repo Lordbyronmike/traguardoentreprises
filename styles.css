@@ -503,6 +503,26 @@ a{ color:inherit; text-decoration:none; }
 
 .btn--ghost{ background: transparent; }
 
+#headerCta{
+  min-height: 46px;
+  padding: 10px 16px;
+  border-radius: 16px;
+  align-self: center;
+  border-color: rgba(17,24,39,.08);
+  background: rgba(255,255,255,.38);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+#headerCta:hover{
+  background: rgba(255,255,255,.56);
+  border-color: rgba(41,144,166,.12);
+  color: var(--text);
+  box-shadow: 0 10px 22px rgba(7,18,38,.06);
+}
+
 .btn--solid{
   background: var(--accent);
   color:#fff;
@@ -1735,6 +1755,11 @@ textarea.input{ resize:vertical; min-height:100px; }
   .brand__tagline{
     font-size:10px;
     letter-spacing: .10em;
+  }
+  #headerCta{
+    min-height: 42px;
+    padding: 9px 14px;
+    font-size: 13px;
   }
   .introGate{
     padding: 28px 0;
