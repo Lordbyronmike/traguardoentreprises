@@ -2316,6 +2316,16 @@ textarea.input{ resize:vertical; min-height:100px; }
   background: linear-gradient(90deg, rgba(7,18,38,.48) 0%, rgba(7,18,38,.22) 64%, rgba(7,18,38,.04) 100%);
 }
 
+.programHero--infographie .btn--ghost{
+  color: #ffffff;
+  border-color: rgba(255,255,255,.28);
+}
+
+.programHero--infographie .btn--ghost:hover{
+  color: #ffffff;
+  border-color: rgba(255,255,255,.4);
+}
+
 .programHero__cta{
   display: flex;
   flex-wrap: wrap;
