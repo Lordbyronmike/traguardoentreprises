@@ -45,6 +45,21 @@ body::before{
     linear-gradient(180deg, #ffffff 0%, #faf8ed 58%, #f7f5e8 100%);
 }
 
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(110% 80% at 100% 0%, rgba(41,144,166,.18) 0%, rgba(41,144,166,0) 58%),
+    radial-gradient(95% 70% at 0% 100%, rgba(244,211,9,.14) 0%, rgba(244,211,9,0) 54%),
+    linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(250,248,237,.22) 100%);
+  backdrop-filter: blur(8px);
+  transition: opacity .28s ease;
+}
+
 body.is-intro-route .header,
 body.is-intro-route .footer,
 body.is-intro-route .fab,
@@ -514,6 +529,9 @@ body.is-intro-route .main{ min-height:100vh; }
 body.is-chatbot-route-transitioning .main{
   opacity: 0;
   transform: translateY(10px);
+}
+body.is-chatbot-route-transitioning::after{
+  opacity: 1;
 }
 .section{ padding: 56px 0; }
 .grid{ display:grid; gap:16px; }
