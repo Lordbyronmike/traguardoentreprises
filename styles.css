@@ -504,8 +504,17 @@ a{ color:inherit; text-decoration:none; }
 .btn--solid:hover{ background:#1f7487; }
 
 /* ===== Layout ===== */
-.main{ min-height:70vh; }
+.main{
+  min-height:70vh;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity .28s ease, transform .28s ease;
+}
 body.is-intro-route .main{ min-height:100vh; }
+body.is-chatbot-route-transitioning .main{
+  opacity: 0;
+  transform: translateY(10px);
+}
 .section{ padding: 56px 0; }
 .grid{ display:grid; gap:16px; }
 

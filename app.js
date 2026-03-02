@@ -390,6 +390,7 @@ function initPage() {
   setupChatbot();
   updateShellVisibility();
   render();
+  finishChatbotRouteTransition();
   resolveChatbotPendingCompletion();
   removeLegacySectionLabel();
   setTimeout(() => {
@@ -508,6 +509,7 @@ let _chatbotBound = false;
 let _chatbotState = { current: "root", history: [] };
 let _chatbotPendingCompletion = null;
 let _chatbotCloseTimeout = null;
+let _chatbotRouteTransitionTimeout = null;
 
 function setupChatbot() {
   if (_chatbotBound || !$chatbot || !$chatbotToggle || !$chatbotPanel || !$chatbotResponse || !$chatbotChoices || !$chatbotNav) return;
@@ -593,6 +595,23 @@ function closeChatbot() {
   clearChatbotCloseTimeout();
   $chatbotPanel.hidden = true;
   $chatbotToggle.setAttribute("aria-expanded", "false");
+}
+
+function startChatbotRouteTransition() {
+  document.body.classList.add("is-chatbot-route-transitioning");
+  if (_chatbotRouteTransitionTimeout) {
+    clearTimeout(_chatbotRouteTransitionTimeout);
+    _chatbotRouteTransitionTimeout = null;
+  }
+}
+
+function finishChatbotRouteTransition() {
+  if (!document.body.classList.contains("is-chatbot-route-transitioning")) return;
+  if (_chatbotRouteTransitionTimeout) clearTimeout(_chatbotRouteTransitionTimeout);
+  _chatbotRouteTransitionTimeout = setTimeout(() => {
+    document.body.classList.remove("is-chatbot-route-transitioning");
+    _chatbotRouteTransitionTimeout = null;
+  }, 40);
 }
 
 function clearChatbotCloseTimeout() {
@@ -700,6 +719,7 @@ function handleChatbotCommand(command, href = "") {
         closeChatbot();
         return;
       }
+      startChatbotRouteTransition();
       setChatbotPendingCompletion(href.slice(1), {
         completionMessage: "Je vous ai amene sur la page demandee."
       });
@@ -713,6 +733,7 @@ function handleChatbotCommand(command, href = "") {
         }, 120);
         return;
       }
+      startChatbotRouteTransition();
       setChatbotPendingCompletion("/contact", {
         scrollToForm: true,
         completionMessage: "Je vous ai amene au formulaire de contact."
