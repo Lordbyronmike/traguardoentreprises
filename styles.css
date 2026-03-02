@@ -2245,9 +2245,9 @@ textarea.input{ resize:vertical; min-height:100px; }
 .programHero--infographie::before{
   z-index: 0;
   background:
-    linear-gradient(90deg, rgba(7,18,38,.62) 0%, rgba(7,18,38,.32) 44%, rgba(7,18,38,.08) 100%),
+    linear-gradient(90deg, rgba(7,18,38,.74) 0%, rgba(7,18,38,.46) 42%, rgba(7,18,38,.14) 100%),
     radial-gradient(120% 90% at 100% 0%, rgba(41,144,166,.16) 0%, rgba(41,144,166,0) 58%),
-    linear-gradient(180deg, rgba(3,10,24,.04) 0%, rgba(3,10,24,.24) 100%);
+    linear-gradient(180deg, rgba(3,10,24,.06) 0%, rgba(3,10,24,.30) 100%);
 }
 
 .programHero--roadmap .hero__inner{
@@ -2282,7 +2282,16 @@ textarea.input{ resize:vertical; min-height:100px; }
 
 .programHero--infographie .h1{
   color: #ffffff;
-  text-shadow: 0 10px 24px rgba(0,0,0,.45);
+  text-shadow: 0 10px 24px rgba(0,0,0,.52);
+}
+
+.programHero--infographie .kicker{
+  color: #9dd8e5;
+}
+
+.programHero--infographie .muted{
+  color: rgba(255,255,255,.9);
+  text-shadow: 0 6px 16px rgba(0,0,0,.35);
 }
 
 .programHero--roadmap .stack .p{
@@ -2292,7 +2301,7 @@ textarea.input{ resize:vertical; min-height:100px; }
 
 .programHero--infographie .stack .p{
   color: rgba(245,249,255,.94);
-  text-shadow: 0 6px 16px rgba(0,0,0,.30);
+  text-shadow: 0 6px 16px rgba(0,0,0,.34);
 }
 
 .programHero--roadmap .stack{
@@ -2304,7 +2313,7 @@ textarea.input{ resize:vertical; min-height:100px; }
 .programHero--infographie .stack{
   padding: 18px 20px;
   border-radius: 16px;
-  background: linear-gradient(90deg, rgba(7,18,38,.36) 0%, rgba(7,18,38,.14) 72%, rgba(7,18,38,0) 100%);
+  background: linear-gradient(90deg, rgba(7,18,38,.48) 0%, rgba(7,18,38,.22) 64%, rgba(7,18,38,.04) 100%);
 }
 
 .programHero__cta{
