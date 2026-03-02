@@ -503,6 +503,13 @@ a{ color:inherit; text-decoration:none; }
 
 .btn--ghost{ background: transparent; }
 
+#headerCta{
+  min-height: 46px;
+  padding: 11px 18px;
+  border-radius: 16px;
+  align-self: center;
+}
+
 .btn--solid{
   background: var(--accent);
   color:#fff;
@@ -1735,6 +1742,10 @@ textarea.input{ resize:vertical; min-height:100px; }
   .brand__tagline{
     font-size:10px;
     letter-spacing: .10em;
+  }
+  #headerCta{
+    min-height: 42px;
+    padding: 10px 16px;
   }
   .introGate{
     padding: 28px 0;
