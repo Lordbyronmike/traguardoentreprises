@@ -1484,42 +1484,64 @@ function renderBienEtreTravail() {
 }
 
 function renderInfographie() {
-  $app.innerHTML = pageShell(
-    "Infographie & supports visuels",
-    "Des supports clairs et cohérents pour mieux faire comprendre votre offre, votre méthode et vos messages clés.",
-    `
-      <div class="grid grid--2 mt24">
-        <div class="card">
-          <h3 class="h3">Ce que nous pouvons créer</h3>
-          <p class="p">
-            • Infographies pédagogiques<br/>
-            • Schémas de processus et feuilles de route<br/>
-            • Supports de présentation clairs et structurés<br/>
-            • Visuels synthétiques pour site, réseaux et rendez-vous clients
+  $app.innerHTML = `
+    <section class="hero programHero programHero--infographie">
+      <div class="container hero__inner">
+        <div class="stack">
+          <div class="kicker">Infographie & supports visuels</div>
+          <h1 class="h1">Rendre vos messages plus clairs, <span class="muted">plus lisibles et plus mémorables.</span></h1>
+          <p class="p maxW">
+            Des supports visuels utiles pour expliquer votre offre, structurer vos idées
+            et présenter votre activité de manière professionnelle.
           </p>
-        </div>
-        <div class="card">
-          <h3 class="h3">À quoi cela sert</h3>
-          <p class="p">
-            Rendre vos messages plus lisibles, valoriser votre expertise et donner à vos interlocuteurs
-            des repères visuels concrets pour comprendre rapidement votre proposition.
-          </p>
+          <div class="programHero__cta">
+            <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
+            <a class="btn btn--ghost" href="#/solutions" data-link>Voir les solutions</a>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="card mt24">
-        <h3 class="h3">Approche</h3>
-        <p class="p">
-          Nous partons de votre contenu réel: offre, méthode, accompagnement, parcours client ou vision business.
-          L'objectif est de transformer des idées parfois complexes en supports simples, professionnels et directement exploitables.
+    <section class="section">
+      <div class="container">
+        <h2 class="h2">Infographie & supports visuels</h2>
+        <p class="p maxW">
+          Des supports clairs et cohérents pour mieux faire comprendre votre offre, votre méthode et vos messages clés.
         </p>
-      </div>
 
-      <div class="mt32">
-        ${ctaContact()}
+        <div class="grid grid--2 mt24">
+          <div class="card">
+            <h3 class="h3">Ce que nous pouvons créer</h3>
+            <p class="p">
+              • Infographies pédagogiques<br/>
+              • Schémas de processus et feuilles de route<br/>
+              • Supports de présentation clairs et structurés<br/>
+              • Visuels synthétiques pour site, réseaux et rendez-vous clients
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="h3">À quoi cela sert</h3>
+            <p class="p">
+              Rendre vos messages plus lisibles, valoriser votre expertise et donner à vos interlocuteurs
+              des repères visuels concrets pour comprendre rapidement votre proposition.
+            </p>
+          </div>
+        </div>
+
+        <div class="card mt24">
+          <h3 class="h3">Approche</h3>
+          <p class="p">
+            Nous partons de votre contenu réel: offre, méthode, accompagnement, parcours client ou vision business.
+            L'objectif est de transformer des idées parfois complexes en supports simples, professionnels et directement exploitables.
+          </p>
+        </div>
+
+        <div class="mt32">
+          ${ctaContact()}
+        </div>
       </div>
-    `
-  );
+    </section>
+  `;
 }
 
 function renderActualites() {
