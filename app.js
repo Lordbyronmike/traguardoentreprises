@@ -48,6 +48,11 @@ const POSTS = [
 const $app = document.getElementById("app");
 const $year = document.getElementById("year");
 if ($year) $year.textContent = new Date().getFullYear();
+const $chatbot = document.getElementById("chatbot");
+const $chatbotToggle = document.getElementById("chatbotToggle");
+const $chatbotPanel = document.getElementById("chatbotPanel");
+const $chatbotClose = document.getElementById("chatbotClose");
+const $chatbotResponse = document.getElementById("chatbotResponse");
 
 const HERO_IMAGE_URLS = [
   "./brand/page-accueil.png",
@@ -329,6 +334,7 @@ window.addEventListener("load", initPage);
 window.addEventListener("load", warmHeroImages, { once: true });
 
 function initPage() {
+  setupChatbot();
   updateShellVisibility();
   render();
   removeLegacySectionLabel();
@@ -442,6 +448,123 @@ function trackEvent(category, action, label) {
       });
     }
   } catch {}
+}
+
+let _chatbotBound = false;
+
+function setupChatbot() {
+  if (_chatbotBound || !$chatbot || !$chatbotToggle || !$chatbotPanel || !$chatbotResponse) return;
+  _chatbotBound = true;
+
+  $chatbotToggle.addEventListener("click", () => {
+    if ($chatbotPanel.hidden) {
+      openChatbot();
+      return;
+    }
+    closeChatbot();
+  });
+
+  $chatbotClose?.addEventListener("click", closeChatbot);
+
+  $chatbotPanel.addEventListener("click", (e) => {
+    const actionBtn = e.target.closest("[data-chat-action]");
+    if (actionBtn) {
+      handleChatbotAction(actionBtn.getAttribute("data-chat-action"));
+      return;
+    }
+
+    const navLink = e.target.closest("a[data-link]");
+    if (navLink) closeChatbot();
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!$chatbot.contains(e.target)) closeChatbot();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeChatbot();
+  });
+}
+
+function openChatbot() {
+  if (!$chatbotPanel || !$chatbotToggle) return;
+  $chatbotPanel.hidden = false;
+  $chatbotToggle.setAttribute("aria-expanded", "true");
+}
+
+function closeChatbot() {
+  if (!$chatbotPanel || !$chatbotToggle) return;
+  $chatbotPanel.hidden = true;
+  $chatbotToggle.setAttribute("aria-expanded", "false");
+}
+
+function setChatbotResponse(message, links = []) {
+  if (!$chatbotResponse) return;
+
+  const linksHtml = links.length
+    ? `
+        <div class="chatbot__links">
+          ${links
+            .map(
+              (link) =>
+                `<a href="${escapeAttr(link.href)}" ${link.external ? 'target="_blank" rel="noopener noreferrer"' : "data-link"}>${escapeHtml(link.label)}</a>`
+            )
+            .join("")}
+        </div>
+      `
+    : "";
+
+  $chatbotResponse.innerHTML = `${escapeHtml(message)}${linksHtml}`;
+}
+
+function scrollToContactForm() {
+  let attempts = 0;
+
+  const tryScroll = () => {
+    const section = document.getElementById("contact-form");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    attempts += 1;
+    if (attempts < 8) setTimeout(tryScroll, 100);
+  };
+
+  tryScroll();
+}
+
+function handleChatbotAction(action) {
+  if (!action) return;
+
+  switch (action) {
+    case "solutions":
+      setChatbotResponse("Je vous envoie vers les solutions les plus utiles pour dirigeants et createurs.", [
+        { href: "#/solutions", label: "Voir les solutions" },
+        { href: "#/diagnostic-entreprise", label: "Diagnostic d'entreprise" },
+        { href: "#/creation-lancement", label: "Creation et lancement" }
+      ]);
+      break;
+    case "contact":
+      setChatbotResponse("Je vous ouvre le formulaire de contact.");
+      closeChatbot();
+      if (route() !== "/contact") {
+        location.hash = "#/contact";
+      }
+      setTimeout(scrollToContactForm, 120);
+      break;
+    case "agenda":
+      setChatbotResponse("Je vous ouvre l'agenda dans un nouvel onglet.");
+      closeChatbot();
+      window.open(SMARTAGENDA_URL, "_blank", "noopener,noreferrer");
+      break;
+    case "actualites":
+      setChatbotResponse("Je vous dirige vers les actualites.");
+      closeChatbot();
+      location.hash = "#/actualites";
+      break;
+    default:
+      setChatbotResponse("Choisissez une option.");
+  }
 }
 
 
