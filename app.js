@@ -611,7 +611,7 @@ function finishChatbotRouteTransition() {
   _chatbotRouteTransitionTimeout = setTimeout(() => {
     document.body.classList.remove("is-chatbot-route-transitioning");
     _chatbotRouteTransitionTimeout = null;
-  }, 40);
+  }, 90);
 }
 
 function clearChatbotCloseTimeout() {
