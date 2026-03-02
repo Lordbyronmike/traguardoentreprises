@@ -390,6 +390,7 @@ function initPage() {
   setupChatbot();
   updateShellVisibility();
   render();
+  resolveChatbotPendingCompletion();
   removeLegacySectionLabel();
   setTimeout(() => {
     setupWordAnimation();
@@ -505,6 +506,7 @@ function trackEvent(category, action, label) {
 
 let _chatbotBound = false;
 let _chatbotState = { current: "root", history: [] };
+let _chatbotPendingCompletion = null;
 
 function setupChatbot() {
   if (_chatbotBound || !$chatbot || !$chatbotToggle || !$chatbotPanel || !$chatbotResponse || !$chatbotChoices || !$chatbotNav) return;
@@ -516,10 +518,14 @@ function setupChatbot() {
       openChatbot();
       return;
     }
+    _chatbotPendingCompletion = null;
     closeChatbot();
   });
 
-  $chatbotClose?.addEventListener("click", closeChatbot);
+  $chatbotClose?.addEventListener("click", () => {
+    _chatbotPendingCompletion = null;
+    closeChatbot();
+  });
 
   $chatbotPanel.addEventListener("click", (e) => {
     const nextBtn = e.target.closest("[data-chat-next]");
@@ -549,15 +555,26 @@ function setupChatbot() {
     }
 
     const navLink = e.target.closest("a[data-link]");
-    if (navLink) closeChatbot();
+    if (navLink) {
+      const href = navLink.getAttribute("href") || "";
+      if (href.startsWith("#/")) {
+        setChatbotPendingCompletion(href.slice(1));
+      }
+    }
   });
 
   document.addEventListener("click", (e) => {
-    if (!$chatbot.contains(e.target)) closeChatbot();
+    if (!$chatbot.contains(e.target)) {
+      _chatbotPendingCompletion = null;
+      closeChatbot();
+    }
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeChatbot();
+    if (e.key === "Escape") {
+      _chatbotPendingCompletion = null;
+      closeChatbot();
+    }
   });
 }
 
@@ -587,6 +604,26 @@ function scrollToContactForm() {
   };
 
   tryScroll();
+}
+
+function setChatbotPendingCompletion(targetRoute, { scrollToForm = false } = {}) {
+  if (!targetRoute) return;
+  _chatbotPendingCompletion = {
+    route: targetRoute,
+    scrollToForm
+  };
+}
+
+function resolveChatbotPendingCompletion() {
+  if (!_chatbotPendingCompletion) return;
+  if (route() !== _chatbotPendingCompletion.route) return;
+
+  if (_chatbotPendingCompletion.scrollToForm) {
+    setTimeout(scrollToContactForm, 120);
+  }
+
+  _chatbotPendingCompletion = null;
+  closeChatbot();
 }
 
 function renderChatbotNode(nodeId, pushHistory = true) {
@@ -633,15 +670,24 @@ function handleChatbotCommand(command, href = "") {
 
   switch (command) {
     case "navigate":
-      closeChatbot();
-      if (href) location.hash = href;
+      if (!href) return;
+      if (route() === href.slice(1)) {
+        closeChatbot();
+        return;
+      }
+      setChatbotPendingCompletion(href.slice(1));
+      location.hash = href;
       break;
     case "contact-form":
-      closeChatbot();
-      if (route() !== "/contact") {
-        location.hash = "#/contact";
+      if (route() === "/contact") {
+        setTimeout(() => {
+          scrollToContactForm();
+          closeChatbot();
+        }, 120);
+        return;
       }
-      setTimeout(scrollToContactForm, 120);
+      setChatbotPendingCompletion("/contact", { scrollToForm: true });
+      location.hash = "#/contact";
       break;
     case "agenda":
       closeChatbot();
