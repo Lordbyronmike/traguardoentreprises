@@ -529,6 +529,8 @@ function setupChatbot() {
   });
 
   $chatbotPanel.addEventListener("click", (e) => {
+    e.stopPropagation();
+
     const nextBtn = e.target.closest("[data-chat-next]");
     if (nextBtn) {
       renderChatbotNode(nextBtn.getAttribute("data-chat-next"), true);
