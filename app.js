@@ -801,6 +801,10 @@ function render() {
     setTitle("Leadership et équilibre dirigeant");
     return renderBienEtreTravail();
   }
+  if (path === "/infographie") {
+    setTitle("Infographie & supports visuels");
+    return renderInfographie();
+  }
   if (path === "/actualites") {
     setTitle("Actualités");
     return renderActualites();
@@ -847,7 +851,7 @@ function renderIntro() {
 
           <div class="introGate__metrics">
             <div class="introGate__metric">
-              <span class="introGate__metricValue">6</span>
+              <span class="introGate__metricValue">7</span>
               <span class="introGate__metricLabel">solutions ciblées</span>
             </div>
             <div class="introGate__metric">
@@ -934,7 +938,7 @@ function renderHome() {
           </div>
           <div class="card">
             <h3 class="h3">Nos solutions</h3>
-            <p class="p">6 solutions concrètes pour structurer, lancer et développer votre entreprise.</p>
+            <p class="p">7 solutions concrètes pour structurer, lancer et développer votre entreprise.</p>
             <div class="mt16"><a class="btn btn--ghost" href="#/solutions" data-link>Voir les solutions</a></div>
           </div>
           <div class="card">
@@ -969,7 +973,7 @@ function renderHome() {
 function renderSolutions() {
   $app.innerHTML = pageShell(
     "Nos solutions",
-    "Une offre 100% dédiée aux dirigeants et créateurs d'entreprises, avec 6 solutions complémentaires.",
+    "Une offre 100% dédiée aux dirigeants et créateurs d'entreprises, avec 7 solutions complémentaires.",
     `
       <div class="grid grid--2 mt24">
         ${solutionCard(
@@ -1001,6 +1005,11 @@ function renderSolutions() {
           "Leadership et équilibre dirigeant",
           "Prévenir l'épuisement du dirigeant et renforcer la qualité de pilotage.",
           "#/leadership-equilibre"
+        )}
+        ${solutionCard(
+          "Infographie & supports visuels",
+          "Transformer vos messages clés en supports clairs, lisibles et alignés avec votre image.",
+          "#/infographie"
         )}
       </div>
 
@@ -1472,6 +1481,45 @@ function renderBienEtreTravail() {
       </div>
     </section>
   `;
+}
+
+function renderInfographie() {
+  $app.innerHTML = pageShell(
+    "Infographie & supports visuels",
+    "Des supports clairs et cohérents pour mieux faire comprendre votre offre, votre méthode et vos messages clés.",
+    `
+      <div class="grid grid--2 mt24">
+        <div class="card">
+          <h3 class="h3">Ce que nous pouvons créer</h3>
+          <p class="p">
+            • Infographies pédagogiques<br/>
+            • Schémas de processus et feuilles de route<br/>
+            • Supports de présentation clairs et structurés<br/>
+            • Visuels synthétiques pour site, réseaux et rendez-vous clients
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="h3">À quoi cela sert</h3>
+          <p class="p">
+            Rendre vos messages plus lisibles, valoriser votre expertise et donner à vos interlocuteurs
+            des repères visuels concrets pour comprendre rapidement votre proposition.
+          </p>
+        </div>
+      </div>
+
+      <div class="card mt24">
+        <h3 class="h3">Approche</h3>
+        <p class="p">
+          Nous partons de votre contenu réel: offre, méthode, accompagnement, parcours client ou vision business.
+          L'objectif est de transformer des idées parfois complexes en supports simples, professionnels et directement exploitables.
+        </p>
+      </div>
+
+      <div class="mt32">
+        ${ctaContact()}
+      </div>
+    `
+  );
 }
 
 function renderActualites() {
