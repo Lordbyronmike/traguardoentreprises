@@ -2337,6 +2337,303 @@ textarea.input{ resize:vertical; min-height:100px; }
   flex: 0 0 auto;
   touch-action: manipulation;
 }
+
+/* ===== Unified editorial hero layout ===== */
+.shellHero,
+.articleHero{
+  isolation: isolate;
+  background:
+    linear-gradient(102deg, rgba(7,18,38,.74) 0%, rgba(7,18,38,.46) 46%, rgba(7,18,38,.18) 100%),
+    linear-gradient(0deg, rgba(250,248,237,.10) 0%, rgba(250,248,237,.10) 100%),
+    url("./brand/diagnostiquee_dentreprise.png") center center / cover no-repeat;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+}
+
+.articleHero{
+  background:
+    linear-gradient(102deg, rgba(7,18,38,.74) 0%, rgba(7,18,38,.46) 46%, rgba(7,18,38,.18) 100%),
+    linear-gradient(0deg, rgba(250,248,237,.10) 0%, rgba(250,248,237,.10) 100%),
+    url("./brand/actualités.png") center center / cover no-repeat;
+}
+
+.shellHero::before,
+.articleHero::before{
+  z-index: 0;
+  background:
+    linear-gradient(90deg, rgba(7,18,38,.74) 0%, rgba(7,18,38,.46) 42%, rgba(7,18,38,.14) 100%),
+    radial-gradient(120% 90% at 100% 0%, rgba(41,144,166,.16) 0%, rgba(41,144,166,0) 58%),
+    linear-gradient(180deg, rgba(3,10,24,.08) 0%, rgba(3,10,24,.30) 100%);
+}
+
+.shellHero__inner,
+.articleHero__inner{
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+:is(
+  .missionHero__inner,
+  .equipeHero__inner,
+  .actualitesHero__inner,
+  .diagnosticHero__inner,
+  .contactHero__inner,
+  .visionHero__inner,
+  .creationHero__inner,
+  .leadershipHero__inner,
+  .planActionHero__inner,
+  .shellHero__inner,
+  .articleHero__inner,
+  .programHero--roadmap .hero__inner,
+  .programHero--infographie .hero__inner
+){
+  align-items: flex-end;
+  min-height: clamp(460px, 42vw, 580px);
+}
+
+:is(
+  .missionHero__content,
+  .equipeHero__content,
+  .actualitesHero__content,
+  .diagnosticHero__content,
+  .contactHero__content,
+  .visionHero__content,
+  .creationHero__content,
+  .leadershipHero__content,
+  .planActionHero__content,
+  .shellHero__content,
+  .articleHero__content,
+  .programHero--roadmap .stack,
+  .programHero--infographie .stack
+){
+  max-width: min(980px, 100%);
+  padding: clamp(22px, 3vw, 34px);
+  border-radius: 24px;
+  background: linear-gradient(90deg, rgba(7,18,38,.58) 0%, rgba(7,18,38,.30) 64%, rgba(7,18,38,.06) 100%);
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: 0 26px 56px rgba(2,8,20,.20);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+:is(
+  .missionHero__content,
+  .equipeHero__content,
+  .actualitesHero__content,
+  .diagnosticHero__content,
+  .contactHero__content,
+  .visionHero__content,
+  .creationHero__content,
+  .leadershipHero__content,
+  .planActionHero__content,
+  .shellHero__content,
+  .articleHero__content,
+  .programHero--roadmap .stack,
+  .programHero--infographie .stack
+) .kicker{
+  color: #9dd8e5;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+:is(
+  .missionHero__content,
+  .equipeHero__content,
+  .actualitesHero__content,
+  .diagnosticHero__content,
+  .contactHero__content,
+  .visionHero__content,
+  .creationHero__content,
+  .leadershipHero__content,
+  .planActionHero__content,
+  .shellHero__content,
+  .articleHero__content,
+  .programHero--roadmap .stack,
+  .programHero--infographie .stack
+) .h1{
+  color: #ffffff;
+  font-size: clamp(42px, 7vw, 96px);
+  line-height: .94;
+  letter-spacing: -.045em;
+  text-shadow: 0 14px 32px rgba(0,0,0,.48);
+  max-width: min(1200px, 100%);
+}
+
+:is(
+  .missionHero__content,
+  .equipeHero__content,
+  .actualitesHero__content,
+  .diagnosticHero__content,
+  .contactHero__content,
+  .visionHero__content,
+  .creationHero__content,
+  .leadershipHero__content,
+  .planActionHero__content,
+  .shellHero__content,
+  .articleHero__content,
+  .programHero--roadmap .stack,
+  .programHero--infographie .stack
+) .muted{
+  color: rgba(255,255,255,.72);
+  text-shadow: 0 8px 18px rgba(0,0,0,.36);
+}
+
+:is(
+  .missionHero__content,
+  .equipeHero__content,
+  .actualitesHero__content,
+  .diagnosticHero__content,
+  .contactHero__content,
+  .visionHero__content,
+  .creationHero__content,
+  .leadershipHero__content,
+  .planActionHero__content,
+  .shellHero__content,
+  .articleHero__content,
+  .programHero--roadmap .stack,
+  .programHero--infographie .stack
+) .p{
+  color: rgba(245,249,255,.94);
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.6;
+  text-shadow: 0 8px 18px rgba(0,0,0,.34);
+}
+
+:is(
+  .missionHero__content,
+  .equipeHero__content,
+  .actualitesHero__content,
+  .diagnosticHero__content,
+  .contactHero__content,
+  .visionHero__content,
+  .creationHero__content,
+  .leadershipHero__content,
+  .planActionHero__content,
+  .shellHero__content,
+  .articleHero__content,
+  .programHero--roadmap .stack,
+  .programHero--infographie .stack
+) .btn--solid{
+  box-shadow: 0 16px 30px rgba(2,8,20,.34);
+}
+
+:is(
+  .missionHero__content,
+  .equipeHero__content,
+  .actualitesHero__content,
+  .diagnosticHero__content,
+  .contactHero__content,
+  .visionHero__content,
+  .creationHero__content,
+  .leadershipHero__content,
+  .planActionHero__content,
+  .shellHero__content,
+  .articleHero__content,
+  .programHero--roadmap .stack,
+  .programHero--infographie .stack
+) .btn--ghost{
+  color: #ffffff;
+  border-color: rgba(255,255,255,.72);
+  background: rgba(255,255,255,.06);
+}
+
+:is(
+  .missionHero__content,
+  .equipeHero__content,
+  .actualitesHero__content,
+  .diagnosticHero__content,
+  .contactHero__content,
+  .visionHero__content,
+  .creationHero__content,
+  .leadershipHero__content,
+  .planActionHero__content,
+  .shellHero__content,
+  .articleHero__content,
+  .programHero--roadmap .stack,
+  .programHero--infographie .stack
+) .btn--ghost:hover{
+  color: #ffffff;
+  border-color: #ffffff;
+  background: rgba(255,255,255,.12);
+}
+
+@media (max-width: 859px){
+  :is(
+    .missionHero__inner,
+    .equipeHero__inner,
+    .actualitesHero__inner,
+    .diagnosticHero__inner,
+    .contactHero__inner,
+    .visionHero__inner,
+    .creationHero__inner,
+    .leadershipHero__inner,
+    .planActionHero__inner,
+    .shellHero__inner,
+    .articleHero__inner,
+    .programHero--roadmap .hero__inner,
+    .programHero--infographie .hero__inner
+  ){
+    min-height: clamp(320px, 74vw, 430px);
+  }
+
+  :is(
+    .missionHero__content,
+    .equipeHero__content,
+    .actualitesHero__content,
+    .diagnosticHero__content,
+    .contactHero__content,
+    .visionHero__content,
+    .creationHero__content,
+    .leadershipHero__content,
+    .planActionHero__content,
+    .shellHero__content,
+    .articleHero__content,
+    .programHero--roadmap .stack,
+    .programHero--infographie .stack
+  ){
+    padding: 16px 16px;
+    border-radius: 18px;
+  }
+
+  :is(
+    .missionHero__content,
+    .equipeHero__content,
+    .actualitesHero__content,
+    .diagnosticHero__content,
+    .contactHero__content,
+    .visionHero__content,
+    .creationHero__content,
+    .leadershipHero__content,
+    .planActionHero__content,
+    .shellHero__content,
+    .articleHero__content,
+    .programHero--roadmap .stack,
+    .programHero--infographie .stack
+  ) .h1{
+    font-size: clamp(34px, 11vw, 58px);
+    line-height: .98;
+  }
+
+  :is(
+    .missionHero__content,
+    .equipeHero__content,
+    .actualitesHero__content,
+    .diagnosticHero__content,
+    .contactHero__content,
+    .visionHero__content,
+    .creationHero__content,
+    .leadershipHero__content,
+    .planActionHero__content,
+    .shellHero__content,
+    .articleHero__content,
+    .programHero--roadmap .stack,
+    .programHero--infographie .stack
+  ) .p{
+    font-size: 17px;
+  }
+}
+
 .programMetric{
   border: 1px solid var(--border);
   border-radius: 14px;

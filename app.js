@@ -1139,13 +1139,15 @@ function renderAccompagnementSalaries() {
       <div class="blob blob--b"></div>
       <div class="container hero__inner">
         <div class="stack">
-          <h1 class="h1">Accompagnement des dirigeants</h1>
+          <div class="kicker">Accompagnement des dirigeants</div>
+          <h1 class="h1">Piloter avec plus de clarté et <span class="muted">garder le cap dans l'action.</span></h1>
           <p class="p maxW">
             Un accompagnement clair et structuré pour piloter avec plus de lucidité,
             décider plus vite et exécuter avec méthode.
           </p>
           <div class="programHero__cta">
             <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
+            <a class="btn btn--ghost" href="#/solutions" data-link>Voir les solutions</a>
           </div>
         </div>
       </div>
@@ -1553,6 +1555,10 @@ function renderActualites() {
           <div class="kicker">Veille & méthodes</div>
           <h1 class="h1">Actualités</h1>
           <p class="p maxW">Articles, méthodes, réflexions utiles (pas du bruit).</p>
+          <div class="programHero__cta">
+            <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
+            <a class="btn btn--ghost" href="#/solutions" data-link>Voir les solutions</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1572,22 +1578,31 @@ function renderArticle(slug) {
   if (!post) return renderNotFound();
 
   $app.innerHTML = `
+    <section class="hero articleHero">
+      <div class="container articleHero__inner">
+        <div class="articleHero__content stack">
+          <div class="kicker">${escapeHtml(post.date)}</div>
+          <h1 class="h1">${escapeHtml(post.title)}</h1>
+          <p class="p maxW">${escapeHtml(post.excerpt)}</p>
+          <div class="programHero__cta">
+            <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
+            <a class="btn btn--ghost" href="#/actualites" data-link>Retour aux actualités</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
-      <div class="container" style="max-width: 760px;">
-        <a class="kicker" href="#/actualites" data-link>← Retour aux actualités</a>
-        <p class="kicker mt16">${escapeHtml(post.date)}</p>
-        <h1 class="h1" style="font-size:clamp(28px,4vw,44px)">${escapeHtml(post.title)}</h1>
-        <p class="p">${escapeHtml(post.excerpt)}</p>
-
-        <div class="hr"></div>
-
+      <div class="container" style="max-width: 860px;">
         <article class="stack" style="gap:14px">
           ${post.content
             .map((p) => `<p class="p" style="color:#111827">${escapeHtml(p)}</p>`)
             .join("")}
         </article>
 
-        <div class="mt32">${ctaContact()}</div>
+        <div class="mt32">
+          ${ctaContact()}
+        </div>
       </div>
     </section>
   `;
@@ -1961,11 +1976,28 @@ function renderNotFound() {
 // Helpers
 // =========================
 function pageShell(title, subtitle, contentHtml) {
+  const secondaryCta =
+    title === "Nos solutions"
+      ? `<a class="btn btn--ghost" href="#/" data-link>Retour à l'accueil</a>`
+      : `<a class="btn btn--ghost" href="#/solutions" data-link>Voir les solutions</a>`;
+
   return `
+    <section class="hero shellHero">
+      <div class="container shellHero__inner">
+        <div class="shellHero__content stack">
+          <div class="kicker">Traguardo entreprises</div>
+          <h1 class="h1">${escapeHtml(title)}</h1>
+          <p class="p maxW">${escapeHtml(subtitle)}</p>
+          <div class="programHero__cta">
+            <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
+            ${secondaryCta}
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="container">
-        <h1 class="h1" style="font-size:clamp(30px,4vw,44px)">${escapeHtml(title)}</h1>
-        <p class="p maxW">${escapeHtml(subtitle)}</p>
         <div class="mt32">${contentHtml}</div>
       </div>
     </section>
