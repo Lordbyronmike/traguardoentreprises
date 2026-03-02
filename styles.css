@@ -1279,6 +1279,27 @@ body.is-chatbot-route-transitioning::after{
   text-shadow: 0 10px 24px rgba(0,0,0,.5);
 }
 
+.visionHero__headline{
+  display: flex;
+  flex-direction: column;
+  gap: .02em;
+  max-width: min(1100px, 100%);
+}
+
+.visionHero__headlineMain,
+.visionHero__headlineAccent{
+  display: block;
+}
+
+.visionHero__headlineMain{
+  color: #ffffff;
+}
+
+.visionHero__headlineAccent{
+  color: rgba(255,255,255,.66);
+  text-shadow: 0 10px 22px rgba(0,0,0,.42);
+}
+
 .visionHero .muted{
   color: rgba(255,255,255,.9);
   text-shadow: 0 6px 16px rgba(0,0,0,.35);
@@ -1814,6 +1835,12 @@ textarea.input{ resize:vertical; min-height:100px; }
   .contactHero__content{ padding: 14px 14px; }
   .leadershipHero__content{ padding: 14px 14px; }
   .visionHero__content{ padding: 14px 14px; }
+  .visionHero__headline{
+    gap: .04em;
+  }
+  .visionHero__headlineAccent{
+    color: rgba(255,255,255,.72);
+  }
   .planActionHero__content{ padding: 14px 14px; }
   .programHero--roadmap .stack{ padding: 12px 12px; }
   .programHero__cta{
