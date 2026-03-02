@@ -53,6 +53,59 @@ const $chatbotToggle = document.getElementById("chatbotToggle");
 const $chatbotPanel = document.getElementById("chatbotPanel");
 const $chatbotClose = document.getElementById("chatbotClose");
 const $chatbotResponse = document.getElementById("chatbotResponse");
+const $chatbotChoices = document.getElementById("chatbotChoices");
+const $chatbotNav = document.getElementById("chatbotNav");
+
+const CHATBOT_FLOW = {
+  root: {
+    title: "Quel est votre besoin principal ?",
+    message: "Je peux vous orienter vers la bonne page, le bon format d'echange ou le bon point d'entree.",
+    choices: [
+      { label: "Je dirige deja une activite", next: "dirigeant" },
+      { label: "Je lance mon entreprise", next: "createur" },
+      { label: "Je veux contacter l'equipe", next: "contact" },
+      { label: "Je cherche des ressources", next: "ressources" }
+    ]
+  },
+  dirigeant: {
+    title: "Vous etes deja en activite",
+    message: "Choisissez le levier le plus utile maintenant.",
+    choices: [
+      { label: "Clarifier ma vision", command: "navigate", href: "#/vision-strategique" },
+      { label: "Faire un diagnostic rapide", command: "navigate", href: "#/diagnostic-entreprise" },
+      { label: "Travailler mon pilotage", command: "navigate", href: "#/plan-action-business" },
+      { label: "Parler a quelqu'un", next: "contact" }
+    ]
+  },
+  createur: {
+    title: "Vous lancez ou structurez un projet",
+    message: "Je vous renvoie vers les pages les plus directement utiles pour passer de l'idee a l'action.",
+    choices: [
+      { label: "Structurer mon lancement", command: "navigate", href: "#/creation-lancement" },
+      { label: "Poser un plan d'action", command: "navigate", href: "#/plan-action-business" },
+      { label: "Prendre un rendez-vous", command: "agenda" },
+      { label: "Ecrire un message", command: "contact-form" }
+    ]
+  },
+  contact: {
+    title: "Vous preferez un echange direct",
+    message: "Choisissez le canal le plus simple selon votre rythme.",
+    choices: [
+      { label: "Ecrire maintenant", command: "contact-form" },
+      { label: "Voir la page contact", command: "navigate", href: "#/contact" },
+      { label: "Ouvrir l'agenda", command: "agenda" }
+    ]
+  },
+  ressources: {
+    title: "Vous voulez d'abord consulter",
+    message: "Je vous envoie vers des contenus ou vers l'ensemble des solutions.",
+    choices: [
+      { label: "Voir toutes les solutions", command: "navigate", href: "#/solutions" },
+      { label: "Lire les actualites", command: "navigate", href: "#/actualites" },
+      { label: "Comprendre notre mission", command: "navigate", href: "#/notre-mission" }
+    ]
+  }
+};
 
 const HERO_IMAGE_URLS = [
   "./brand/page-accueil.png",
@@ -451,10 +504,12 @@ function trackEvent(category, action, label) {
 }
 
 let _chatbotBound = false;
+let _chatbotState = { current: "root", history: [] };
 
 function setupChatbot() {
-  if (_chatbotBound || !$chatbot || !$chatbotToggle || !$chatbotPanel || !$chatbotResponse) return;
+  if (_chatbotBound || !$chatbot || !$chatbotToggle || !$chatbotPanel || !$chatbotResponse || !$chatbotChoices || !$chatbotNav) return;
   _chatbotBound = true;
+  renderChatbotNode("root", false);
 
   $chatbotToggle.addEventListener("click", () => {
     if ($chatbotPanel.hidden) {
@@ -467,9 +522,29 @@ function setupChatbot() {
   $chatbotClose?.addEventListener("click", closeChatbot);
 
   $chatbotPanel.addEventListener("click", (e) => {
-    const actionBtn = e.target.closest("[data-chat-action]");
-    if (actionBtn) {
-      handleChatbotAction(actionBtn.getAttribute("data-chat-action"));
+    const nextBtn = e.target.closest("[data-chat-next]");
+    if (nextBtn) {
+      renderChatbotNode(nextBtn.getAttribute("data-chat-next"), true);
+      return;
+    }
+
+    const commandBtn = e.target.closest("[data-chat-command]");
+    if (commandBtn) {
+      handleChatbotCommand(
+        commandBtn.getAttribute("data-chat-command"),
+        commandBtn.getAttribute("data-chat-href") || ""
+      );
+      return;
+    }
+
+    const navBtn = e.target.closest("[data-chat-nav]");
+    if (navBtn) {
+      const navAction = navBtn.getAttribute("data-chat-nav");
+      if (navAction === "back") {
+        goChatbotBack();
+      } else if (navAction === "reset") {
+        renderChatbotNode("root", false);
+      }
       return;
     }
 
@@ -498,25 +573,6 @@ function closeChatbot() {
   $chatbotToggle.setAttribute("aria-expanded", "false");
 }
 
-function setChatbotResponse(message, links = []) {
-  if (!$chatbotResponse) return;
-
-  const linksHtml = links.length
-    ? `
-        <div class="chatbot__links">
-          ${links
-            .map(
-              (link) =>
-                `<a href="${escapeAttr(link.href)}" ${link.external ? 'target="_blank" rel="noopener noreferrer"' : "data-link"}>${escapeHtml(link.label)}</a>`
-            )
-            .join("")}
-        </div>
-      `
-    : "";
-
-  $chatbotResponse.innerHTML = `${escapeHtml(message)}${linksHtml}`;
-}
-
 function scrollToContactForm() {
   let attempts = 0;
 
@@ -533,19 +589,54 @@ function scrollToContactForm() {
   tryScroll();
 }
 
-function handleChatbotAction(action) {
-  if (!action) return;
+function renderChatbotNode(nodeId, pushHistory = true) {
+  const node = CHATBOT_FLOW[nodeId] || CHATBOT_FLOW.root;
+  if (!node) return;
 
-  switch (action) {
-    case "solutions":
-      setChatbotResponse("Je vous envoie vers les solutions les plus utiles pour dirigeants et createurs.", [
-        { href: "#/solutions", label: "Voir les solutions" },
-        { href: "#/diagnostic-entreprise", label: "Diagnostic d'entreprise" },
-        { href: "#/creation-lancement", label: "Creation et lancement" }
-      ]);
+  if (pushHistory && _chatbotState.current && _chatbotState.current !== nodeId) {
+    _chatbotState.history.push(_chatbotState.current);
+  }
+
+  _chatbotState.current = nodeId;
+
+  $chatbotResponse.innerHTML = `
+    <span class="chatbot__responseTitle">${escapeHtml(node.title)}</span>
+    ${escapeHtml(node.message)}
+  `;
+
+  $chatbotChoices.innerHTML = node.choices
+    .map((choice) => {
+      if (choice.next) {
+        return `<button class="chatbot__choice" type="button" data-chat-next="${escapeAttr(choice.next)}">${escapeHtml(choice.label)}</button>`;
+      }
+      return `<button class="chatbot__choice" type="button" data-chat-command="${escapeAttr(choice.command || "")}" data-chat-href="${escapeAttr(choice.href || "")}">${escapeHtml(choice.label)}</button>`;
+    })
+    .join("");
+
+  $chatbotNav.innerHTML = `
+    <button class="chatbot__navBtn chatbot__navBtn--muted" type="button" data-chat-nav="back" ${_chatbotState.history.length ? "" : "hidden"}>Retour</button>
+    <button class="chatbot__navBtn" type="button" data-chat-nav="reset" ${nodeId === "root" ? "hidden" : ""}>Recommencer</button>
+  `;
+}
+
+function goChatbotBack() {
+  const previous = _chatbotState.history.pop();
+  if (!previous) {
+    renderChatbotNode("root", false);
+    return;
+  }
+  renderChatbotNode(previous, false);
+}
+
+function handleChatbotCommand(command, href = "") {
+  if (!command) return;
+
+  switch (command) {
+    case "navigate":
+      closeChatbot();
+      if (href) location.hash = href;
       break;
-    case "contact":
-      setChatbotResponse("Je vous ouvre le formulaire de contact.");
+    case "contact-form":
       closeChatbot();
       if (route() !== "/contact") {
         location.hash = "#/contact";
@@ -553,17 +644,11 @@ function handleChatbotAction(action) {
       setTimeout(scrollToContactForm, 120);
       break;
     case "agenda":
-      setChatbotResponse("Je vous ouvre l'agenda dans un nouvel onglet.");
       closeChatbot();
       window.open(SMARTAGENDA_URL, "_blank", "noopener,noreferrer");
       break;
-    case "actualites":
-      setChatbotResponse("Je vous dirige vers les actualites.");
-      closeChatbot();
-      location.hash = "#/actualites";
-      break;
     default:
-      setChatbotResponse("Choisissez une option.");
+      renderChatbotNode("root", false);
   }
 }
 

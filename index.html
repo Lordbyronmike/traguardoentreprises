@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./styles.css?v=20260225-93" />
+  <link rel="stylesheet" href="./styles.css?v=20260225-94" />
 </head>
 
 <body>
@@ -135,17 +135,13 @@
       <div class="chatbot__panelHeader">
         <div>
           <p class="chatbot__eyebrow">Assistant Traguardo</p>
-          <p class="chatbot__title">Je vous oriente en quelques clics.</p>
+          <p class="chatbot__title">Je vous guide pas a pas.</p>
         </div>
         <button class="chatbot__close" id="chatbotClose" type="button" aria-label="Fermer l'assistant">X</button>
       </div>
-      <div class="chatbot__choices">
-        <button class="chatbot__choice" type="button" data-chat-action="solutions">Trouver ma solution</button>
-        <button class="chatbot__choice" type="button" data-chat-action="contact">Ecrire un message</button>
-        <button class="chatbot__choice" type="button" data-chat-action="agenda">Prendre rendez-vous</button>
-        <button class="chatbot__choice" type="button" data-chat-action="actualites">Voir les actualites</button>
-      </div>
-      <div class="chatbot__response" id="chatbotResponse">Choisissez une option.</div>
+      <div class="chatbot__response" id="chatbotResponse"></div>
+      <div class="chatbot__choices" id="chatbotChoices"></div>
+      <div class="chatbot__nav" id="chatbotNav"></div>
     </section>
 
     <button class="chatbot__toggle" id="chatbotToggle" type="button" aria-expanded="false" aria-controls="chatbotPanel" aria-label="Ouvrir l'assistant">
@@ -154,7 +150,7 @@
     </button>
   </div>
 
-  <script src="./config.js?v=20260225-93"></script>
-  <script src="./app.js?v=20260225-93" defer></script>
+  <script src="./config.js?v=20260225-94"></script>
+  <script src="./app.js?v=20260225-94" defer></script>
 </body>
 </html>

@@ -1997,7 +1997,7 @@ textarea.input{ resize:vertical; min-height:100px; }
 
 .chatbot__choices{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 10px;
   margin-top: 14px;
 }
@@ -2035,6 +2035,15 @@ textarea.input{ resize:vertical; min-height:100px; }
   line-height: 1.6;
 }
 
+.chatbot__responseTitle{
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
 .chatbot__links{
   display: grid;
   gap: 8px;
@@ -2052,6 +2061,30 @@ textarea.input{ resize:vertical; min-height:100px; }
   background: rgba(41,144,166,.08);
   color: var(--text);
   font-weight: 700;
+}
+
+.chatbot__nav{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.chatbot__navBtn{
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.chatbot__navBtn--muted{
+  color: var(--muted);
 }
 
 @media (max-width: 859px){
@@ -2072,9 +2105,6 @@ textarea.input{ resize:vertical; min-height:100px; }
   }
   .chatbot__panel{
     width: 100%;
-  }
-  .chatbot__choices{
-    grid-template-columns: 1fr;
   }
   .fab{
     right: 12px;
