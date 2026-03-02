@@ -507,6 +507,7 @@ function trackEvent(category, action, label) {
 let _chatbotBound = false;
 let _chatbotState = { current: "root", history: [] };
 let _chatbotPendingCompletion = null;
+let _chatbotCloseTimeout = null;
 
 function setupChatbot() {
   if (_chatbotBound || !$chatbot || !$chatbotToggle || !$chatbotPanel || !$chatbotResponse || !$chatbotChoices || !$chatbotNav) return;
@@ -580,14 +581,23 @@ function setupChatbot() {
 
 function openChatbot() {
   if (!$chatbotPanel || !$chatbotToggle) return;
+  clearChatbotCloseTimeout();
   $chatbotPanel.hidden = false;
   $chatbotToggle.setAttribute("aria-expanded", "true");
 }
 
 function closeChatbot() {
   if (!$chatbotPanel || !$chatbotToggle) return;
+  clearChatbotCloseTimeout();
   $chatbotPanel.hidden = true;
   $chatbotToggle.setAttribute("aria-expanded", "false");
+}
+
+function clearChatbotCloseTimeout() {
+  if (_chatbotCloseTimeout) {
+    clearTimeout(_chatbotCloseTimeout);
+    _chatbotCloseTimeout = null;
+  }
 }
 
 function scrollToContactForm() {
@@ -606,11 +616,12 @@ function scrollToContactForm() {
   tryScroll();
 }
 
-function setChatbotPendingCompletion(targetRoute, { scrollToForm = false } = {}) {
+function setChatbotPendingCompletion(targetRoute, { scrollToForm = false, completionMessage = "" } = {}) {
   if (!targetRoute) return;
   _chatbotPendingCompletion = {
     route: targetRoute,
-    scrollToForm
+    scrollToForm,
+    completionMessage
   };
 }
 
@@ -622,8 +633,20 @@ function resolveChatbotPendingCompletion() {
     setTimeout(scrollToContactForm, 120);
   }
 
+  $chatbotResponse.innerHTML = `
+    <span class="chatbot__responseTitle">C'est bon.</span>
+    ${escapeHtml(_chatbotPendingCompletion.completionMessage || "Je vous ai amene au bon endroit.")}
+  `;
+  $chatbotChoices.innerHTML = "";
+  $chatbotNav.innerHTML = "";
+
+  clearChatbotCloseTimeout();
+  _chatbotCloseTimeout = setTimeout(() => {
+    closeChatbot();
+    renderChatbotNode("root", false);
+  }, 1400);
+
   _chatbotPendingCompletion = null;
-  closeChatbot();
 }
 
 function renderChatbotNode(nodeId, pushHistory = true) {
@@ -675,7 +698,9 @@ function handleChatbotCommand(command, href = "") {
         closeChatbot();
         return;
       }
-      setChatbotPendingCompletion(href.slice(1));
+      setChatbotPendingCompletion(href.slice(1), {
+        completionMessage: "Je vous ai amene sur la page demandee."
+      });
       location.hash = href;
       break;
     case "contact-form":
@@ -686,7 +711,10 @@ function handleChatbotCommand(command, href = "") {
         }, 120);
         return;
       }
-      setChatbotPendingCompletion("/contact", { scrollToForm: true });
+      setChatbotPendingCompletion("/contact", {
+        scrollToForm: true,
+        completionMessage: "Je vous ai amene au formulaire de contact."
+      });
       location.hash = "#/contact";
       break;
     case "agenda":
