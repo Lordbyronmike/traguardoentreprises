@@ -390,8 +390,9 @@ function initPage() {
   setupChatbot();
   updateShellVisibility();
   render();
+  setupInternalRouteTransitions();
   resetPageScroll();
-  finishChatbotRouteTransition();
+  finishRouteTransition();
   resolveChatbotPendingCompletion();
   removeLegacySectionLabel();
   setTimeout(() => {
@@ -407,6 +408,36 @@ function resetPageScroll() {
   window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   document.documentElement.scrollTop = 0;
   document.body.scrollTop = 0;
+}
+
+function setupInternalRouteTransitions() {
+  document.querySelectorAll('a[href^="#/"]').forEach((link) => {
+    if (link.dataset.routeTransitionBound === "true") return;
+    link.dataset.routeTransitionBound = "true";
+
+    link.addEventListener("click", (e) => {
+      if (e.defaultPrevented) return;
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      if (link.target && link.target !== "_self") return;
+
+      const href = link.getAttribute("href") || "";
+      const nextRoute = href.replace("#", "").split("?")[0];
+      const currentRoute = route();
+
+      e.preventDefault();
+      startRouteTransition();
+
+      window.setTimeout(() => {
+        if (currentRoute === nextRoute) {
+          resetPageScroll();
+          updateActiveNav();
+          finishRouteTransition();
+          return;
+        }
+        location.hash = href;
+      }, 110);
+    });
+  });
 }
 
 function removeLegacySectionLabel() {
@@ -516,7 +547,7 @@ let _chatbotBound = false;
 let _chatbotState = { current: "root", history: [] };
 let _chatbotPendingCompletion = null;
 let _chatbotCloseTimeout = null;
-let _chatbotRouteTransitionTimeout = null;
+let _routeTransitionTimeout = null;
 
 function setupChatbot() {
   if (_chatbotBound || !$chatbot || !$chatbotToggle || !$chatbotPanel || !$chatbotResponse || !$chatbotChoices || !$chatbotNav) return;
@@ -604,21 +635,27 @@ function closeChatbot() {
   $chatbotToggle.setAttribute("aria-expanded", "false");
 }
 
-function startChatbotRouteTransition() {
-  document.body.classList.add("is-chatbot-route-transitioning");
-  if (_chatbotRouteTransitionTimeout) {
-    clearTimeout(_chatbotRouteTransitionTimeout);
-    _chatbotRouteTransitionTimeout = null;
+function startRouteTransition(options = {}) {
+  const { chatbot = false } = options;
+  document.body.classList.add("is-route-transitioning");
+  document.body.classList.toggle("is-chatbot-route-transitioning", chatbot);
+  if (_routeTransitionTimeout) {
+    clearTimeout(_routeTransitionTimeout);
+    _routeTransitionTimeout = null;
   }
 }
 
-function finishChatbotRouteTransition() {
-  if (!document.body.classList.contains("is-chatbot-route-transitioning")) return;
-  if (_chatbotRouteTransitionTimeout) clearTimeout(_chatbotRouteTransitionTimeout);
-  _chatbotRouteTransitionTimeout = setTimeout(() => {
-    document.body.classList.remove("is-chatbot-route-transitioning");
-    _chatbotRouteTransitionTimeout = null;
-  }, 90);
+function startChatbotRouteTransition() {
+  startRouteTransition({ chatbot: true });
+}
+
+function finishRouteTransition() {
+  if (!document.body.classList.contains("is-route-transitioning")) return;
+  if (_routeTransitionTimeout) clearTimeout(_routeTransitionTimeout);
+  _routeTransitionTimeout = setTimeout(() => {
+    document.body.classList.remove("is-route-transitioning", "is-chatbot-route-transitioning");
+    _routeTransitionTimeout = null;
+  }, 180);
 }
 
 function clearChatbotCloseTimeout() {

@@ -541,6 +541,7 @@ a{ color:inherit; text-decoration:none; }
     transform .52s cubic-bezier(.22, .72, .18, 1);
 }
 body.is-intro-route .main{ min-height:100vh; }
+body.is-route-transitioning .main,
 body.is-chatbot-route-transitioning .main{
   opacity: 0;
   transform: translateY(12px);
