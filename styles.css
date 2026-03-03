@@ -1967,14 +1967,14 @@ textarea.input{ resize:vertical; min-height:100px; }
   isolation: isolate;
   display: inline-flex;
   align-items: center;
-  gap: 11px;
-  padding: 12px 18px 13px 14px;
-  min-height: 56px;
-  border-radius: 28px 28px 28px 10px;
-  border: 1px solid rgba(255,255,255,.18);
+  gap: 10px;
+  padding: 12px 18px 14px 15px;
+  min-height: 58px;
+  border-radius: 30px 30px 30px 12px;
+  border: 1px solid rgba(255,255,255,.16);
   background:
-    radial-gradient(circle at 22% 20%, rgba(255,255,255,.18) 0%, rgba(255,255,255,.06) 22%, rgba(255,255,255,0) 42%),
-    linear-gradient(135deg, rgba(55,157,182,.98) 0%, rgba(41,144,166,.96) 46%, rgba(27,113,134,.94) 100%);
+    radial-gradient(circle at 20% 22%, rgba(255,255,255,.16) 0%, rgba(255,255,255,.05) 22%, rgba(255,255,255,0) 42%),
+    linear-gradient(140deg, rgba(56,160,185,.98) 0%, rgba(41,144,166,.97) 42%, rgba(25,109,130,.95) 100%);
   color: #fff;
   box-shadow:
     0 16px 32px rgba(7,18,38,.18),
@@ -1992,30 +1992,31 @@ textarea.input{ resize:vertical; min-height:100px; }
   content:"";
   position:absolute;
   inset: 1px;
-  border-radius: 27px 27px 27px 9px;
+  border-radius: 29px 29px 29px 11px;
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.05) 36%, rgba(255,255,255,.01) 100%);
+    linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.05) 34%, rgba(255,255,255,.01) 100%);
 }
 
 .chatbot__toggle::after{
   content:"";
   position:absolute;
-  right: 16px;
-  bottom: -7px;
-  width: 16px;
-  height: 16px;
-  border-right: 1px solid rgba(255,255,255,.14);
-  border-bottom: 1px solid rgba(255,255,255,.14);
-  border-bottom-right-radius: 5px;
+  left: 14px;
+  bottom: -4px;
+  width: 18px;
+  height: 12px;
+  border-left: 1px solid rgba(255,255,255,.12);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 2px;
   background:
-    linear-gradient(135deg, rgba(41,144,166,.96) 0%, rgba(27,113,134,.94) 100%);
-  transform: rotate(38deg);
+    linear-gradient(180deg, rgba(41,144,166,.98) 0%, rgba(25,109,130,.96) 100%);
+  transform: skewX(-26deg) rotate(4deg);
   z-index: -1;
 }
 
 .chatbot__toggle:hover{
-  transform: translateY(-1px) scale(1.01);
+  transform: translateY(-1px) scale(1.012);
   border-color: rgba(255,255,255,.24);
   box-shadow:
     0 20px 38px rgba(7,18,38,.22),
@@ -2028,13 +2029,13 @@ textarea.input{ resize:vertical; min-height:100px; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 999px;
   background:
     radial-gradient(circle at 30% 30%, rgba(255,255,255,.28) 0%, rgba(255,255,255,.10) 46%, rgba(255,255,255,.04) 100%);
   border: 1px solid rgba(255,255,255,.14);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
   line-height: 1;
   box-shadow:
