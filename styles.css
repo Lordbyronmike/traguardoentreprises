@@ -1296,30 +1296,30 @@ body.is-chatbot-route-transitioning::after{
     rgba(41,144,166,.9) 68%,
     rgba(255,255,255,.3) 100%
   );
-  background-size: 260% 100%;
-  background-position: 140% 50%;
+  background-size: 280% 180%;
+  background-position: 145% 84%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
   text-shadow: none;
   filter: drop-shadow(0 0 10px rgba(244,211,9,.16));
-  animation: visionHeroShimmer 4.1s ease-in-out infinite;
+  animation: visionHeroShimmer 2.9s ease-in-out infinite;
 }
 
 @keyframes visionHeroShimmer{
   0%, 12%{
-    background-position: 140% 50%;
+    background-position: 145% 84%;
   }
   48%, 100%{
-    background-position: -40% 50%;
+    background-position: -45% 14%;
   }
 }
 
 @media (prefers-reduced-motion: reduce){
   .visionHero__shimmer{
     animation: none;
-    background-position: 50% 50%;
+    background-position: 50% 42%;
   }
 }
 
