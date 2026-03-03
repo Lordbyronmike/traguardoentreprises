@@ -2046,7 +2046,7 @@ textarea.input{ resize:vertical; min-height:100px; }
   font-size: 14px;
   font-weight: 800;
   letter-spacing: .015em;
-  color: var(--accent);
+  color: #ffffff;
 }
 
 .chatbot__panel{
