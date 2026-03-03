@@ -390,6 +390,7 @@ function initPage() {
   setupChatbot();
   updateShellVisibility();
   render();
+  resetPageScroll();
   finishChatbotRouteTransition();
   resolveChatbotPendingCompletion();
   removeLegacySectionLabel();
@@ -400,6 +401,12 @@ function initPage() {
   updateHeaderCtaVisibility();
   updateActiveNav();
   updateFabVisibilityByScroll();
+}
+
+function resetPageScroll() {
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
 }
 
 function removeLegacySectionLabel() {
