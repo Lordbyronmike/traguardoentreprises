@@ -1097,7 +1097,7 @@ function renderReperage() {
       <div class="container visionHero__inner">
         <div class="visionHero__content stack">
           <div class="kicker">Vision & Leadership</div>
-          <h1 class="h1">Prendre de la hauteur. <span class="muted visionHero__shimmer" data-shimmer="Décider avec clarté.">Décider avec clarté.</span></h1>
+          <h1 class="h1">Prendre de la hauteur. ${shimmerText("Décider avec clarté.")}</h1>
           <p class="p maxW">
             Pour dirigeants et créateurs d'entreprises : clarifier le cap, arbitrer plus vite
             et piloter une croissance soutenable.
@@ -1140,7 +1140,7 @@ function renderAccompagnementSalaries() {
       <div class="container hero__inner">
         <div class="stack">
           <div class="kicker">Accompagnement des dirigeants</div>
-          <h1 class="h1">Piloter avec plus de clarté et <span class="muted visionHero__shimmer" data-shimmer="garder le cap dans l'action.">garder le cap dans l'action.</span></h1>
+          <h1 class="h1">Piloter avec plus de clarté et ${shimmerText("garder le cap dans l'action.")}</h1>
           <p class="p maxW">
             Un accompagnement clair et structuré pour piloter avec plus de lucidité,
             décider plus vite et exécuter avec méthode.
@@ -1271,7 +1271,7 @@ function renderBilanCompetences() {
       <div class="container diagnosticHero__inner">
         <div class="diagnosticHero__content stack">
           <div class="kicker">Diagnostic d'entreprise</div>
-          <h1 class="h1">Clarifier votre modèle et vos <span class="muted visionHero__shimmer" data-shimmer="priorités business.">priorités business.</span></h1>
+          <h1 class="h1">Clarifier votre modèle et vos ${shimmerText("priorités business.")}</h1>
           <p class="p maxW">Faire le point sur votre modèle, vos priorités et vos leviers de croissance.</p>
           <div class="programHero__cta">
             <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
@@ -1377,7 +1377,7 @@ function renderOutilSuivi() {
       <div class="container planActionHero__inner">
         <div class="planActionHero__content stack">
           <div class="kicker">Exécution & Pilotage</div>
-          <h1 class="h1">Transformer vos priorités en <span class="muted visionHero__shimmer" data-shimmer="résultats mesurables.">résultats mesurables.</span></h1>
+          <h1 class="h1">Transformer vos priorités en ${shimmerText("résultats mesurables.")}</h1>
           <p class="p maxW">
             Structurer votre progression avec des priorités claires, des objectifs concrets
             et un rythme d'exécution adapté à votre réalité de dirigeant.
@@ -1423,7 +1423,7 @@ function renderEcoleFormation() {
       <div class="container creationHero__inner">
         <div class="creationHero__content stack">
           <div class="kicker">Création & lancement</div>
-          <h1 class="h1">Passer de l'idée au lancement avec un <span class="muted visionHero__shimmer" data-shimmer="cadre structuré.">cadre structuré.</span></h1>
+          <h1 class="h1">Passer de l'idée au lancement avec un ${shimmerText("cadre structuré.")}</h1>
           <p class="p maxW">Valider l'offre, clarifier le positionnement et lancer avec des étapes réalistes.</p>
           <div class="programHero__cta">
             <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
@@ -1457,7 +1457,7 @@ function renderBienEtreTravail() {
       <div class="container leadershipHero__inner">
         <div class="leadershipHero__content stack">
           <div class="kicker">Leadership & équilibre</div>
-          <h1 class="h1">Diriger avec plus de recul, sans <span class="muted visionHero__shimmer" data-shimmer="vous épuiser.">vous épuiser.</span></h1>
+          <h1 class="h1">Diriger avec plus de recul, sans ${shimmerText("vous épuiser.")}</h1>
           <p class="p maxW">Prévenir l'épuisement du dirigeant et maintenir une performance durable.</p>
           <div class="programHero__cta">
             <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
@@ -1491,7 +1491,7 @@ function renderInfographie() {
       <div class="container hero__inner">
         <div class="stack">
           <div class="kicker">Infographie & supports visuels</div>
-          <h1 class="h1">Rendre vos messages plus clairs, <span class="muted visionHero__shimmer" data-shimmer="plus lisibles et plus mémorables.">plus lisibles et plus mémorables.</span></h1>
+          <h1 class="h1">Rendre vos messages plus clairs, ${shimmerText("plus lisibles et plus mémorables.")}</h1>
           <p class="p maxW">
             Des supports visuels utiles pour expliquer votre offre, structurer vos idées
             et présenter votre activité de manière professionnelle.
@@ -2024,6 +2024,11 @@ function postCard(p) {
       <p class="p">${escapeHtml(p.excerpt)}</p>
     </a>
   `;
+}
+
+function shimmerText(text) {
+  const safe = escapeHtml(text);
+  return `<span class="muted visionHero__shimmer" data-shimmer="${safe}">${safe}</span>`;
 }
 
 function ctaContact() {

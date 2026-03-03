@@ -1251,11 +1251,6 @@ body.is-chatbot-route-transitioning::after{
   background: linear-gradient(90deg, rgba(7,18,38,.34) 0%, rgba(7,18,38,.18) 40%, rgba(7,18,38,.04) 72%, rgba(7,18,38,0) 100%);
 }
 
-.visionHero__content{
-  opacity: 1;
-  transform: none;
-}
-
 .visionHero__inner{
   position: relative;
   z-index: 1;
