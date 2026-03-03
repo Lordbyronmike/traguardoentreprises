@@ -1968,17 +1968,19 @@ textarea.input{ resize:vertical; min-height:100px; }
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 18px 14px 14px;
-  border-radius: 26px 26px 10px 26px;
-  border: 1px solid rgba(255,255,255,.42);
+  padding: 13px 20px 16px 15px;
+  min-height: 58px;
+  border-radius: 30px 30px 30px 12px;
+  border: 1px solid rgba(255,255,255,.46);
   background:
-    linear-gradient(135deg, rgba(255,255,255,.20) 0%, rgba(235,244,248,.14) 32%, rgba(41,144,166,.26) 100%);
+    radial-gradient(circle at 18% 20%, rgba(255,255,255,.30) 0%, rgba(255,255,255,.10) 24%, rgba(255,255,255,0) 42%),
+    linear-gradient(135deg, rgba(255,255,255,.22) 0%, rgba(235,244,248,.15) 30%, rgba(41,144,166,.28) 100%);
   color: #fff;
   box-shadow:
     0 18px 36px rgba(7,18,38,.16),
-    0 10px 22px rgba(41,144,166,.10),
+    0 12px 24px rgba(41,144,166,.12),
     inset 0 1px 0 rgba(255,255,255,.18);
-  backdrop-filter: blur(18px) saturate(1.12);
+  backdrop-filter: blur(18px) saturate(1.14);
   cursor: pointer;
   font: inherit;
   font-weight: 700;
@@ -1990,23 +1992,25 @@ textarea.input{ resize:vertical; min-height:100px; }
   content:"";
   position:absolute;
   inset: 1px;
-  border-radius: inherit;
+  border-radius: 29px 29px 29px 11px;
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.24) 0%, rgba(255,255,255,.04) 42%, rgba(255,255,255,.02) 100%);
+    linear-gradient(180deg, rgba(255,255,255,.24) 0%, rgba(255,255,255,.06) 42%, rgba(255,255,255,.02) 100%);
 }
 
 .chatbot__toggle::after{
   content:"";
   position:absolute;
-  right: 16px;
-  bottom: -5px;
-  width: 12px;
-  height: 12px;
-  border-right: 1px solid rgba(255,255,255,.28);
-  border-bottom: 1px solid rgba(255,255,255,.28);
-  background: rgba(55,124,147,.62);
-  transform: rotate(45deg);
+  right: 18px;
+  bottom: -9px;
+  width: 18px;
+  height: 18px;
+  border-right: 1px solid rgba(255,255,255,.30);
+  border-bottom: 1px solid rgba(255,255,255,.30);
+  border-bottom-right-radius: 6px;
+  background:
+    linear-gradient(135deg, rgba(98,166,186,.92) 0%, rgba(60,126,148,.86) 100%);
+  transform: rotate(42deg);
   z-index: -1;
 }
 
@@ -2024,9 +2028,9 @@ textarea.input{ resize:vertical; min-height:100px; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
   background:
     radial-gradient(circle at 30% 30%, rgba(255,255,255,.34) 0%, rgba(255,255,255,.12) 46%, rgba(255,255,255,.05) 100%);
   border: 1px solid rgba(255,255,255,.24);
