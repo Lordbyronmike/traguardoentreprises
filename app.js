@@ -1140,7 +1140,7 @@ function renderAccompagnementSalaries() {
       <div class="container hero__inner">
         <div class="stack">
           <div class="kicker">Accompagnement des dirigeants</div>
-          <h1 class="h1">Piloter avec plus de clarté et <span class="muted">garder le cap dans l'action.</span></h1>
+          <h1 class="h1">Piloter avec plus de clarté et <span class="muted visionHero__shimmer">garder le cap dans l'action.</span></h1>
           <p class="p maxW">
             Un accompagnement clair et structuré pour piloter avec plus de lucidité,
             décider plus vite et exécuter avec méthode.
@@ -1271,7 +1271,7 @@ function renderBilanCompetences() {
       <div class="container diagnosticHero__inner">
         <div class="diagnosticHero__content stack">
           <div class="kicker">Diagnostic d'entreprise</div>
-          <h1 class="h1">Clarifier votre modèle et vos <span class="muted">priorités business.</span></h1>
+          <h1 class="h1">Clarifier votre modèle et vos <span class="muted visionHero__shimmer">priorités business.</span></h1>
           <p class="p maxW">Faire le point sur votre modèle, vos priorités et vos leviers de croissance.</p>
           <div class="programHero__cta">
             <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
@@ -1377,7 +1377,7 @@ function renderOutilSuivi() {
       <div class="container planActionHero__inner">
         <div class="planActionHero__content stack">
           <div class="kicker">Exécution & Pilotage</div>
-          <h1 class="h1">Transformer vos priorités en <span class="muted">résultats mesurables.</span></h1>
+          <h1 class="h1">Transformer vos priorités en <span class="muted visionHero__shimmer">résultats mesurables.</span></h1>
           <p class="p maxW">
             Structurer votre progression avec des priorités claires, des objectifs concrets
             et un rythme d'exécution adapté à votre réalité de dirigeant.
@@ -1423,7 +1423,7 @@ function renderEcoleFormation() {
       <div class="container creationHero__inner">
         <div class="creationHero__content stack">
           <div class="kicker">Création & lancement</div>
-          <h1 class="h1">Passer de l'idée au lancement avec un <span class="muted">cadre structuré.</span></h1>
+          <h1 class="h1">Passer de l'idée au lancement avec un <span class="muted visionHero__shimmer">cadre structuré.</span></h1>
           <p class="p maxW">Valider l'offre, clarifier le positionnement et lancer avec des étapes réalistes.</p>
           <div class="programHero__cta">
             <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
@@ -1457,7 +1457,7 @@ function renderBienEtreTravail() {
       <div class="container leadershipHero__inner">
         <div class="leadershipHero__content stack">
           <div class="kicker">Leadership & équilibre</div>
-          <h1 class="h1">Diriger avec plus de recul, sans <span class="muted">vous épuiser.</span></h1>
+          <h1 class="h1">Diriger avec plus de recul, sans <span class="muted visionHero__shimmer">vous épuiser.</span></h1>
           <p class="p maxW">Prévenir l'épuisement du dirigeant et maintenir une performance durable.</p>
           <div class="programHero__cta">
             <a class="btn btn--solid" href="#/contact" data-link>Demander un échange</a>
@@ -1491,7 +1491,7 @@ function renderInfographie() {
       <div class="container hero__inner">
         <div class="stack">
           <div class="kicker">Infographie & supports visuels</div>
-          <h1 class="h1">Rendre vos messages plus clairs, <span class="muted">plus lisibles et plus mémorables.</span></h1>
+          <h1 class="h1">Rendre vos messages plus clairs, <span class="muted visionHero__shimmer">plus lisibles et plus mémorables.</span></h1>
           <p class="p maxW">
             Des supports visuels utiles pour expliquer votre offre, structurer vos idées
             et présenter votre activité de manière professionnelle.
