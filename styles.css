@@ -1319,13 +1319,6 @@ body.is-chatbot-route-transitioning::after{
   }
 }
 
-@media (prefers-reduced-motion: reduce){
-  .h1 .muted.visionHero__shimmer{
-    animation: none;
-    background-position: 50% 42%;
-  }
-}
-
 .visionHero .p{
   color: rgba(247,250,255,.94);
   text-shadow: 0 6px 16px rgba(0,0,0,.32);
