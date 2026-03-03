@@ -1284,7 +1284,7 @@ body.is-chatbot-route-transitioning::after{
   text-shadow: 0 6px 16px rgba(0,0,0,.35);
 }
 
-.muted.visionHero__shimmer{
+.h1 .muted.visionHero__shimmer{
   background-image: linear-gradient(
     112deg,
     rgba(41,144,166,.4) 0%,
@@ -1319,7 +1319,7 @@ body.is-chatbot-route-transitioning::after{
 }
 
 @media (prefers-reduced-motion: reduce){
-  .muted.visionHero__shimmer{
+  .h1 .muted.visionHero__shimmer{
     animation: none;
     background-position: 50% 42%;
   }
